@@ -1,8 +1,9 @@
-package demo.teamwork.aquidigital.common.injection.module;
+package demo.teamwork.aquidigital.common.injection;
 
 import dagger.Module;
+import demo.teamwork.aquidigital.repository.NetworkModule;
 
-@Module(includes = {NetworkModule.class})
+@Module(includes = { NetworkModule.class})
 public class ApiModule {
 
 //    @Provides

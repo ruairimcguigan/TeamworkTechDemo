@@ -1,13 +1,10 @@
-package demo.teamwork.aquidigital.common.injection.component;
+package demo.teamwork.aquidigital.common.injection;
 
 
 
 import dagger.Component;
-import demo.teamwork.aquidigital.BaseFragment;
+import demo.teamwork.aquidigital.common.base.BaseFragment;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
-import demo.teamwork.aquidigital.common.injection.ConfigPersistent;
-import demo.teamwork.aquidigital.common.injection.module.ActivityModule;
-import demo.teamwork.aquidigital.common.injection.module.FragmentModule;
 
 /**
  * A dagger component that will live during the lifecycle of an Activity or Fragment but it won't be

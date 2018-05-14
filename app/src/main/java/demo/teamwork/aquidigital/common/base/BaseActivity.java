@@ -17,10 +17,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
-import demo.teamwork.aquidigital.common.injection.component.ActivityComponent;
-import demo.teamwork.aquidigital.common.injection.component.ConfigPersistentComponent;
-import demo.teamwork.aquidigital.common.injection.component.DaggerConfigPersistentComponent;
-import demo.teamwork.aquidigital.common.injection.module.ActivityModule;
+import demo.teamwork.aquidigital.common.injection.ActivityComponent;
+import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
+import demo.teamwork.aquidigital.common.injection.ActivityModule;
+import demo.teamwork.aquidigital.common.injection.DaggerConfigPersistentComponent;
 import demo.teamwork.aquidigital.home.HomeActivity;
 import timber.log.Timber;
 

@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.common.injection.module;
+package demo.teamwork.aquidigital.common.injection;
 
 import android.app.Activity;
 import android.content.Context;

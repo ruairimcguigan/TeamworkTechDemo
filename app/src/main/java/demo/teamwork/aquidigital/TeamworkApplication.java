@@ -8,10 +8,10 @@ import com.singhajit.sherlock.core.Sherlock;
 import com.squareup.leakcanary.LeakCanary;
 import com.tspoon.traceur.Traceur;
 
-import demo.teamwork.aquidigital.common.injection.component.AppComponent;
-import demo.teamwork.aquidigital.common.injection.component.DaggerAppComponent;
-import demo.teamwork.aquidigital.common.injection.module.AppModule;
-import demo.teamwork.aquidigital.common.injection.module.NetworkModule;
+import demo.teamwork.aquidigital.common.injection.AppComponent;
+import demo.teamwork.aquidigital.common.injection.DaggerAppComponent;
+import demo.teamwork.aquidigital.repository.NetworkModule;
+import demo.teamwork.aquidigital.common.injection.AppModule;
 import timber.log.Timber;
 
 public class TeamworkApplication extends Application {
@@ -42,6 +42,10 @@ public class TeamworkApplication extends Application {
                     .build();
         }
         return appComponent;
+    }
+
+    public static AppComponent getAppComponent() {
+        return getAppComponent();
     }
 
     // Needed to replace the component with a test specific one

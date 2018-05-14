@@ -1,8 +1,8 @@
-package demo.teamwork.aquidigital.common.injection.component;
+package demo.teamwork.aquidigital.common.injection;
 
 import dagger.Subcomponent;
 import demo.teamwork.aquidigital.common.injection.PerFragment;
-import demo.teamwork.aquidigital.common.injection.module.FragmentModule;
+import demo.teamwork.aquidigital.common.injection.FragmentModule;
 import demo.teamwork.aquidigital.projects.ProjectDetailsFragment;
 
 /**

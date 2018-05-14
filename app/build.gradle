@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "demo.teamwork.aquidigital"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -71,6 +71,13 @@ android {
 
         testImplementation unitTestLibs
         androidTestImplementation androidTestsLibs
+
+        compileOnly "com.google.auto.value:auto-value:$versions.autoValue"
+        annotationProcessor "com.google.auto.value:auto-value:$versions.autoValue"
+
+        annotationProcessor "com.ryanharter.auto.value:auto-value-gson:$versions.autoValue_gson"
+        implementation "com.ryanharter.auto.value:auto-value-gson-annotations:$versions.autoValue_gson"
+        implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     }
 
 }

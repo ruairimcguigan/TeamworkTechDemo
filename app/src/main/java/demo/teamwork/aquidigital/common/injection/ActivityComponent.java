@@ -1,8 +1,8 @@
-package demo.teamwork.aquidigital.common.injection.component;
+package demo.teamwork.aquidigital.common.injection;
 
 import dagger.Subcomponent;
 import demo.teamwork.aquidigital.common.injection.PerActivity;
-import demo.teamwork.aquidigital.common.injection.module.ActivityModule;
+import demo.teamwork.aquidigital.common.injection.ActivityModule;
 import demo.teamwork.aquidigital.home.HomeActivity;
 import demo.teamwork.aquidigital.projects.ProjectsActivity;
 

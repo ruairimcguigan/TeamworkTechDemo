@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.common.injection.module;
+package demo.teamwork.aquidigital.common.injection;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,9 +7,8 @@ import android.content.SharedPreferences;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.common.injection.ApplicationContext;
 
-import static demo.teamwork.aquidigital.Constants.PREF_FILE_NAME;
+import static demo.teamwork.aquidigital.util.Constants.PREF_FILE_NAME;
 
 @Module(includes = {ApiModule.class})
 public class AppModule {

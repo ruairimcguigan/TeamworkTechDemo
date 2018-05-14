@@ -1,21 +1,21 @@
-package demo.teamwork.aquidigital;
+package demo.teamwork.aquidigital.common.base;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.LongSparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 import butterknife.ButterKnife;
-import demo.teamwork.aquidigital.common.injection.component.ConfigPersistentComponent;
-import demo.teamwork.aquidigital.common.injection.component.DaggerConfigPersistentComponent;
-import demo.teamwork.aquidigital.common.injection.component.FragmentComponent;
-import demo.teamwork.aquidigital.common.injection.module.FragmentModule;
+import demo.teamwork.aquidigital.TeamworkApplication;
+import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
+import demo.teamwork.aquidigital.common.injection.DaggerConfigPersistentComponent;
+import demo.teamwork.aquidigital.common.injection.FragmentComponent;
+import demo.teamwork.aquidigital.common.injection.FragmentModule;
 import timber.log.Timber;
 
 import static java.util.Objects.requireNonNull;
@@ -64,7 +64,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(
-            LayoutInflater inflater,
+            @NonNull LayoutInflater inflater,
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayout(), container, false);

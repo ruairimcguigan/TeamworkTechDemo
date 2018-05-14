@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital;
+package demo.teamwork.aquidigital.util;
 
 public interface Constants {
 
