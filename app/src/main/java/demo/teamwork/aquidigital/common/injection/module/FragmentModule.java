@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.injection.module;
+package demo.teamwork.aquidigital.common.injection.module;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.injection.ActivityContext;
+import demo.teamwork.aquidigital.common.injection.ActivityContext;
 
 @Module
 public class FragmentModule {

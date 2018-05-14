@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.injection;
+package demo.teamwork.aquidigital.common.injection;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

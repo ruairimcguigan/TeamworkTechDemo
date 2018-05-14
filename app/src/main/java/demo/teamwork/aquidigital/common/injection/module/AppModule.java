@@ -1,12 +1,13 @@
-package demo.teamwork.aquidigital.injection.module;
+package demo.teamwork.aquidigital.common.injection.module;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.injection.ApplicationContext;
+import demo.teamwork.aquidigital.common.injection.ApplicationContext;
 
 import static demo.teamwork.aquidigital.Constants.PREF_FILE_NAME;
 

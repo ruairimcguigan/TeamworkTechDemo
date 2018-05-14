@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.injection.module;
+package demo.teamwork.aquidigital.common.injection.module;
 
 import dagger.Module;
 

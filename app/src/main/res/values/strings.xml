@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TeamworkTechDemo</string>
+    <string name="fragment_not_created_message">New fragment should have been created</string>
 </resources>
