@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Single;
 
-public class Repository implements TeamworkDataStore{
+public class  Repository implements TeamworkDataStore{
 
     private TeamworkLocalDataStore mAppLocalDataStore;
     private TeamworkRemoteDataStore mAppRemoteDataStore;

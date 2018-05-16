@@ -16,7 +16,7 @@ import demo.teamwork.aquidigital.common.base.BaseActivity;
 @Component(dependencies = AppComponent.class)
 public interface ConfigPersistentComponent {
 
-    ActivityComponent activityComponent(ActivityModule activityModule);
-
-    FragmentComponent fragmentComponent(FragmentModule fragmentModule);
+//    ActivityComponent activityComponent(ActivityModule activityModule);
+//
+//    FragmentComponent fragmentComponent(FragmentModule fragmentModule);
 }

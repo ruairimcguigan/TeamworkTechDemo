@@ -16,11 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
-import demo.teamwork.aquidigital.TeamworkApplication;
-import demo.teamwork.aquidigital.common.injection.ActivityComponent;
 import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
-import demo.teamwork.aquidigital.common.injection.ActivityModule;
-import demo.teamwork.aquidigital.common.injection.DaggerConfigPersistentComponent;
 import demo.teamwork.aquidigital.home.HomeActivity;
 import timber.log.Timber;
 
@@ -56,23 +52,23 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
 
         ConfigPersistentComponent configPersistentComponent;
 
-        if (componentsArray.get(activityId) == null) {
-
-            Timber.i("Creating new ConfigPersistentComponent id=%d", activityId);
-            configPersistentComponent = DaggerConfigPersistentComponent.builder()
-                    .appComponent(TeamworkApplication.get(this).getComponent())
-                    .build();
-
-            componentsArray.put(activityId, configPersistentComponent);
-        } else {
-
-            Timber.i("Reusing ConfigPersistentComponent id=%d", activityId);
-            configPersistentComponent = componentsArray.get(activityId);
-        }
-        ActivityComponent activityComponent =
-                configPersistentComponent.activityComponent(new ActivityModule(this));
-
-        inject(activityComponent);
+//        if (componentsArray.get(activityId) == null) {
+//
+//            Timber.i("Creating new ConfigPersistentComponent id=%d", activityId);
+//            configPersistentComponent = DaggerConfigPersistentComponent.builder()
+//                    .appComponent(TeamworkApplication.get(this).getComponent())
+//                    .build();
+//
+//            componentsArray.put(activityId, configPersistentComponent);
+//        } else {
+//
+//            Timber.i("Reusing ConfigPersistentComponent id=%d", activityId);
+//            configPersistentComponent = componentsArray.get(activityId);
+//        }
+//        ActivityComponent activityComponent =
+//                configPersistentComponent.activityComponent(new ActivityModule(this));
+//
+//        inject(activityComponent);
 
         attachView();
     }
@@ -150,8 +146,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     }
 
     protected abstract int getLayout();
-
-    protected abstract void inject(ActivityComponent activityComponent);
 
     protected abstract void attachView();
 

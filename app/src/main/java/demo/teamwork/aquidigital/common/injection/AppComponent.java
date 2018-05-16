@@ -1,27 +1,25 @@
 package demo.teamwork.aquidigital.common.injection;
 
-import android.app.Application;
-import android.content.Context;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
-import demo.teamwork.aquidigital.common.injection.ApplicationContext;
-import demo.teamwork.aquidigital.common.injection.AppModule;
-import demo.teamwork.aquidigital.projects.service.ProjectsApi;
-import demo.teamwork.aquidigital.repository.TeamworkRemoteDataStore;
+import demo.teamwork.aquidigital.home.HomeActivity;
+import demo.teamwork.aquidigital.home.HomeModule;
+import demo.teamwork.aquidigital.projects.ProjectsActivity;
+import demo.teamwork.aquidigital.projects.ProjectsModule;
+import demo.teamwork.aquidigital.repository.ApiModule;
 
 @Singleton
-@Component(modules = AppModule.class)
+@Component(modules = {
+        AppModule.class,
+        HomeModule.class,
+        ProjectsModule.class,
+        ApiModule.class})
 public interface AppComponent {
 
-    @ApplicationContext
-    Context context();
+    void inject(HomeActivity activity);
 
-    Application application();
+    void inject(ProjectsActivity activity);
 
-    ProjectsApi teamworkService();
-
-    void inject(TeamworkRemoteDataStore appRemoteDataStore);
 
 }

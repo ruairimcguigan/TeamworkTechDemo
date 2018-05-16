@@ -1,16 +1,9 @@
 package demo.teamwork.aquidigital.repository;
 
-import javax.inject.Inject;
-
-import demo.teamwork.aquidigital.repository.model.Response;
+import demo.teamwork.aquidigital.repository.apimodel.Response;
 import io.reactivex.Single;
 
 public class TeamworkLocalDataStore implements TeamworkDataStore {
-
-
-    @Inject
-    public TeamworkLocalDataStore() {
-    }
 
     @Override
     public Single getProjects() {

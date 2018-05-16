@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.repository.model;
+package demo.teamwork.aquidigital.repository.apimodel;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -7,8 +7,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import demo.teamwork.aquidigital.repository.api.apimodel.BoardData;
+import demo.teamwork.aquidigital.repository.api.apimodel.Category;
+import demo.teamwork.aquidigital.repository.api.apimodel.Company;
+import demo.teamwork.aquidigital.repository.api.apimodel.Defaults;
+import demo.teamwork.aquidigital.repository.api.apimodel.Integrations;
+import demo.teamwork.aquidigital.util.ui.Item;
+
 @AutoValue
-public abstract class Project {
+public abstract class Project implements Item {
 
 	@SerializedName("replyByEmailEnabled")
 	public abstract boolean replyByEmailEnabled();

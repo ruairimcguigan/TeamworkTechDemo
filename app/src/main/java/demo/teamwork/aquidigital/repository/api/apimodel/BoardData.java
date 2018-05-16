@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.repository.model;
+package demo.teamwork.aquidigital.repository.api.apimodel;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;

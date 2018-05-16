@@ -8,17 +8,13 @@ import android.support.v4.util.LongSparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 import butterknife.ButterKnife;
-import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
-import demo.teamwork.aquidigital.common.injection.DaggerConfigPersistentComponent;
 import demo.teamwork.aquidigital.common.injection.FragmentComponent;
-import demo.teamwork.aquidigital.common.injection.FragmentModule;
 import timber.log.Timber;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Abstract Fragment that every other Fragment in this application must implement. It handles
@@ -44,20 +40,20 @@ public abstract class BaseFragment extends Fragment {
                         ? savedInstanceState.getLong(KEY_FRAGMENT_ID)
                         : NEXT_ID.getAndIncrement();
         ConfigPersistentComponent configPersistentComponent;
-        if (componentsArray.get(fragmentId) == null) {
-            Timber.i("Creating new ConfigPersistentComponent id=%d", fragmentId);
-            configPersistentComponent =
-                    DaggerConfigPersistentComponent.builder()
-                            .appComponent(TeamworkApplication.get(requireNonNull(getActivity())).getComponent())
-                            .build();
-            componentsArray.put(fragmentId, configPersistentComponent);
-        } else {
-            Timber.i("Reusing ConfigPersistentComponent id=%d", fragmentId);
-            configPersistentComponent = componentsArray.get(fragmentId);
-        }
-        FragmentComponent fragmentComponent =
-                configPersistentComponent.fragmentComponent(new FragmentModule(this));
-        inject(fragmentComponent);
+//        if (componentsArray.get(fragmentId) == null) {
+//            Timber.i("Creating new ConfigPersistentComponent id=%d", fragmentId);
+//            configPersistentComponent =
+//                    DaggerConfigPersistentComponent.builder()
+//                            .appComponent(TeamworkApplication.get(requireNonNull(getActivity())).getComponent())
+//                            .build();
+//            componentsArray.put(fragmentId, configPersistentComponent);
+//        } else {
+//            Timber.i("Reusing ConfigPersistentComponent id=%d", fragmentId);
+//            configPersistentComponent = componentsArray.get(fragmentId);
+//        }
+//        FragmentComponent fragmentComponent =
+//                configPersistentComponent.fragmentComponent(new FragmentModule(this));
+//        inject(fragmentComponent);
         attachView();
     }
 

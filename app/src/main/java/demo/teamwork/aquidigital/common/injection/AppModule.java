@@ -7,10 +7,15 @@ import android.content.SharedPreferences;
 
 import dagger.Module;
 import dagger.Provides;
+import demo.teamwork.aquidigital.home.HomeActivity;
+import demo.teamwork.aquidigital.projects.ProjectsActivity;
+import demo.teamwork.aquidigital.repository.Repository;
+import demo.teamwork.aquidigital.repository.TeamworkDataStore;
+import demo.teamwork.aquidigital.repository.TeamworkRemoteDataStore;
 
 import static demo.teamwork.aquidigital.util.Constants.PREF_FILE_NAME;
 
-@Module(includes = {ApiModule.class})
+@Module()
 public class AppModule {
     private final Application application;
 
@@ -24,6 +29,16 @@ public class AppModule {
     }
 
     @Provides
+    HomeActivity provideHomeActivity(){
+        return new HomeActivity();
+    }
+
+    @Provides
+    ProjectsActivity provideProjectsActivity(){
+        return new ProjectsActivity();
+    }
+
+    @Provides
     @ApplicationContext
     Context provideContext() {
         return application;
@@ -33,5 +48,11 @@ public class AppModule {
     @ApplicationContext
     SharedPreferences provideSharedPreference(@ApplicationContext Context context) {
         return context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+    }
+
+    @Provides
+    @ApplicationContext
+    TeamworkDataStore provideRepository(){
+        return new TeamworkRemoteDataStore();
     }
 }
