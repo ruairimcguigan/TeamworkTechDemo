@@ -1,28 +1,61 @@
 package demo.teamwork.aquidigital.repository.api.apimodel;
 
-import com.google.auto.value.AutoValue;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import demo.teamwork.aquidigital.util.ui.Item;
-
-@AutoValue
-public abstract class Onedrivebusiness implements Item {
+public class Onedrivebusiness{
 
 	@SerializedName("folder")
-	public abstract String folder();
+	private String folder;
 
 	@SerializedName("foldername")
-	public abstract String folderName();
+	private String foldername;
 
 	@SerializedName("enabled")
-	public abstract boolean isEnabled();
+	private boolean enabled;
 
 	@SerializedName("account")
-	public abstract String account();
+	private String account;
 
-	public static TypeAdapter<Onedrivebusiness> typeAdapter(Gson gson) {
-		return new AutoValue_Onedrivebusiness.GsonTypeAdapter(gson);
+	public void setFolder(String folder){
+		this.folder = folder;
 	}
+
+	public String getFolder(){
+		return folder;
+	}
+
+	public void setFoldername(String foldername){
+		this.foldername = foldername;
+	}
+
+	public String getFoldername(){
+		return foldername;
+	}
+
+	public void setEnabled(boolean enabled){
+		this.enabled = enabled;
+	}
+
+	public boolean isEnabled(){
+		return enabled;
+	}
+
+	public void setAccount(String account){
+		this.account = account;
+	}
+
+	public String getAccount(){
+		return account;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Onedrivebusiness{" + 
+			"folder = '" + folder + '\'' + 
+			",foldername = '" + foldername + '\'' + 
+			",enabled = '" + enabled + '\'' + 
+			",account = '" + account + '\'' + 
+			"}";
+		}
 }

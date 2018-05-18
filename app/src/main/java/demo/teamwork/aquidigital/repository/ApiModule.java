@@ -79,10 +79,12 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    OkHttpClient.Builder provideClient(Cache cache) {
+    OkHttpClient provideClient(Cache cache) {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
+        client.addInterceptor(provideLoggingInterceptor());
+        client.addInterceptor(provideAuthenticationInterceptor(basic(BuildConfig.API_KEY, "X")));
         client.cache(cache);
-        return client;
+        return client.build();
     }
 
     @Provides
@@ -90,7 +92,7 @@ public class ApiModule {
     Retrofit provideRetrofit(String baseUrl, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
                 .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .build();
@@ -98,14 +100,8 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public ProjectAPI provideProjectApiService(OkHttpClient.Builder builder,
-                                               Cache cache,
-                                               HttpLoggingInterceptor loggingInterceptor) {
-        return provideRetrofit(BASE_URL, builder.cache(cache)
-                .addInterceptor(loggingInterceptor)
-                .addInterceptor(provideAuthenticationInterceptor(basic(BuildConfig.API_KEY, "X")))
-                .build())
-                .create(ProjectAPI.class);
+    public ProjectAPI provideProjectApiService(Cache cache) {
+        return provideRetrofit(BASE_URL, provideClient(cache)).create(ProjectAPI.class);
     }
 
     @Provides

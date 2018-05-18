@@ -3,6 +3,7 @@ package demo.teamwork.aquidigital.projects;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.projects.ProjectsContract.View;
 import demo.teamwork.aquidigital.repository.api.apimodel.Project;
+
+import static android.support.v7.widget.RecyclerView.HORIZONTAL;
 
 public class ProjectsActivity extends AppCompatActivity implements View{
 
@@ -44,6 +47,8 @@ public class ProjectsActivity extends AppCompatActivity implements View{
         projectList.setLayoutManager(new LinearLayoutManager(this));
         projectList.setHasFixedSize(true);
         projectList.setAdapter(adapter);
+        DividerItemDecoration itemDecor = new DividerItemDecoration(this, HORIZONTAL);
+        projectList.addItemDecoration(itemDecor);
     }
 
     @Override
@@ -61,7 +66,10 @@ public class ProjectsActivity extends AppCompatActivity implements View{
 
     @Override
     public void showProjects(List<Project> projectList) {
-        Toast.makeText(this, "Success   ", Toast.LENGTH_SHORT).show();
+        for (Project p: projectList) {
+        Toast.makeText(this, p.getName(), Toast.LENGTH_SHORT).show();
+
+        }
         adapter.setData(projectList);
     }
 

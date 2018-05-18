@@ -1,25 +1,49 @@
 package demo.teamwork.aquidigital.repository.api.apimodel;
 
-import com.google.auto.value.AutoValue;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import demo.teamwork.aquidigital.util.ui.Item;
-
-@AutoValue
-public abstract class Integrations implements Item {
+public class Integrations{
 
 	@SerializedName("xero")
-	public abstract Xero xero();
+	private Xero xero;
 
 	@SerializedName("onedrivebusiness")
-	public abstract Onedrivebusiness onedrivebusiness();
+	private Onedrivebusiness onedrivebusiness;
 
 	@SerializedName("microsoftConnectors")
-	public abstract MicrosoftConnectors microsoftConnectors();
+	private MicrosoftConnectors microsoftConnectors;
 
-	public static TypeAdapter<Integrations> typeAdapter(Gson gson) {
-		return new AutoValue_Integrations.GsonTypeAdapter(gson);
+	public void setXero(Xero xero){
+		this.xero = xero;
 	}
+
+	public Xero getXero(){
+		return xero;
+	}
+
+	public void setOnedrivebusiness(Onedrivebusiness onedrivebusiness){
+		this.onedrivebusiness = onedrivebusiness;
+	}
+
+	public Onedrivebusiness getOnedrivebusiness(){
+		return onedrivebusiness;
+	}
+
+	public void setMicrosoftConnectors(MicrosoftConnectors microsoftConnectors){
+		this.microsoftConnectors = microsoftConnectors;
+	}
+
+	public MicrosoftConnectors getMicrosoftConnectors(){
+		return microsoftConnectors;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Integrations{" + 
+			"xero = '" + xero + '\'' + 
+			",onedrivebusiness = '" + onedrivebusiness + '\'' + 
+			",microsoftConnectors = '" + microsoftConnectors + '\'' + 
+			"}";
+		}
 }

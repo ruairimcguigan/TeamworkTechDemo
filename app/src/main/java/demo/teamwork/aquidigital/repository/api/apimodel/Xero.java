@@ -1,31 +1,73 @@
 package demo.teamwork.aquidigital.repository.api.apimodel;
 
-import com.google.auto.value.AutoValue;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import demo.teamwork.aquidigital.util.ui.Item;
-
-@AutoValue
-public abstract class Xero implements Item {
+public class Xero{
 
 	@SerializedName("connected")
-	public abstract String connected();
+	private String connected;
 
 	@SerializedName("basecurrency")
-	public abstract String basecurrency();
+	private String basecurrency;
 
 	@SerializedName("countrycode")
-	public abstract String countrycode();
+	private String countrycode;
 
 	@SerializedName("organisation")
-	public abstract String organisation();
+	private String organisation;
 
 	@SerializedName("enabled")
-	public abstract boolean isEnabled();
+	private boolean enabled;
 
-	public static TypeAdapter<Xero> typeAdapter(Gson gson) {
-		return new AutoValue_Xero.GsonTypeAdapter(gson);
+	public void setConnected(String connected){
+		this.connected = connected;
 	}
+
+	public String getConnected(){
+		return connected;
+	}
+
+	public void setBasecurrency(String basecurrency){
+		this.basecurrency = basecurrency;
+	}
+
+	public String getBasecurrency(){
+		return basecurrency;
+	}
+
+	public void setCountrycode(String countrycode){
+		this.countrycode = countrycode;
+	}
+
+	public String getCountrycode(){
+		return countrycode;
+	}
+
+	public void setOrganisation(String organisation){
+		this.organisation = organisation;
+	}
+
+	public String getOrganisation(){
+		return organisation;
+	}
+
+	public void setEnabled(boolean enabled){
+		this.enabled = enabled;
+	}
+
+	public boolean isEnabled(){
+		return enabled;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Xero{" + 
+			"connected = '" + connected + '\'' + 
+			",basecurrency = '" + basecurrency + '\'' + 
+			",countrycode = '" + countrycode + '\'' + 
+			",organisation = '" + organisation + '\'' + 
+			",enabled = '" + enabled + '\'' + 
+			"}";
+		}
 }

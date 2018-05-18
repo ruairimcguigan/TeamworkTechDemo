@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/project_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.051"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        fresco:layout_constraintBottom_toBottomOf="parent"
+        fresco:layout_constraintEnd_toEndOf="parent"
+        fresco:layout_constraintHorizontal_bias="0.0"
+        fresco:layout_constraintStart_toStartOf="parent"
+        fresco:layout_constraintTop_toTopOf="parent"
         fresco:placeholderImage="@android:drawable/btn_star" />
 
     <TextView
         android:id="@+id/project_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="252dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.757"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.077" />
+        android:layout_gravity="center"
+        fresco:layout_constraintBottom_toBottomOf="parent"
+        fresco:layout_constraintEnd_toEndOf="parent"
+        fresco:layout_constraintHorizontal_bias="0.083"
+        fresco:layout_constraintStart_toEndOf="@id/project_logo"
+        fresco:layout_constraintTop_toTopOf="parent"
+        fresco:layout_constraintVertical_bias="0.51" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/project_is_starred"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center|end"
+        fresco:layout_constraintBottom_toBottomOf="parent"
+        fresco:layout_constraintEnd_toEndOf="parent"
+        fresco:layout_constraintHorizontal_bias="1.0"
+        fresco:layout_constraintStart_toStartOf="parent"
+        fresco:layout_constraintTop_toTopOf="parent"
+        fresco:placeholderImage="@android:drawable/btn_star" />
 
 
 </android.support.constraint.ConstraintLayout>

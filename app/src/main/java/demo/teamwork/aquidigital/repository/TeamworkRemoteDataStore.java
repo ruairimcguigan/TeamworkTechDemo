@@ -17,10 +17,11 @@ public class TeamworkRemoteDataStore implements TeamworkDataStore{
 
     @Override
     public Single getProjects() {
-        Log.d("REMOTE", "Loaded from remote");
-        return retrofit.create(ProjectAPI.class)
-                .getProjects();
-//                .doOnSuccess(TeamworkLocalDataStore::persistProjectsDataToDB);
+        return null;
+//        Log.d("REMOTE", "Loaded from remote");
+//        return retrofit.create(ProjectAPI.class)
+//                .getProjects();
+////                .doOnSuccess(TeamworkLocalDataStore::persistProjectsDataToDB);
     }
 
 }

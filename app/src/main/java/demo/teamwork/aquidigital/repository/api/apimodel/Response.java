@@ -1,22 +1,38 @@
 package demo.teamwork.aquidigital.repository.api.apimodel;
 
-import com.google.auto.value.AutoValue;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
+import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-@AutoValue
-public abstract class Response{
+public class Response{
 
 	@SerializedName("STATUS")
-	public abstract String status();
+	private String sTATUS;
 
 	@SerializedName("projects")
-	public abstract List<Project> projects();
+	private List<Project> projects;
 
-	public static TypeAdapter<Response> typeAdapter(Gson gson) {
-		return new AutoValue_Response.GsonTypeAdapter(gson);
+	public void setSTATUS(String sTATUS){
+		this.sTATUS = sTATUS;
 	}
+
+	public String getSTATUS(){
+		return sTATUS;
+	}
+
+	public void setProjects(List<Project> projects){
+		this.projects = projects;
+	}
+
+	public List<Project> getProjects(){
+		return projects;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Response{" + 
+			"sTATUS = '" + sTATUS + '\'' + 
+			",projects = '" + projects + '\'' + 
+			"}";
+		}
 }

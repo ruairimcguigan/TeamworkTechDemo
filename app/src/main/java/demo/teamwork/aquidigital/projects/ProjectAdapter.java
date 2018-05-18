@@ -18,7 +18,7 @@ import demo.teamwork.aquidigital.repository.api.apimodel.Project;
 
 public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectViewHolder> {
 
-    private final int TYPE_PROJECT= 0;
+    private final int TYPE_PROJECT = 0;
     private final int TYPE_PROJECT_LOADING = 1;
     private final int TYPE_ERROR = 2;
 
@@ -43,11 +43,11 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
 
     @Override
     public void onBindViewHolder(@NonNull ProjectViewHolder holder, int position) {
-        Project project = (Project)getItem(position);
+        Project project = (Project) getItem(position);
         holder.populate(project);
     }
 
-    class ProjectViewHolder extends RecyclerView.ViewHolder{
+    class ProjectViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.project_logo)
         ImageView projectLogo;
@@ -55,14 +55,24 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
         @BindView(R.id.project_name)
         TextView projectName;
 
+        @BindView(R.id.project_is_starred)
+        ImageView projectIsStarred;
+
         ProjectViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        void populate(Project project){
-            projectLogo.setImageURI(Uri.parse(project.logo()));
-            projectName.setText(project.name());
+        void populate(Project project) {
+            projectLogo.setImageURI(Uri.parse(project.getLogo()));
+            projectName.setText(project.getName());
+            setProjectStarred(project);
+        }
+
+        private void setProjectStarred(Project project) {
+            if (project.isStarred()){
+                projectIsStarred.setImageResource(android.R.drawable.btn_star);
+            }
         }
     }
 }

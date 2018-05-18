@@ -1,25 +1,49 @@
 package demo.teamwork.aquidigital.repository.api.apimodel;
 
-import com.google.auto.value.AutoValue;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import demo.teamwork.aquidigital.util.ui.Item;
-
-@AutoValue
-public abstract class Category implements Item {
-
-	@SerializedName("id")
-	public abstract String id();
-
-	@SerializedName("name")
-	public abstract String name();
+public class Category{
 
 	@SerializedName("color")
-	public abstract String color();
+	private String color;
 
-	public static TypeAdapter<Category> typeAdapter(Gson gson) {
-		return new AutoValue_Category.GsonTypeAdapter(gson);
+	@SerializedName("name")
+	private String name;
+
+	@SerializedName("id")
+	private String id;
+
+	public void setColor(String color){
+		this.color = color;
 	}
+
+	public String getColor(){
+		return color;
+	}
+
+	public void setName(String name){
+		this.name = name;
+	}
+
+	public String getName(){
+		return name;
+	}
+
+	public void setId(String id){
+		this.id = id;
+	}
+
+	public String getId(){
+		return id;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Category{" + 
+			"color = '" + color + '\'' + 
+			",name = '" + name + '\'' + 
+			",id = '" + id + '\'' + 
+			"}";
+		}
 }
