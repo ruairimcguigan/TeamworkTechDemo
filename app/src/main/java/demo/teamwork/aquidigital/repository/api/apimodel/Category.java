@@ -5,8 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import demo.teamwork.aquidigital.util.ui.Item;
+
 @AutoValue
-public abstract class Category{
+public abstract class Category implements Item {
 
 	@SerializedName("id")
 	public abstract String id();

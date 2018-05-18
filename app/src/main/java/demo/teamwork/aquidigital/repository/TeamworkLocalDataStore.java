@@ -1,6 +1,6 @@
 package demo.teamwork.aquidigital.repository;
 
-import demo.teamwork.aquidigital.repository.apimodel.Response;
+import demo.teamwork.aquidigital.repository.api.apimodel.Response;
 import io.reactivex.Single;
 
 public class TeamworkLocalDataStore implements TeamworkDataStore {

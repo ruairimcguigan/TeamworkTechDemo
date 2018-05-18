@@ -2,6 +2,7 @@ package demo.teamwork.aquidigital;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.singhajit.sherlock.core.Sherlock;
 import com.squareup.leakcanary.LeakCanary;
@@ -27,6 +28,7 @@ public class TeamworkApplication extends Application {
         super.onCreate();
 
         if (BuildConfig.DEBUG) {
+            Fresco.initialize(this);
             Timber.plant(new Timber.DebugTree());
             Stetho.initializeWithDefaults(this);
             LeakCanary.install(this);
@@ -42,12 +44,8 @@ public class TeamworkApplication extends Application {
         }
     }
 
-    public  AppComponent getAppComponent() {
-        return appComponent ;
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
 
-//    // Needed to replace the component with a test specific one
-//    public void setComponent(AppComponent appComponent) {
-//        this.appComponent = appComponent;
-//    }
 }

@@ -8,10 +8,11 @@ import demo.teamwork.aquidigital.projects.ProjectsContract.Model;
 import demo.teamwork.aquidigital.projects.ProjectsContract.Presenter;
 import demo.teamwork.aquidigital.projects.ProjectsContract.View;
 import demo.teamwork.aquidigital.repository.api.ProjectAPI;
-import demo.teamwork.aquidigital.repository.apimodel.Project;
+import demo.teamwork.aquidigital.repository.api.apimodel.Project;
+import demo.teamwork.aquidigital.repository.api.apimodel.Response;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -23,7 +24,7 @@ public class ProjectsPresenter implements Presenter {
     ProjectAPI projectService;
 
     private View view;
-    private Model projectModel;
+    private final Model projectModel;
 
     @Inject
     ProjectsPresenter(Model projectModel) {
@@ -36,16 +37,23 @@ public class ProjectsPresenter implements Presenter {
     }
 
     @Override
-    public void getProjects() {
+    public void loadProjects() {
         disposable.add(projectService
                 .getProjects()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(result -> onSuccess(result.projects()), this::onError));
+                .subscribe(new Consumer<Response>() {
+                    @Override
+                    public void accept(Response result) throws Exception {
+                        ProjectsPresenter.this.onSuccess(result.projects());
+                    }
+                }, this::onError));
     }
 
     private void onSuccess(List<Project> projects) {
-        view.showProjects(projects);
+        if (projects != null && projects.size() > 0) {
+            view.showProjects(projects);
+        }
     }
 
     private void onError(Throwable throwable) {

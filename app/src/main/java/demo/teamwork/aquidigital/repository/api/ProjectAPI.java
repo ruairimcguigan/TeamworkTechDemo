@@ -1,6 +1,6 @@
 package demo.teamwork.aquidigital.repository.api;
 
-import demo.teamwork.aquidigital.repository.apimodel.Response;
+import demo.teamwork.aquidigital.repository.api.apimodel.Response;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 

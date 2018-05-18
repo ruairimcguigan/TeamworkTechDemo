@@ -5,8 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
+import demo.teamwork.aquidigital.util.ui.Item;
+
 @AutoValue
-public abstract class Defaults{
+public abstract class Defaults implements Item {
 
 	@SerializedName("privacy")
 	public abstract String privacy();

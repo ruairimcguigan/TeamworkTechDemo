@@ -2,7 +2,8 @@ package demo.teamwork.aquidigital.projects;
 
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.apimodel.Project;
+import demo.teamwork.aquidigital.repository.api.apimodel.Project;
+
 
 public class ProjectsContract {
 
@@ -17,7 +18,7 @@ public class ProjectsContract {
 
         void attachView(View view);
 
-        void getProjects();
+        void loadProjects();
     }
 
     interface Model {

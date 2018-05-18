@@ -5,12 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import demo.teamwork.aquidigital.repository.apimodel.MicrosoftConnectors;
-import demo.teamwork.aquidigital.repository.apimodel.Onedrivebusiness;
-import demo.teamwork.aquidigital.repository.apimodel.Xero;
+import demo.teamwork.aquidigital.util.ui.Item;
 
 @AutoValue
-public abstract class Integrations{
+public abstract class Integrations implements Item {
 
 	@SerializedName("xero")
 	public abstract Xero xero();
