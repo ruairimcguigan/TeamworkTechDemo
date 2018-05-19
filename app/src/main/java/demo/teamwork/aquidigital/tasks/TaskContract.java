@@ -1,6 +1,6 @@
-package demo.teamwork.aquidigital.home;
+package demo.teamwork.aquidigital.tasks;
 
-public interface HomeContract {
+public interface TaskContract {
 
     interface View {
 

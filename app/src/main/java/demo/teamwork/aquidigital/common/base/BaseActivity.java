@@ -17,7 +17,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
-import demo.teamwork.aquidigital.home.HomeActivity;
 import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import timber.log.Timber;
 
@@ -74,8 +73,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
 //        attachView();
     }
 
-    protected final <T extends Fragment> void showFragment(@IdRes int fragmentPlaceholder, Class<T> fragmentClass) {
-        showFragment(fragmentPlaceholder, fragmentClass, null, false);
+    protected final <T extends Fragment> void showFragment( Class<T> fragmentClass) {
+        showFragment(R.id.fragment_container, fragmentClass, null, false);
     }
 
     @SuppressLint("StringFormatInvalid")

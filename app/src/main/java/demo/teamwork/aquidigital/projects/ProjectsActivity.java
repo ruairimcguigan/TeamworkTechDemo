@@ -7,12 +7,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,9 +19,14 @@ import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
 import demo.teamwork.aquidigital.projects.ProjectsContract.View;
+import demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection;
 import demo.teamwork.aquidigital.repository.api.apimodel.Project;
+import demo.teamwork.aquidigital.tasks.TasksFragment;
 
-import static android.support.v7.widget.RecyclerView.HORIZONTAL;
+import static demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection.MESSAGES;
+import static demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection.PEOPLE;
+import static demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection.PROJECTS;
+import static demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection.TASKS;
 
 public class ProjectsActivity extends BaseActivity implements View, OnNavigationItemSelectedListener {
 
@@ -35,7 +35,6 @@ public class ProjectsActivity extends BaseActivity implements View, OnNavigation
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-
 
     @Inject
     ProjectsPresenter presenter;
@@ -46,7 +45,7 @@ public class ProjectsActivity extends BaseActivity implements View, OnNavigation
         setContentView(getLayout());
         ButterKnife.bind(this);
 
-        showFragment(R.id.fragment_container, ProjectsListFragment.class);
+        showFragment(ProjectsListFragment.class);
         setNavigationView();
 
         ((TeamworkApplication) getApplication()).getAppComponent().inject(this);
@@ -58,6 +57,7 @@ public class ProjectsActivity extends BaseActivity implements View, OnNavigation
     }
 
     private void setNavigationView() {
+        navigationView.setNavigationItemSelectedListener(this);
         if (navigationView != null) {
             drawerLayout.openDrawer(GravityCompat.START);
 //            setupDrawerContent(navigationView);
@@ -78,10 +78,7 @@ public class ProjectsActivity extends BaseActivity implements View, OnNavigation
 
     @Override
     public void showProjects(List<Project> projectList) {
-
-
     }
-
 
     @Override
     public void toggleProgress() {
@@ -90,27 +87,44 @@ public class ProjectsActivity extends BaseActivity implements View, OnNavigation
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         switch (item.getItemId()) {
-
             case R.id.nav_projects:
-                //do somthing
+//                presenter.onNavigationSelection(PROJECTS);
+                showFragment(ProjectsListFragment.class);
                 break;
 
             case R.id.nav_messages:
-                //do somthing
+                presenter.onNavigationSelection(MESSAGES);
                 break;
 
-            case R.id.nav_milestones:
-                //do somthing
+            case R.id.nav_tasks:
+//                presenter.onNavigationSelection(TASKS);
+                showFragment(TasksFragment.class);
                 break;
 
             case R.id.nav_people:
-                //do somthing
+                presenter.onNavigationSelection(PEOPLE);
                 break;
         }
-        //close navigation drawer
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void displayNavigationSelection(NavigationSelection selection) {
+        switch (selection){
+            case PROJECTS:
+                showFragment(ProjectsListFragment.class);
+                break;
+//            case MESSAGES:
+//                showFragment(MessagesFragment.class);
+//                break;
+//            case TASKS:
+//                showFragment(TasksFragment.class);
+//                break;
+//            case PEOPLE:
+//                showFragment(PeopleFragment.class);
+//                break;
+        }
     }
 }

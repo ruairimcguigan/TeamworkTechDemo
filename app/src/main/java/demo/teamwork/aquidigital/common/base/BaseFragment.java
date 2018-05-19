@@ -70,8 +70,6 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayout();
 
-    protected abstract void inject(FragmentComponent fragmentComponent);
-
     protected abstract void attachView();
 
     protected abstract void detachPresenter();

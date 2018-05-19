@@ -32,9 +32,15 @@ public class ProjectsPresenter implements Presenter {
         this.projectModel = projectModel;
     }
 
+    public enum NavigationSelection{
+        PROJECTS, MESSAGES, TASKS, PEOPLE
+    }
+
     @Override
     public void attachView(View view) {
-        this.view = view;
+        if (view != null) {
+            this.view = view;
+        }
     }
 
     @Override
@@ -73,6 +79,13 @@ public class ProjectsPresenter implements Presenter {
 //                        ProjectsPresenter.this.onSuccess(result.getProjects());
 //                    }
 //                }));
+    }
+
+    @Override
+    public void onNavigationSelection(NavigationSelection selection) {
+        if (view != null) {
+            view.displayNavigationSelection(selection);
+        }
     }
 
     private void onSuccess(List<Project> projects) {

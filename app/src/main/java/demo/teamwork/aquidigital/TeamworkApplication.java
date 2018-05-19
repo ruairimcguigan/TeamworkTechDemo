@@ -10,7 +10,7 @@ import com.tspoon.traceur.Traceur;
 
 import demo.teamwork.aquidigital.common.injection.AppComponent;
 import demo.teamwork.aquidigital.common.injection.DaggerAppComponent;
-import demo.teamwork.aquidigital.home.HomeModule;
+import demo.teamwork.aquidigital.tasks.TaskModule;
 import demo.teamwork.aquidigital.projects.ProjectsModule;
 import demo.teamwork.aquidigital.common.injection.AppModule;
 import demo.teamwork.aquidigital.repository.ApiModule;
@@ -37,7 +37,7 @@ public class TeamworkApplication extends Application {
 
             appComponent = DaggerAppComponent.builder()
                     .appModule(new AppModule(this))
-                    .homeModule(new HomeModule())
+                    .taskModule(new TaskModule())
                     .projectsModule(new ProjectsModule())
                     .apiModule(new ApiModule(this, BuildConfig.BASE_URL))
                     .build();

@@ -41,7 +41,9 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
         View view = inflater.inflate(getLayout(), container, false);
         ButterKnife.bind(this, view);
         setAdapter();
+
         ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
+
         return view;
     }
 
@@ -59,18 +61,11 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
         return R.layout.fragment_project_list;
     }
 
-
-
     @Override
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
         presenter.loadProjects();
-    }
-
-    @Override
-    protected void inject(FragmentComponent fragmentComponent) {
-
     }
 
     @Override
@@ -91,5 +86,10 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     @Override
     public void toggleProgress() {
 
+    }
+
+    @Override
+    public void displayNavigationSelection(ProjectsPresenter.NavigationSelection selection) {
+        Toast.makeText(getActivity(), selection.toString(), Toast.LENGTH_SHORT).show();
     }
 }

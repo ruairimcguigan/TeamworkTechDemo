@@ -4,6 +4,8 @@ import java.util.List;
 
 import demo.teamwork.aquidigital.repository.api.apimodel.Project;
 
+import static demo.teamwork.aquidigital.projects.ProjectsPresenter.*;
+
 
 public class ProjectsContract {
 
@@ -12,6 +14,8 @@ public class ProjectsContract {
         void showProjects(List<Project> projectList);
 
         void toggleProgress();
+
+        void displayNavigationSelection(NavigationSelection selection);
     }
 
     interface Presenter{
@@ -19,6 +23,8 @@ public class ProjectsContract {
         void attachView(View view);
 
         void loadProjects();
+
+        void onNavigationSelection(NavigationSelection selection);
     }
 
     interface Model {
