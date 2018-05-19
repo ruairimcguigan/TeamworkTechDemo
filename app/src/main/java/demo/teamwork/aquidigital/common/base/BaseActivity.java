@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
 import demo.teamwork.aquidigital.home.HomeActivity;
+import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import timber.log.Timber;
 
 /**
@@ -70,7 +71,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
 //
 //        inject(activityComponent);
 
-        attachView();
+//        attachView();
     }
 
     protected final <T extends Fragment> void showFragment(@IdRes int fragmentPlaceholder, Class<T> fragmentClass) {
@@ -147,9 +148,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
 
     protected abstract int getLayout();
 
-    protected abstract void attachView();
-
-    protected abstract void detachPresenter();
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -164,7 +162,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
 
     private void startParentActivity() {
         finish();
-        startActivity(new Intent(this, HomeActivity.class));
+        startActivity(new Intent(this, ProjectsActivity.class));
     }
 
     protected void handleBackButton() {
@@ -192,7 +190,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
             Timber.i("Clearing ConfigPersistentComponent id=%d", activityId);
             componentsArray.remove(activityId);
         }
-        detachPresenter();
+//        detachPresenter();
         super.onDestroy();
     }
 }

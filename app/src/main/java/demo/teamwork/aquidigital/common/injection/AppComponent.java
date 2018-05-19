@@ -6,6 +6,7 @@ import dagger.Component;
 import demo.teamwork.aquidigital.home.HomeActivity;
 import demo.teamwork.aquidigital.home.HomeModule;
 import demo.teamwork.aquidigital.projects.ProjectsActivity;
+import demo.teamwork.aquidigital.projects.ProjectsListFragment;
 import demo.teamwork.aquidigital.projects.ProjectsModule;
 import demo.teamwork.aquidigital.repository.ApiModule;
 
@@ -18,6 +19,9 @@ import demo.teamwork.aquidigital.repository.ApiModule;
 public interface AppComponent {
 
     void inject(HomeActivity activity);
+
+    void inject(ProjectsListFragment fragment);
+
 
     void inject(ProjectsActivity activity);
 

@@ -1,6 +1,7 @@
 package demo.teamwork.aquidigital.projects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -55,6 +56,9 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
         @BindView(R.id.project_name)
         TextView projectName;
 
+        @BindView(R.id.project_description)
+        TextView projectDescription;
+
         @BindView(R.id.project_is_starred)
         ImageView projectIsStarred;
 
@@ -66,7 +70,22 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
         void populate(Project project) {
             projectLogo.setImageURI(Uri.parse(project.getLogo()));
             projectName.setText(project.getName());
+            projectDescription.setText(project.getDescription());
             setProjectStarred(project);
+
+            startProjectDetailsActivityOnViewSelect(project);
+        }
+
+        private void startProjectDetailsActivityOnViewSelect(Project project) {
+            itemView.setOnClickListener(v -> {
+                Context context = v.getContext();
+
+                Intent intent = new Intent(context, ProjectDetailsActivity.class);
+                intent.putExtra(ProjectDetailsActivity.EXTRA_NAME,project.getName());
+                intent.putExtra(ProjectDetailsActivity.EXTRA_LOGO, project.getLogo());
+
+                context.startActivity(intent);
+            });
         }
 
         private void setProjectStarred(Project project) {

@@ -1,9 +1,7 @@
 package demo.teamwork.aquidigital.common.injection;
 
 import dagger.Subcomponent;
-import demo.teamwork.aquidigital.common.injection.PerFragment;
-import demo.teamwork.aquidigital.common.injection.FragmentModule;
-import demo.teamwork.aquidigital.projects.ProjectDetailsFragment;
+import demo.teamwork.aquidigital.projects.ProjectDetailsActivity;
 
 /**
  * This component inject dependencies to all Fragments across the application
@@ -12,7 +10,7 @@ import demo.teamwork.aquidigital.projects.ProjectDetailsFragment;
 @Subcomponent(modules = FragmentModule.class)
 public interface FragmentComponent {
 
-    void inject(ProjectDetailsFragment fragment);
+    void inject(ProjectDetailsActivity fragment);
 
 
 }
