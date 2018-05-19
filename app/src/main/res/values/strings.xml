@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">TeamworkTechDemo</string>
     <string name="fragment_not_created_message">New fragment should have been created</string>
+    <string name="projects">Projects</string>
+    <string name="project_description">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue cheese caerphilly bavarian bergkase cheese and biscuits mascarpone.</string>
+    <string name="messages">Messages</string>
+    <string name="messages_description">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue cheese caerphilly bavarian bergkase cheese and biscuits mascarpone.</string>
+    <string name="milestones">Milestones</string>
+    <string name="milestones_description">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue cheese caerphilly bavarian bergkase cheese and biscuits mascarpone.</string>
+    <string name="people">People</string>
+    <string name="people_description">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue cheese caerphilly bavarian bergkase cheese and biscuits mascarpone.></string>
 </resources>

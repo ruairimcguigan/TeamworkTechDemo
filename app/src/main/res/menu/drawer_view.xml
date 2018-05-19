@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/grp1" android:checkableBehavior="single" >
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_projects"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="Home" />
+            android:title="Projects" />
+    </group>
+    <group android:id="@+id/grp2" android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_messages"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="Messages" />
+    </group>
+    <group android:id="@+id/grp3" android:checkableBehavior="single" >
         <item
-            android:id="@+id/nav_friends"
+            android:id="@+id/nav_milestones"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="Friends" />
+            android:title="Milestones" />
+    </group>
+    <group android:id="@+id/grp4" android:checkableBehavior="single" >
         <item
-            android:id="@+id/nav_discussion"
+            android:id="@+id/nav_people"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="Discussion" />
+            android:title="People" />
     </group>
 
     <item android:title="Sub items">
