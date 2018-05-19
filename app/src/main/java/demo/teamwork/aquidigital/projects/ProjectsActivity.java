@@ -18,6 +18,8 @@ import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
+import demo.teamwork.aquidigital.messages.MessagesFragment;
+import demo.teamwork.aquidigital.people.PeopleFragment;
 import demo.teamwork.aquidigital.projects.ProjectsContract.View;
 import demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection;
 import demo.teamwork.aquidigital.repository.api.apimodel.Project;
@@ -89,21 +91,19 @@ public class ProjectsActivity extends BaseActivity implements View, OnNavigation
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_projects:
-//                presenter.onNavigationSelection(PROJECTS);
                 showFragment(ProjectsListFragment.class);
                 break;
 
             case R.id.nav_messages:
-                presenter.onNavigationSelection(MESSAGES);
+                showFragment(MessagesFragment.class);
                 break;
 
             case R.id.nav_tasks:
-//                presenter.onNavigationSelection(TASKS);
                 showFragment(TasksFragment.class);
                 break;
 
             case R.id.nav_people:
-                presenter.onNavigationSelection(PEOPLE);
+                showFragment(PeopleFragment.class);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
