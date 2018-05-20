@@ -81,12 +81,6 @@ public class ProjectsPresenter implements Presenter {
 //                }));
     }
 
-    @Override
-    public void onNavigationSelection(NavigationSelection selection) {
-        if (view != null) {
-            view.displayNavigationSelection(selection);
-        }
-    }
 
     private void onSuccess(List<Project> projects) {
         Timber.d("Success! Projects received");

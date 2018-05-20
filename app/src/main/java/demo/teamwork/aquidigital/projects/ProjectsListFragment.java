@@ -87,9 +87,4 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     public void toggleProgress() {
 
     }
-
-    @Override
-    public void displayNavigationSelection(ProjectsPresenter.NavigationSelection selection) {
-        Toast.makeText(getActivity(), selection.toString(), Toast.LENGTH_SHORT).show();
-    }
 }

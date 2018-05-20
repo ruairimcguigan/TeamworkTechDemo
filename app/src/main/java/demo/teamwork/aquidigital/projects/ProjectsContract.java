@@ -15,7 +15,6 @@ public class ProjectsContract {
 
         void toggleProgress();
 
-        void displayNavigationSelection(NavigationSelection selection);
     }
 
     interface Presenter{
@@ -24,7 +23,6 @@ public class ProjectsContract {
 
         void loadProjects();
 
-        void onNavigationSelection(NavigationSelection selection);
     }
 
     interface Model {
