@@ -1,40 +1,19 @@
 package demo.teamwork.aquidigital.common.base;
 
+import java.util.List;
+
+import demo.teamwork.aquidigital.repository.Item;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
  * Base class that implements the Presenter interface and provides a base implementation for
- * attachView() and detachView(). It also handles keeping a reference to the View that can be
+ * attachView() and detach(). It also handles keeping a reference to the View that can be
  * accessed from the children classes by calling getView().
  */
-public abstract class BasePresenter<T extends View> {
+public abstract class BasePresenter<I extends Item, T extends View> {
 
     protected final CompositeDisposable disposable = new CompositeDisposable();
-    private T view;
-
-    public void attachView(T view) {
-        this.view = view;
-    }
-
-    public void detachView() {
-        view = null;
-        if (!disposable.isDisposed()) {
-            disposable.clear();
-        }
-    }
-
-    private boolean isViewAttached() {
-        return view != null;
-    }
-
-    protected T getView() {
-        return view;
-    }
-
-    protected void checkViewAttached() {
-        if (!isViewAttached()) throw new ViewNotAttachedException();
-    }
 
     public void addDisposable(Disposable disposable) {
         this.disposable.add(disposable);
@@ -45,6 +24,16 @@ public abstract class BasePresenter<T extends View> {
             super(
                     "Please call Presenter.attachView(View) before"
                             + " requesting data to the Presenter");
+        }
+    }
+
+    protected abstract void onSuccess(List<I> dataList);
+
+    protected abstract void onError(Throwable throwable);
+
+    public void detach() {
+        if (!disposable.isDisposed()) {
+            disposable.clear();
         }
     }
 }

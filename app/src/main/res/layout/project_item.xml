@@ -52,8 +52,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        tools:text="Accelerate your team's performance by assigning tasks, communicating and tracking progress in one place. Use the Teamwork Timer to stay on top of your work.Teamwork has given us a one-stop solution that encompasses many of our project management needs.
-        We've gone from using a range of tools to just the one and as a result, our team is more efficient and therefore more effective. Teamwork has given us a one-stop solution that encompasses many of our project management needs. We've gone from using a range of tools to just the one and as a result, our team is more efficient and therefore morejdjdnejdd"
         fresco:layout_constraintBottom_toBottomOf="parent"
         fresco:layout_constraintEnd_toEndOf="parent"
         fresco:layout_constraintHorizontal_bias="0.125"

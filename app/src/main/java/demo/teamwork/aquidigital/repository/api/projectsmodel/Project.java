@@ -3,7 +3,7 @@ package demo.teamwork.aquidigital.repository.api.projectsmodel;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-import demo.teamwork.aquidigital.util.ui.Item;
+import demo.teamwork.aquidigital.repository.Item;
 
 public class Project implements Item{
 

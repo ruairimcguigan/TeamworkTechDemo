@@ -54,7 +54,6 @@ public abstract class BaseFragment extends Fragment {
 //        FragmentComponent fragmentComponent =
 //                configPersistentComponent.fragmentComponent(new FragmentModule(this));
 //        inject(fragmentComponent);
-        attachView();
     }
 
     @Nullable
@@ -70,10 +69,6 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayout();
 
-    protected abstract void attachView();
-
-    protected abstract void detachPresenter();
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -86,7 +81,6 @@ public abstract class BaseFragment extends Fragment {
             Timber.i("Clearing ConfigPersistentComponent id=%d", fragmentId);
             componentsArray.remove(fragmentId);
         }
-        detachPresenter();
         super.onDestroy();
     }
 }

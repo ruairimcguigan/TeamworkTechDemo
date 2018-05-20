@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.repository;
+package demo.teamwork.aquidigital.repository.api;
 
 import android.app.Application;
 import android.content.Context;
@@ -16,6 +16,8 @@ import dagger.Module;
 import dagger.Provides;
 import demo.teamwork.aquidigital.BuildConfig;
 import demo.teamwork.aquidigital.TeamworkApplication;
+import demo.teamwork.aquidigital.repository.TeamworkLocalDataStore;
+import demo.teamwork.aquidigital.repository.TeamworkRemoteDataStore;
 import demo.teamwork.aquidigital.repository.api.AuthenticationInterceptor;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import okhttp3.Cache;

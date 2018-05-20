@@ -12,11 +12,14 @@ import demo.teamwork.aquidigital.projects.ProjectsContract.View;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
+import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
 import timber.log.Timber;
+
+import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ProjectsPresenter extends BasePresenter implements Presenter {
 
@@ -44,23 +47,24 @@ public class ProjectsPresenter extends BasePresenter implements Presenter {
 
     @Override
     public void loadProjects() {
-        disposable.add(projectService
+        addDisposable(projectService
                 .getProjects()
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(mainThread())
                 .doOnError(this::onError)
-                .subscribe(result -> ProjectsPresenter.this.onSuccess(result.getProjects())));
+                .subscribe(result -> onSuccess(result.getProjects())));
     }
 
-
-    private void onSuccess(List<Project> projects) {
+    @Override
+    protected void onSuccess(List projects) {
         Timber.d("Success! Projects received");
         if (projects != null && projects.size() > 0) {
             view.showProjects(projects);
         }
     }
 
-    private void onError(Throwable throwable) {
+    @Override
+    protected void onError(Throwable throwable) {
         Timber.d("Error retrieving projects", Arrays.toString(throwable.getStackTrace()));
-
     }
+
 }

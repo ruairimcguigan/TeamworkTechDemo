@@ -34,14 +34,4 @@ public class PeopleFragment extends BaseFragment implements PeopleContract.View{
         return R.layout.fragment_people;
     }
 
-
-    @Override
-    protected void attachView() {
-
-    }
-
-    @Override
-    protected void detachPresenter() {
-
-    }
 }

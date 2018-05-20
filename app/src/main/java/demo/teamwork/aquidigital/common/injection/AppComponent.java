@@ -10,7 +10,7 @@ import demo.teamwork.aquidigital.tasks.TaskModule;
 import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import demo.teamwork.aquidigital.projects.ProjectsListFragment;
 import demo.teamwork.aquidigital.projects.ProjectsModule;
-import demo.teamwork.aquidigital.repository.ApiModule;
+import demo.teamwork.aquidigital.repository.api.ApiModule;
 
 @Singleton
 @Component(modules = {

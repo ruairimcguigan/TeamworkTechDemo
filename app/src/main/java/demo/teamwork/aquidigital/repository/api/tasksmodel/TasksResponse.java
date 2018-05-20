@@ -6,17 +6,17 @@ import com.google.gson.annotations.SerializedName;
 public class TasksResponse{
 
 	@SerializedName("STATUS")
-	private String sTATUS;
+	private String status;
 
 	@SerializedName("todo-items")
 	private List<TodoItemsItem> todoItems;
 
-	public void setSTATUS(String sTATUS){
-		this.sTATUS = sTATUS;
+	public void setStatus(String status){
+		this.status = status;
 	}
 
-	public String getSTATUS(){
-		return sTATUS;
+	public String getStatus(){
+		return status;
 	}
 
 	public void setTodoItems(List<TodoItemsItem> todoItems){
@@ -31,7 +31,7 @@ public class TasksResponse{
  	public String toString(){
 		return 
 			"TasksResponse{" + 
-			"sTATUS = '" + sTATUS + '\'' + 
+			"status = '" + status + '\'' +
 			",todo-items = '" + todoItems + '\'' + 
 			"}";
 		}

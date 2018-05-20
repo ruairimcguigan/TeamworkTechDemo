@@ -13,7 +13,7 @@ import demo.teamwork.aquidigital.common.injection.DaggerAppComponent;
 import demo.teamwork.aquidigital.tasks.TaskModule;
 import demo.teamwork.aquidigital.projects.ProjectsModule;
 import demo.teamwork.aquidigital.common.injection.AppModule;
-import demo.teamwork.aquidigital.repository.ApiModule;
+import demo.teamwork.aquidigital.repository.api.ApiModule;
 import timber.log.Timber;
 
 public class TeamworkApplication extends Application {

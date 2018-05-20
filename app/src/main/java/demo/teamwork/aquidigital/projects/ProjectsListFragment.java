@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -41,20 +40,17 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
         ButterKnife.bind(this, view);
         setAdapter();
 
-        Toast.makeText(getActivity(), "ProjectsListFragment", Toast.LENGTH_SHORT).show();
-
         ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
 
         return view;
     }
 
-    private void setAdapter() {
+    @Override
+    public void setAdapter() {
         adapter = new ProjectAdapter(getActivity());
         projectList.setLayoutManager(new LinearLayoutManager(getActivity()));
         projectList.setHasFixedSize(true);
         projectList.setAdapter(adapter);
-        DividerItemDecoration itemDecor = new DividerItemDecoration(getActivity(), HORIZONTAL);
-        projectList.addItemDecoration(itemDecor);
     }
 
     @Override
@@ -70,22 +66,13 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     }
 
     @Override
-    protected void attachView() {
-
-    }
-
-    @Override
-    protected void detachPresenter() {
-
-    }
-
-    @Override
     public void showProjects(List<Project> projectList) {
         adapter.setData(projectList);
     }
 
     @Override
-    public void toggleProgress() {
-
+    public void onStop() {
+        super.onStop();
+        presenter.detach();
     }
 }

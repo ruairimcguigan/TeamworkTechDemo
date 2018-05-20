@@ -34,14 +34,4 @@ public class MessagesFragment extends BaseFragment implements MessagesContract.V
         return R.layout.fragment_messages;
     }
 
-
-    @Override
-    protected void attachView() {
-
-    }
-
-    @Override
-    protected void detachPresenter() {
-
-    }
 }
