@@ -2,8 +2,6 @@ package demo.teamwork.aquidigital.common.base;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import rx.Observable;
-import rx.Single;
 
 /**
  * Base class that implements the Presenter interface and provides a base implementation for
@@ -12,7 +10,7 @@ import rx.Single;
  */
 public abstract class BasePresenter<T extends View> {
 
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    protected final CompositeDisposable disposable = new CompositeDisposable();
     private T view;
 
     public void attachView(T view) {
@@ -21,8 +19,8 @@ public abstract class BasePresenter<T extends View> {
 
     public void detachView() {
         view = null;
-        if (!compositeDisposable.isDisposed()) {
-            compositeDisposable.clear();
+        if (!disposable.isDisposed()) {
+            disposable.clear();
         }
     }
 
@@ -39,7 +37,7 @@ public abstract class BasePresenter<T extends View> {
     }
 
     public void addDisposable(Disposable disposable) {
-        compositeDisposable.add(disposable);
+        this.disposable.add(disposable);
     }
 
     private static class ViewNotAttachedException extends RuntimeException {
