@@ -11,11 +11,14 @@ import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import demo.teamwork.aquidigital.projects.ProjectsListFragment;
 import demo.teamwork.aquidigital.projects.ProjectsModule;
 import demo.teamwork.aquidigital.repository.api.ApiModule;
+import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailFragment;
+import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailModule;
 
 @Singleton
 @Component(modules = {
         AppModule.class,
         TaskModule.class,
+        TaskDetailModule.class,
         ProjectsModule.class,
         ApiModule.class})
 public interface AppComponent {
@@ -27,6 +30,8 @@ public interface AppComponent {
     void inject(PeopleFragment fragment);
 
     void inject(TasksFragment fragment);
+
+    void inject(TaskDetailFragment fragment);
 
     void inject(ProjectsActivity activity);
 
