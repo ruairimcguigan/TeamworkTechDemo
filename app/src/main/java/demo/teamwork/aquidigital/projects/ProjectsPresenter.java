@@ -7,14 +7,12 @@ import javax.inject.Inject;
 import demo.teamwork.aquidigital.projects.ProjectsContract.Model;
 import demo.teamwork.aquidigital.projects.ProjectsContract.Presenter;
 import demo.teamwork.aquidigital.projects.ProjectsContract.View;
-import demo.teamwork.aquidigital.repository.api.ProjectAPI;
-import demo.teamwork.aquidigital.repository.api.apimodel.Project;
-import demo.teamwork.aquidigital.repository.api.apimodel.Response;
+import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class ProjectsPresenter implements Presenter {
@@ -22,7 +20,7 @@ public class ProjectsPresenter implements Presenter {
     private CompositeDisposable disposable = new CompositeDisposable();
 
     @Inject
-    ProjectAPI projectService;
+    TeamworkAPI projectService;
 
     private View view;
     private final Model projectModel;
@@ -48,19 +46,24 @@ public class ProjectsPresenter implements Presenter {
 
        disposable.add(projectService.getProjects()
                .observeOn(AndroidSchedulers.mainThread())
-               .subscribeWith(new DisposableObserver<Response>() {
+               .subscribeWith(new DisposableObserver<ProjectsResponse>() {
                                   @Override
-                                  public void onNext(Response response) {
+                                  public void onNext(ProjectsResponse projectsResponse) {
                                       Timber.d("Success! Projects received");
-                                      if (response.getProjects() != null && response.getProjects().size() > 0) {
-                                          onSuccess(response.getProjects());
+                                      if (projectsResponse.getProjects() != null && projectsResponse.getProjects().size() > 0) {
+                                          onSuccess(projectsResponse.getProjects());
                                       }
                                   }
 
-                                  @Override
-                                  public void onError(Throwable e) {
-                                        onError(e);
-                                  }
+                   @Override
+                   public void onError(Throwable e) {
+
+                   }
+
+//                                  @Override
+//                                  public void onError(Throwable e) {
+//                                        onError(e);
+//                                  }
 
                                   @Override
                                   public void onComplete() {

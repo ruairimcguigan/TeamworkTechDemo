@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.repository.api.apimodel;
+package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
 import com.google.gson.annotations.SerializedName;
 

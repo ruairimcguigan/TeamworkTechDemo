@@ -25,16 +25,4 @@
             android:icon="@drawable/ic_launcher_foreground"
             android:title="People" />
     </group>
-
-    <item android:title="Sub items">
-        <menu>
-            <item
-                android:icon="@drawable/ic_launcher_foreground"
-                android:title="Sub item 1" />
-            <item
-                android:icon="@drawable/ic_launcher_foreground"
-                android:title="Sub item 2" />
-        </menu>
-    </item>
-
 </menu>

@@ -1,8 +1,8 @@
-package demo.teamwork.aquidigital.repository.api.apimodel;
+package demo.teamwork.aquidigital.repository.api.tasksmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Category{
+public class BoardColumn{
 
 	@SerializedName("color")
 	private String color;
@@ -11,7 +11,7 @@ public class Category{
 	private String name;
 
 	@SerializedName("id")
-	private String id;
+	private int id;
 
 	public void setColor(String color){
 		this.color = color;
@@ -29,18 +29,18 @@ public class Category{
 		return name;
 	}
 
-	public void setId(String id){
+	public void setId(int id){
 		this.id = id;
 	}
 
-	public String getId(){
+	public int getId(){
 		return id;
 	}
 
 	@Override
  	public String toString(){
 		return 
-			"Category{" + 
+			"BoardColumn{" + 
 			"color = '" + color + '\'' + 
 			",name = '" + name + '\'' + 
 			",id = '" + id + '\'' + 

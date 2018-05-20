@@ -2,9 +2,7 @@ package demo.teamwork.aquidigital.projects;
 
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.api.apimodel.Project;
-
-import static demo.teamwork.aquidigital.projects.ProjectsPresenter.*;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 
 
 public class ProjectsContract {

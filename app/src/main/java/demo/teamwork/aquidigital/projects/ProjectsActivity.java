@@ -23,16 +23,10 @@ import demo.teamwork.aquidigital.common.base.BaseActivity;
 import demo.teamwork.aquidigital.messages.MessagesFragment;
 import demo.teamwork.aquidigital.people.PeopleFragment;
 import demo.teamwork.aquidigital.projects.ProjectsContract.View;
-import demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection;
-import demo.teamwork.aquidigital.repository.api.apimodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 import demo.teamwork.aquidigital.tasks.TasksFragment;
 
-import static demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection.MESSAGES;
-import static demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection.PEOPLE;
-import static demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection.PROJECTS;
-import static demo.teamwork.aquidigital.projects.ProjectsPresenter.NavigationSelection.TASKS;
-
-public class ProjectsActivity extends BaseActivity implements View, OnNavigationItemSelectedListener {
+public class ProjectsActivity extends BaseActivity implements OnNavigationItemSelectedListener {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -84,15 +78,6 @@ public class ProjectsActivity extends BaseActivity implements View, OnNavigation
         if (navigationView != null) {
             drawerLayout.openDrawer(GravityCompat.START);
         }
-    }
-
-    @Override
-    public void showProjects(List<Project> projectList) {
-    }
-
-    @Override
-    public void toggleProgress() {
-        // TODO: 16/05/2018 implement progress
     }
 
     @Override

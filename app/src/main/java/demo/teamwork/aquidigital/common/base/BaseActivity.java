@@ -148,10 +148,21 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     protected abstract int getLayout();
 
 
-//    private void startParentActivity() {
-//        finish();
-//        startActivity(new Intent(this, ProjectsActivity.class));
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+////                startParentActivity();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
 //    }
+
+    private void startParentActivity() {
+        finish();
+        startActivity(new Intent(this, ProjectsActivity.class));
+    }
 
     protected void handleBackButton() {
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {

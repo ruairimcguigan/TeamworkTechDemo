@@ -1,15 +1,15 @@
-package demo.teamwork.aquidigital.repository.api.apimodel;
+package demo.teamwork.aquidigital.repository.api.messagesmodel;
 
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class Response{
+public class MessagesResponse{
 
 	@SerializedName("STATUS")
 	private String sTATUS;
 
-	@SerializedName("projects")
-	private List<Project> projects;
+	@SerializedName("posts")
+	private List<PostsItem> posts;
 
 	public void setSTATUS(String sTATUS){
 		this.sTATUS = sTATUS;
@@ -19,20 +19,20 @@ public class Response{
 		return sTATUS;
 	}
 
-	public void setProjects(List<Project> projects){
-		this.projects = projects;
+	public void setPosts(List<PostsItem> posts){
+		this.posts = posts;
 	}
 
-	public List<Project> getProjects(){
-		return projects;
+	public List<PostsItem> getPosts(){
+		return posts;
 	}
 
 	@Override
  	public String toString(){
 		return 
-			"Response{" + 
+			"MessagesResponse{" + 
 			"sTATUS = '" + sTATUS + '\'' + 
-			",projects = '" + projects + '\'' + 
+			",posts = '" + posts + '\'' + 
 			"}";
 		}
 }

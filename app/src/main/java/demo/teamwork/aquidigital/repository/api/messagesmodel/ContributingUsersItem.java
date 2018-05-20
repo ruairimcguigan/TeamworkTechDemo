@@ -1,11 +1,11 @@
-package demo.teamwork.aquidigital.repository.api.apimodel;
+package demo.teamwork.aquidigital.repository.api.messagesmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Company{
+public class ContributingUsersItem{
 
-	@SerializedName("is-owner")
-	private String isOwner;
+	@SerializedName("avatarURL")
+	private String avatarURL;
 
 	@SerializedName("name")
 	private String name;
@@ -13,12 +13,12 @@ public class Company{
 	@SerializedName("id")
 	private String id;
 
-	public void setIsOwner(String isOwner){
-		this.isOwner = isOwner;
+	public void setAvatarURL(String avatarURL){
+		this.avatarURL = avatarURL;
 	}
 
-	public String getIsOwner(){
-		return isOwner;
+	public String getAvatarURL(){
+		return avatarURL;
 	}
 
 	public void setName(String name){
@@ -40,8 +40,8 @@ public class Company{
 	@Override
  	public String toString(){
 		return 
-			"Company{" + 
-			"is-owner = '" + isOwner + '\'' + 
+			"ContributingUsersItem{" + 
+			"avatarURL = '" + avatarURL + '\'' + 
 			",name = '" + name + '\'' + 
 			",id = '" + id + '\'' + 
 			"}";

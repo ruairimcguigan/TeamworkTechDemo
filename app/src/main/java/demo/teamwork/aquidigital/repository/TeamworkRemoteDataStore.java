@@ -1,10 +1,7 @@
 package demo.teamwork.aquidigital.repository;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
-import demo.teamwork.aquidigital.repository.api.ProjectAPI;
 import io.reactivex.Single;
 import retrofit2.Retrofit;
 

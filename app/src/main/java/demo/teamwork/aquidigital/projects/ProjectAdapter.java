@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.base.BaseAdapter;
-import demo.teamwork.aquidigital.repository.api.apimodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 
 public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectViewHolder> {
 

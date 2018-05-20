@@ -17,7 +17,7 @@ import dagger.Provides;
 import demo.teamwork.aquidigital.BuildConfig;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.repository.api.AuthenticationInterceptor;
-import demo.teamwork.aquidigital.repository.api.ProjectAPI;
+import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -100,8 +100,8 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public ProjectAPI provideProjectApiService(Cache cache) {
-        return provideRetrofit(BASE_URL, provideClient(cache)).create(ProjectAPI.class);
+    public TeamworkAPI provideProjectApiService(Cache cache) {
+        return provideRetrofit(BASE_URL, provideClient(cache)).create(TeamworkAPI.class);
     }
 
     @Provides

@@ -20,8 +20,7 @@ import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.common.injection.FragmentComponent;
-import demo.teamwork.aquidigital.repository.api.apimodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 
 import static android.support.v7.widget.RecyclerView.HORIZONTAL;
 
@@ -41,6 +40,8 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
         View view = inflater.inflate(getLayout(), container, false);
         ButterKnife.bind(this, view);
         setAdapter();
+
+        Toast.makeText(getActivity(), "ProjectsListFragment", Toast.LENGTH_SHORT).show();
 
         ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
 
