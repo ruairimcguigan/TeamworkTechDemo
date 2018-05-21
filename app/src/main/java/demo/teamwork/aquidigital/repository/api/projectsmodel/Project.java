@@ -1,11 +1,12 @@
 package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 import demo.teamwork.aquidigital.repository.Item;
 
-public class Project implements Item{
+public class Project implements Item, Serializable {
 
 	@SerializedName("replyByEmailEnabled")
 	private boolean replyByEmailEnabled;

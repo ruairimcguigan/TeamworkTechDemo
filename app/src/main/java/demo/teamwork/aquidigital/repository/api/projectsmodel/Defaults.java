@@ -2,7 +2,9 @@ package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Defaults{
+import java.io.Serializable;
+
+public class Defaults implements Serializable {
 
 	@SerializedName("privacy")
 	private String privacy;

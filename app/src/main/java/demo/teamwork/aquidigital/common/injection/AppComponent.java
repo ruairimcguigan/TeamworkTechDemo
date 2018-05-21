@@ -6,6 +6,8 @@ import dagger.Component;
 import demo.teamwork.aquidigital.messages.MessagesFragment;
 import demo.teamwork.aquidigital.people.PeopleFragment;
 import demo.teamwork.aquidigital.people.PeopleModule;
+import demo.teamwork.aquidigital.projects.addproject.AddProjectFragment;
+import demo.teamwork.aquidigital.projects.addproject.AddProjectModule;
 import demo.teamwork.aquidigital.tasks.TasksFragment;
 import demo.teamwork.aquidigital.tasks.TaskModule;
 import demo.teamwork.aquidigital.projects.ProjectsActivity;
@@ -22,7 +24,9 @@ import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailModule;
         TaskDetailModule.class,
         ProjectsModule.class,
         PeopleModule.class,
-        ApiModule.class})
+        ApiModule.class,
+        AddProjectModule.class
+})
 public interface AppComponent {
 
     void inject(ProjectsActivity activity);
@@ -36,5 +40,7 @@ public interface AppComponent {
     void inject(TasksFragment fragment);
 
     void inject(TaskDetailFragment fragment);
+
+    void inject(AddProjectFragment fragment);
 
 }

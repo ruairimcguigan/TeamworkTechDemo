@@ -2,7 +2,9 @@ package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MicrosoftConnectors{
+import java.io.Serializable;
+
+public class MicrosoftConnectors implements Serializable {
 
 	@SerializedName("enabled")
 	private boolean enabled;

@@ -2,7 +2,9 @@ package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Category{
+import java.io.Serializable;
+
+public class Category implements Serializable {
 
 	@SerializedName("color")
 	private String color;

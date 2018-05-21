@@ -1,6 +1,8 @@
 package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
-public class BoardData{
+import java.io.Serializable;
+
+public class BoardData implements Serializable{
 
 	@Override
  	public String toString(){

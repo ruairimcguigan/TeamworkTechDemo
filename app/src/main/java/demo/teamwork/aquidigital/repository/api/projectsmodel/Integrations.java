@@ -2,7 +2,9 @@ package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Integrations{
+import java.io.Serializable;
+
+public class Integrations implements Serializable {
 
 	@SerializedName("xero")
 	private Xero xero;

@@ -2,7 +2,9 @@ package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Onedrivebusiness{
+import java.io.Serializable;
+
+public class Onedrivebusiness implements Serializable {
 
 	@SerializedName("folder")
 	private String folder;

@@ -2,7 +2,9 @@ package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Company{
+import java.io.Serializable;
+
+public class Company implements Serializable {
 
 	@SerializedName("is-owner")
 	private String isOwner;
