@@ -1,30 +1,33 @@
 package demo.teamwork.aquidigital.tasks;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
+import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
+import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailFragment;
 
 import static butterknife.ButterKnife.bind;
+import static demo.teamwork.aquidigital.tasks.TasksAdapter.AdapterCallback;
 
-public class TasksFragment extends BaseFragment implements TaskContract.View{
+public class TasksFragment extends BaseFragment implements AdapterCallback, TaskContract.View{
 
     @Inject
     TaskPresenter presenter;
@@ -33,6 +36,8 @@ public class TasksFragment extends BaseFragment implements TaskContract.View{
 
     @BindView(R.id.task_list)
     RecyclerView taskList;
+
+    private List<TodoItemsItem> items = new ArrayList<>();
 
     @Nullable
     @Override
@@ -56,6 +61,8 @@ public class TasksFragment extends BaseFragment implements TaskContract.View{
     @Override
     public void setAdapter(){
         adapter = new TasksAdapter(getActivity());
+        adapter.callback = this;
+
         taskList.setLayoutManager(new LinearLayoutManager(getActivity()));
         taskList.setHasFixedSize(true);
         taskList.setAdapter(adapter);
@@ -73,6 +80,7 @@ public class TasksFragment extends BaseFragment implements TaskContract.View{
 
     @Override
     public void showTasks(List<TodoItemsItem> taskList) {
+        items.addAll(taskList);
         adapter.setData(taskList);
     }
 
@@ -80,5 +88,15 @@ public class TasksFragment extends BaseFragment implements TaskContract.View{
     public void onStop() {
         super.onStop();
         presenter.detach();
+    }
+
+    @Override
+    public void onTaskSelected(TodoItemsItem task) {
+        if (task != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("TASK", task);
+
+            ((ProjectsActivity) getActivity()).showFragment(R.id.fragment_container, TaskDetailFragment.class, bundle, true);
+        }
     }
 }

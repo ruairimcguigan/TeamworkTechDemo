@@ -36,15 +36,7 @@ public class TaskDetailPresenter extends BasePresenter implements Presenter {
         }
     }
 
-    @Override
-    public void loadTasks() {
-        addDisposable(projectService
-                .getTasks()
-                .observeOn(mainThread())
-                .doOnError(this::onError)
-                .subscribe(tasksResponse -> onSuccess(tasksResponse.getTodoItems()))
-        );
-    }
+
 
     @Override
     protected void onSuccess(List tasks) {

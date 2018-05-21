@@ -78,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
     }
 
     @SuppressLint("StringFormatInvalid")
-    protected final <T extends Fragment> void showFragment(@IdRes int fragmentPlaceholder, Class<T> fragmentClass, Bundle bundle, boolean addToBackStack) {
+    public final <T extends Fragment> void showFragment(@IdRes int fragmentPlaceholder, Class<T> fragmentClass, Bundle bundle, boolean addToBackStack) {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentClass.getSimpleName());

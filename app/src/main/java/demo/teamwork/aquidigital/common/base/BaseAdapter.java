@@ -1,6 +1,8 @@
 package demo.teamwork.aquidigital.common.base;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.Adapter;
+import android.support.v7.widget.RecyclerView.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ import demo.teamwork.aquidigital.repository.Item;
  * @param <I>
  * @param <V>
  */
-public abstract class BaseAdapter<I extends Item, V extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<V> {
+public abstract class BaseAdapter<I extends Item, V extends ViewHolder> extends Adapter<V> {
 
     protected List<I> data;
 

@@ -1,11 +1,12 @@
 package demo.teamwork.aquidigital.repository.api.tasksmodel;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 import demo.teamwork.aquidigital.repository.Item;
 
-public class TodoItemsItem implements Item{
+public class TodoItemsItem implements Serializable, Item{
 
 	@SerializedName("project-name")
 	private String projectName;

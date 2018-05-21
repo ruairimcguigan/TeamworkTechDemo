@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +20,7 @@ import demo.teamwork.aquidigital.common.base.BaseAdapter;
 import demo.teamwork.aquidigital.projects.ProjectDetailsActivity;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
+import timber.log.Timber;
 
 public class TasksAdapter extends BaseAdapter<TodoItemsItem, TasksAdapter.TaskViewHolder> {
 
@@ -26,6 +29,8 @@ public class TasksAdapter extends BaseAdapter<TodoItemsItem, TasksAdapter.TaskVi
     TasksAdapter(Context context) {
         this.context = context;
     }
+
+    AdapterCallback callback;
 
     @NonNull
     @Override
@@ -36,7 +41,6 @@ public class TasksAdapter extends BaseAdapter<TodoItemsItem, TasksAdapter.TaskVi
         final TaskViewHolder viewHolder = new TaskViewHolder(view);
         viewHolder.itemView.setOnClickListener(v -> onItemClicked(viewHolder.getAdapterPosition()));
 
-
         return viewHolder;
     }
 
@@ -46,7 +50,7 @@ public class TasksAdapter extends BaseAdapter<TodoItemsItem, TasksAdapter.TaskVi
         holder.populate(task);
     }
 
-    class TaskViewHolder extends RecyclerView.ViewHolder {
+    class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.task_title)
         TextView taskTitle;
@@ -72,15 +76,17 @@ public class TasksAdapter extends BaseAdapter<TodoItemsItem, TasksAdapter.TaskVi
 
         private void startProjectDetailsActivityOnViewSelect(TodoItemsItem task) {
             itemView.setOnClickListener(v -> {
-                Context context = v.getContext();
+                Toast.makeText(context, "item clicked", Toast.LENGTH_SHORT).show();
 
-                // TODO: 20/05/2018 pass task object through to detail
-//                Intent intent = new Intent(context, ProjectDetailsActivity.class);
-//                intent.putExtra(ProjectDetailsActivity.EXTRA_NAME,project.getName());
-//                intent.putExtra(ProjectDetailsActivity.EXTRA_LOGO, project.getLogo());
-
-//                context.startActivity(intent);
+                callback.onTaskSelected(task);
             });
         }
+
+        @Override
+        public void onClick(View v) {  }
+    }
+
+    public interface AdapterCallback{
+        void onTaskSelected(TodoItemsItem task);
     }
 }

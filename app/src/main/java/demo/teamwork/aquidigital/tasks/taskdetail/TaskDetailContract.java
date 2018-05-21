@@ -19,7 +19,6 @@ public interface TaskDetailContract {
 
         void attachView(View view);
 
-        void loadTasks();
     }
 
     interface Model {
