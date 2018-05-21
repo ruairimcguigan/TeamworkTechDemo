@@ -3,12 +3,15 @@ package demo.teamwork.aquidigital.tasks.taskdetail;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import java.util.List;
 
@@ -23,16 +26,21 @@ import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
 import static android.widget.Toast.makeText;
 import static butterknife.ButterKnife.bind;
 
-public class TaskDetailFragment extends BaseFragment implements TaskDetailContract.View {
+public class TaskDetailFragment extends BaseFragment implements TaskDetailContract.View, View.OnClickListener {
 
     @Inject
     TaskDetailPresenter presenter;
 
-    private TaskDetailAdapter adapter;
+    @BindView(R.id.expandableLayout)
+    ExpandableRelativeLayout expandableLayout;
 
-    @BindView(R.id.task_detail_list)
-    RecyclerView taskDetail;
+    @BindView(R.id.project_details_header)
+    TextView projectDetailsHeader;
 
+    @BindView(R.id.project_details_content)
+    TextView projectDetailsContent;
+
+    private OnGlobalLayoutListener mGlobalLayoutListener;
     private TodoItemsItem task;
 
     @Override
@@ -49,9 +57,12 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayout(), container, false);
         bind(this, view);
-        setAdapter();
 
         ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
+
+        projectDetailsHeader.setOnClickListener(this);
+
+        setExpandableLayoutListener();
 
         return view;
     }
@@ -60,15 +71,15 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
+
+        setProjectDetailsView();
     }
 
-    @Override
-    public void setAdapter() {
-        adapter = new TaskDetailAdapter(getActivity());
-        taskDetail.setLayoutManager(new LinearLayoutManager(getActivity()));
-        taskDetail.setHasFixedSize(true);
-        taskDetail.setAdapter(adapter);
+    private void setProjectDetailsView() {
+        projectDetailsHeader.setText(task.getTodoListName());
+        projectDetailsContent.setText("sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample..ruairi");
     }
+
 
     @Override
     protected int getLayout() {
@@ -82,12 +93,29 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
 
     @Override
     public void showTasks(List<TodoItemsItem> taskList) {
-        adapter.setData(taskList);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         presenter.detach();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.project_details_header:
+                expandableLayout.expand();
+                break;
+        }
+    }
+
+    private void setExpandableLayoutListener() {
+        mGlobalLayoutListener = () -> {
+            expandableLayout.move(projectDetailsHeader.getHeight(), 0, null);
+
+            projectDetailsHeader.getViewTreeObserver().removeOnGlobalLayoutListener(mGlobalLayoutListener);
+        };
+        projectDetailsHeader.getViewTreeObserver().addOnGlobalLayoutListener(mGlobalLayoutListener);
     }
 }

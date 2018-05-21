@@ -12,7 +12,6 @@ public interface TaskDetailContract {
 
         void showTasks(List<TodoItemsItem> taskList);
 
-        void setAdapter();
     }
 
     interface Presenter{
