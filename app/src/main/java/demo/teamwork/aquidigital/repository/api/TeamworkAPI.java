@@ -1,5 +1,7 @@
 package demo.teamwork.aquidigital.repository.api;
 
+import demo.teamwork.aquidigital.repository.api.messagesmodel.MessagesResponse;
+import demo.teamwork.aquidigital.repository.api.peoplemodel.PeopleResponse;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TasksResponse;
 import io.reactivex.Observable;
@@ -14,10 +16,10 @@ public interface TeamworkAPI {
     Observable<TasksResponse> getTasks();
 
     @GET("/posts.json")
-    Observable<TasksResponse> getMessages();
+    Observable<MessagesResponse> getMessages();
 
     @GET("/people.json")
-    Observable<TasksResponse> getPeople();
+    Observable<PeopleResponse> getPeople();
 
 
 

@@ -14,6 +14,10 @@ public class ProjectsContract {
 
         void showProjects(List<Project> projectList);
 
+        void showProgress();
+
+        void hideProgress();
+
     }
 
     interface Presenter{

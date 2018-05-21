@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +33,9 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
 
     @BindView(R.id.projectList)
     RecyclerView projectList;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private ProjectAdapter adapter;
 
@@ -77,6 +81,16 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     @Override
     public void showProjects(List<Project> projectList) {
         adapter.setData(projectList);
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

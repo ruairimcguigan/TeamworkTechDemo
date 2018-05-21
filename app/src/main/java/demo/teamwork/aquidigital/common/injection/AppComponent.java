@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import demo.teamwork.aquidigital.messages.MessagesFragment;
 import demo.teamwork.aquidigital.people.PeopleFragment;
+import demo.teamwork.aquidigital.people.PeopleModule;
 import demo.teamwork.aquidigital.tasks.TasksFragment;
 import demo.teamwork.aquidigital.tasks.TaskModule;
 import demo.teamwork.aquidigital.projects.ProjectsActivity;
@@ -20,8 +21,11 @@ import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailModule;
         TaskModule.class,
         TaskDetailModule.class,
         ProjectsModule.class,
+        PeopleModule.class,
         ApiModule.class})
 public interface AppComponent {
+
+    void inject(ProjectsActivity activity);
 
     void inject(ProjectsListFragment fragment);
 
@@ -32,8 +36,5 @@ public interface AppComponent {
     void inject(TasksFragment fragment);
 
     void inject(TaskDetailFragment fragment);
-
-    void inject(ProjectsActivity activity);
-
 
 }

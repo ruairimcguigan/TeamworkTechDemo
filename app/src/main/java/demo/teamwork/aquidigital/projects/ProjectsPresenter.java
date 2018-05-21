@@ -50,7 +50,9 @@ public class ProjectsPresenter extends BasePresenter implements Presenter {
         addDisposable(projectService
                 .getProjects()
                 .observeOn(mainThread())
+                .doOnSubscribe(__ -> view.showProgress())
                 .doOnError(this::onError)
+                .doOnTerminate(() -> view.hideProgress())
                 .subscribe(result -> onSuccess(result.getProjects())));
     }
 

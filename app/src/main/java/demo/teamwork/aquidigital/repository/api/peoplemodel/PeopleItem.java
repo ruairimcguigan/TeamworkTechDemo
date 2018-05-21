@@ -3,7 +3,9 @@ package demo.teamwork.aquidigital.repository.api.peoplemodel;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class PeopleItem{
+import demo.teamwork.aquidigital.repository.Item;
+
+public class PeopleItem implements Item{
 
 	@SerializedName("user-type")
 	private String userType;

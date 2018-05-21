@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -24,6 +25,8 @@ import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
 import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailFragment;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static butterknife.ButterKnife.bind;
 import static demo.teamwork.aquidigital.tasks.TasksAdapter.AdapterCallback;
 import static java.util.Objects.requireNonNull;
@@ -37,6 +40,9 @@ public class TasksFragment extends BaseFragment implements AdapterCallback, Task
 
     @BindView(R.id.task_list)
     RecyclerView taskList;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private List<TodoItemsItem> items = new ArrayList<>();
 
@@ -53,10 +59,21 @@ public class TasksFragment extends BaseFragment implements AdapterCallback, Task
     }
 
     @Override
+    protected int getLayout() {
+        return R.layout.fragment_tasks;
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
         presenter.loadTasks();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requireNonNull(getActivity()).setTitle("Tasks");
     }
 
     @Override
@@ -70,31 +87,19 @@ public class TasksFragment extends BaseFragment implements AdapterCallback, Task
     }
 
     @Override
-    protected int getLayout() {
-        return R.layout.fragment_tasks;
+    public void showProgress() {
+        progressBar.setVisibility(VISIBLE);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        requireNonNull(getActivity()).setTitle("Tasks");
-    }
-
-    @Override
-    public void setProjectName(String projectName) {
-
+    public void hideProgress() {
+        progressBar.setVisibility(GONE);
     }
 
     @Override
     public void showTasks(List<TodoItemsItem> taskList) {
         items.addAll(taskList);
         adapter.setData(taskList);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        presenter.detach();
     }
 
     @Override
@@ -105,5 +110,11 @@ public class TasksFragment extends BaseFragment implements AdapterCallback, Task
 
             ((ProjectsActivity) getActivity()).showFragment(R.id.fragment_container, TaskDetailFragment.class, bundle, true);
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        presenter.detach();
     }
 }

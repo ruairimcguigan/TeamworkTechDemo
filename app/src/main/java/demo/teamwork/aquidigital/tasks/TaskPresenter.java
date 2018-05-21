@@ -41,7 +41,9 @@ public class TaskPresenter extends BasePresenter implements Presenter {
         addDisposable(projectService
                 .getTasks()
                 .observeOn(mainThread())
+                .doOnSubscribe(__ -> view.showProgress())
                 .doOnError(this::onError)
+                .doOnTerminate(() -> view.hideProgress())
                 .subscribe(tasksResponse -> onSuccess(tasksResponse.getTodoItems()))
         );
     }

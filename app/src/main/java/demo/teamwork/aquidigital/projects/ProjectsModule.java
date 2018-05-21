@@ -4,15 +4,15 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.projects.ProjectsContract.Model;
-import demo.teamwork.aquidigital.projects.ProjectsContract.Presenter;
+
+import static demo.teamwork.aquidigital.projects.ProjectsContract.*;
 
 @Module
 public class ProjectsModule {
 
     @Provides
     @Singleton
-    Presenter provideProjectPresenter(Model model){
+    Presenter providePeoplePresenter(Model model){
         return new ProjectsPresenter(model);
     }
 

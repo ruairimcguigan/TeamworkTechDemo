@@ -1,40 +1,59 @@
 package demo.teamwork.aquidigital.people;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import demo.teamwork.aquidigital.common.base.BasePresenter;
-import demo.teamwork.aquidigital.tasks.TaskContract;
-import demo.teamwork.aquidigital.tasks.TaskContract.Model;
-import demo.teamwork.aquidigital.tasks.TaskContract.Presenter;
+import demo.teamwork.aquidigital.people.PeopleContract.View;
+import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import timber.log.Timber;
 
-public class PeoplePresenter extends BasePresenter implements Presenter{
+import static timber.log.Timber.d;
 
-    private Model model;
+public class PeoplePresenter extends BasePresenter implements PeopleContract.Presenter {
 
     @Inject
-    public PeoplePresenter(Model model) {
+    TeamworkAPI projectService;
+
+    private PeopleContract.View view;
+    private PeopleContract.Model model;
+
+    @Inject
+    public PeoplePresenter(PeopleContract.Model model) {
         this.model = model;
     }
 
     @Override
-    public void attachView(TaskContract.View view) {
-
+    public void attachView(View view) {
+        if (view != null) {
+            this.view = view;
+        }
     }
 
     @Override
-    public void loadTasks() {
-
+    public void loadPeople() {
+        addDisposable(projectService
+                .getPeople()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(__ -> view.showProgress())
+                .doOnError(this::onError)
+                .doOnTerminate(() -> view.hideProgress())
+                .subscribe(peopleResponse -> onSuccess(peopleResponse.getPeople())));
     }
 
     @Override
-    protected void onSuccess(List dataList) {
-
+    protected void onSuccess(List people) {
+        d("Success! People received");
+        if (people != null && people.size() > 0) {
+            view.showPeople(people);
+        }
     }
 
     @Override
     protected void onError(Throwable throwable) {
-
+        Timber.d("Error retrieving people", Arrays.toString(throwable.getStackTrace()));
     }
 }
