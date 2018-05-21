@@ -13,6 +13,9 @@ import javax.inject.Inject;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
+import demo.teamwork.aquidigital.projects.ProjectsActivity;
+
+import static java.util.Objects.requireNonNull;
 
 public class PeopleFragment extends BaseFragment implements PeopleContract.View{
 
@@ -32,6 +35,12 @@ public class PeopleFragment extends BaseFragment implements PeopleContract.View{
     @Override
     protected int getLayout() {
         return R.layout.fragment_people;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requireNonNull(getActivity()).setTitle("People");
     }
 
 }

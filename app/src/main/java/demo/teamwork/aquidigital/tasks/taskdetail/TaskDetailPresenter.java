@@ -36,19 +36,9 @@ public class TaskDetailPresenter extends BasePresenter implements Presenter {
         }
     }
 
-
+    @Override
+    protected void onSuccess(List tasks) { }
 
     @Override
-    protected void onSuccess(List tasks) {
-        d("Success! Tasks received");
-        if (tasks != null && tasks.size() > 0){
-            view.showTasks(tasks);
-        }
-
-    }
-
-    @Override
-    protected void onError(Throwable throwable) {
-        Timber.d("Error retrieving tasks", Arrays.toString(throwable.getStackTrace()));
-    }
+    protected void onError(Throwable throwable) { }
 }

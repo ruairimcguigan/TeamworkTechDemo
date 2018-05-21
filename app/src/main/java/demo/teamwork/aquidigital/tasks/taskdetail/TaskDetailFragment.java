@@ -8,11 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,8 +19,8 @@ import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
 
-import static android.widget.Toast.makeText;
 import static butterknife.ButterKnife.bind;
+import static java.util.Objects.requireNonNull;
 
 public class TaskDetailFragment extends BaseFragment implements TaskDetailContract.View, View.OnClickListener {
 
@@ -69,7 +66,6 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     @BindView(R.id.following_status)
     TextView followingStatus;
 
-
     private OnGlobalLayoutListener mGlobalLayoutListener;
     private TodoItemsItem task;
 
@@ -78,7 +74,6 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             task = (TodoItemsItem) getArguments().getSerializable("TASK");
-            makeText(getActivity(), "Tasks: " + task, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -88,10 +83,9 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
         View view = inflater.inflate(getLayout(), container, false);
         bind(this, view);
 
-        ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
 
         projectDetailsHeader.setOnClickListener(this);
-
         setExpandableLayoutListener();
 
         return view;
@@ -101,7 +95,6 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
-
         setProjectDetailsView();
     }
 
@@ -127,12 +120,9 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     }
 
     @Override
-    public void setProjectName(String projectName) {
-
-    }
-
-    @Override
-    public void showTasks(List<TodoItemsItem> taskList) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requireNonNull(getActivity()).setTitle("Task details");
     }
 
     @Override

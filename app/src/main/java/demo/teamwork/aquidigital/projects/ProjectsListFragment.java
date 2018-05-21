@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -22,6 +23,7 @@ import demo.teamwork.aquidigital.common.base.BaseFragment;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 
 import static android.support.v7.widget.RecyclerView.HORIZONTAL;
+import static java.util.Objects.requireNonNull;
 
 public class ProjectsListFragment extends BaseFragment implements ProjectsContract.View{
 
@@ -56,6 +58,13 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     @Override
     protected int getLayout() {
         return R.layout.fragment_project_list;
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requireNonNull(getActivity()).setTitle("List all projects");
     }
 
     @Override

@@ -11,4 +11,15 @@
     <string name="people_description">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue cheese caerphilly bavarian bergkase cheese and biscuits mascarpone.></string>
     <string name="task_title">Do stuff</string>
     <string name="task_description">New task added</string>
+    <string name="task_id">Task ID:</string>
+    <string name="progress">Progress:</string>
+    <string name="responsible">Responsible:</string>
+    <string name="start_date">Start date:</string>
+    <string name="task_list">Task list:</string>
+    <string name="project_name">Project name:</string>
+    <string name="created_by">Created by:</string>
+    <string name="created_on">Created on:</string>
+    <string name="last_modified">Last modified:</string>
+    <string name="access">Access:</string>
+    <string name="following">Following:</string>
 </resources>

@@ -6,17 +6,17 @@ import com.google.gson.annotations.SerializedName;
 public class PeopleResponse{
 
 	@SerializedName("STATUS")
-	private String sTATUS;
+	private String status;
 
 	@SerializedName("people")
 	private List<PeopleItem> people;
 
-	public void setSTATUS(String sTATUS){
-		this.sTATUS = sTATUS;
+	public void setStatus(String status){
+		this.status = status;
 	}
 
-	public String getSTATUS(){
-		return sTATUS;
+	public String getStatus(){
+		return status;
 	}
 
 	public void setPeople(List<PeopleItem> people){
@@ -31,7 +31,7 @@ public class PeopleResponse{
  	public String toString(){
 		return 
 			"PeopleResponse{" + 
-			"sTATUS = '" + sTATUS + '\'' + 
+			"sTATUS = '" + status + '\'' +
 			",people = '" + people + '\'' + 
 			"}";
 		}

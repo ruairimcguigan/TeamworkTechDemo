@@ -8,10 +8,6 @@ public interface TaskDetailContract {
 
     interface View {
 
-        void setProjectName(String projectName);
-
-        void showTasks(List<TodoItemsItem> taskList);
-
     }
 
     interface Presenter{

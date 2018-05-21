@@ -26,6 +26,7 @@ import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailFragment;
 
 import static butterknife.ButterKnife.bind;
 import static demo.teamwork.aquidigital.tasks.TasksAdapter.AdapterCallback;
+import static java.util.Objects.requireNonNull;
 
 public class TasksFragment extends BaseFragment implements AdapterCallback, TaskContract.View{
 
@@ -71,6 +72,12 @@ public class TasksFragment extends BaseFragment implements AdapterCallback, Task
     @Override
     protected int getLayout() {
         return R.layout.fragment_tasks;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requireNonNull(getActivity()).setTitle("Tasks");
     }
 
     @Override

@@ -75,11 +75,7 @@ public class TasksAdapter extends BaseAdapter<TodoItemsItem, TasksAdapter.TaskVi
         }
 
         private void startProjectDetailsActivityOnViewSelect(TodoItemsItem task) {
-            itemView.setOnClickListener(v -> {
-                Toast.makeText(context, "item clicked", Toast.LENGTH_SHORT).show();
-
-                callback.onTaskSelected(task);
-            });
+            itemView.setOnClickListener(v -> { callback.onTaskSelected(task); });
         }
 
         @Override

@@ -3,8 +3,8 @@
     package="demo.teamwork.aquidigital">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name=".TeamworkApplication"
         android:allowBackup="true"

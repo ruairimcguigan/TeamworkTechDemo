@@ -13,6 +13,9 @@ import javax.inject.Inject;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
+import demo.teamwork.aquidigital.projects.ProjectsActivity;
+
+import static java.util.Objects.requireNonNull;
 
 public class MessagesFragment extends BaseFragment implements MessagesContract.View{
 
@@ -34,4 +37,9 @@ public class MessagesFragment extends BaseFragment implements MessagesContract.V
         return R.layout.fragment_messages;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requireNonNull(getActivity()).setTitle("Messages");
+    }
 }
