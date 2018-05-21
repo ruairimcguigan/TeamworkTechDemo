@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,14 +30,45 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     @Inject
     TaskDetailPresenter presenter;
 
-    @BindView(R.id.expandableLayout)
-    ExpandableRelativeLayout expandableLayout;
+    @BindView(R.id.project_details_expand_container)
+    ExpandableRelativeLayout projectDetailsExpandContainer;
 
     @BindView(R.id.project_details_header)
     TextView projectDetailsHeader;
 
-    @BindView(R.id.project_details_content)
-    TextView projectDetailsContent;
+    @BindView(R.id.task_id)
+    TextView taskId;
+
+    @BindView(R.id.progress_percentage)
+    TextView progressPercentage;
+
+    @BindView(R.id.responsible)
+    TextView responsible;
+
+    @BindView(R.id.start_date)
+    TextView startDate;
+
+    @BindView(R.id.task_list)
+    TextView taskList;
+
+    @BindView(R.id.task_project_name)
+    TextView projectName;
+
+    @BindView(R.id.created_by)
+    TextView createdBy;
+
+    @BindView(R.id.created_on)
+    TextView createdOn;
+
+    @BindView(R.id.last_modified)
+    TextView lastModified;
+
+    @BindView(R.id.access_status)
+    TextView accessStatus;
+
+    @BindView(R.id.following_status)
+    TextView followingStatus;
+
 
     private OnGlobalLayoutListener mGlobalLayoutListener;
     private TodoItemsItem task;
@@ -77,7 +107,17 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
 
     private void setProjectDetailsView() {
         projectDetailsHeader.setText(task.getTodoListName());
-        projectDetailsContent.setText("sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample.sample..ruairi");
+        taskId.setText(String.valueOf(task.getId()));
+        progressPercentage.setText(String.valueOf(task.getProgress() + "%"));
+        responsible.setText(task.getResponsiblePartyFirstname());
+        startDate.setText(task.getStartDate());
+        taskList.setText(task.getPriority());
+        projectName.setText(task.getProjectName());
+        createdBy.setText(task.getCreatorFirstname() + "" + task.getCreatorLastname());
+        createdOn.setText(task.getCreatedOn());
+        lastModified.setText(task.getLastChangedOn());
+        accessStatus.setText(task.getStatus());
+        followingStatus.setText(task.getTimeIsLogged());
     }
 
 
@@ -105,14 +145,22 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.project_details_header:
-                expandableLayout.expand();
+                toggleProjectDetailsContainer();
                 break;
+        }
+    }
+
+    private void toggleProjectDetailsContainer() {
+        if (!projectDetailsExpandContainer.isExpanded()) {
+            projectDetailsExpandContainer.expand();
+        }else {
+            projectDetailsExpandContainer.collapse();
         }
     }
 
     private void setExpandableLayoutListener() {
         mGlobalLayoutListener = () -> {
-            expandableLayout.move(projectDetailsHeader.getHeight(), 0, null);
+            projectDetailsExpandContainer.move(projectDetailsHeader.getHeight(), 0, null);
 
             projectDetailsHeader.getViewTreeObserver().removeOnGlobalLayoutListener(mGlobalLayoutListener);
         };
