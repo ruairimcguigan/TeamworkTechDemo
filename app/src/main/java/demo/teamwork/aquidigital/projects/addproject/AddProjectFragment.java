@@ -8,10 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -38,6 +42,30 @@ public class AddProjectFragment extends BaseFragment implements AdapterCallback,
     @BindView(R.id.task_list)
     RecyclerView taskList;
 
+    @BindView(R.id.add_project_add_title)
+    EditText addTitle;
+
+    @BindView(R.id.add_project_add_description)
+    EditText addDescription;
+
+    @BindView(R.id.add_project_category_spinner)
+    Spinner categorySpinner;
+
+    @BindView(R.id.add_project_company_spinner)
+    Spinner companySpinner;
+
+    @BindView(R.id.add_project_tags_spinner)
+    Spinner tagsSpinner;
+
+    @BindView(R.id.add_project_start_date)
+    TextView startDate;
+
+    @BindView(R.id.add_project_end_date)
+    TextView endDate;
+
+    @BindView(R.id.add_project_save_project)
+    TextView saveProject;
+
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
@@ -49,14 +77,14 @@ public class AddProjectFragment extends BaseFragment implements AdapterCallback,
         View view = inflater.inflate(getLayout(), container, false);
         bind(this, view);
 
-        ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
 
         return view;
     }
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_tasks;
+        return R.layout.fragment_add_project;
     }
 
     @Override
@@ -68,7 +96,7 @@ public class AddProjectFragment extends BaseFragment implements AdapterCallback,
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        requireNonNull(getActivity()).setTitle("Tasks");
+        requireNonNull(getActivity()).setTitle("Create project");
     }
 
     @Override
@@ -88,7 +116,7 @@ public class AddProjectFragment extends BaseFragment implements AdapterCallback,
             Bundle bundle = new Bundle();
             bundle.putSerializable("TASK", task);
 
-            ((ProjectsActivity) getActivity()).showFragment(R.id.fragment_container, TaskDetailFragment.class, bundle, true);
+            ((ProjectsActivity) requireNonNull(getActivity())).showFragment(R.id.fragment_container, TaskDetailFragment.class, bundle, true);
         }
     }
 
