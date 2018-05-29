@@ -28,7 +28,6 @@
     <string name="company">Company:</string>
     <string name="tags">Tags:</string>
     <string name="category">Category:</string>
-    <string name="start_date">Start date:</string>
     <string name="start_date_label">Start date</string>
     <string name="end_date">End date:</string>
     <string name="save_project">Save project</string>

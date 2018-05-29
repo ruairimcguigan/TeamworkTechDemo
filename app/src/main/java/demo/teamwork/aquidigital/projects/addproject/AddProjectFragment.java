@@ -1,11 +1,9 @@
 package demo.teamwork.aquidigital.projects.addproject;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,12 +12,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,22 +33,35 @@ import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
 import demo.teamwork.aquidigital.projects.ProjectsActivity;
+import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagsItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
-import demo.teamwork.aquidigital.tasks.TasksAdapter;
 import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailFragment;
 
+import static android.R.layout.simple_spinner_item;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static butterknife.ButterKnife.bind;
+import static demo.teamwork.aquidigital.R.layout.spinner_item_view;
+import static demo.teamwork.aquidigital.projects.ProjectDetailsActivity.EXTRA_PROJECTS_LIST;
 import static demo.teamwork.aquidigital.tasks.TasksAdapter.AdapterCallback;
+import static demo.teamwork.aquidigital.util.ui.ViewUtil.getCategories;
+import static demo.teamwork.aquidigital.util.ui.ViewUtil.getCompanyNames;
+import static demo.teamwork.aquidigital.util.ui.ViewUtil.getTagNames;
+import static demo.teamwork.aquidigital.util.ui.ViewUtil.handleSoftKeyBoardVisibility;
+import static java.time.LocalDate.of;
+import static java.util.Calendar.getInstance;
 import static java.util.Objects.requireNonNull;
 
 public class AddProjectFragment extends BaseFragment
-        implements AdapterCallback, OnItemSelectedListener, AddProjectContract.View, OnClickListener{
+        implements AdapterCallback, AddProjectContract.View, OnClickListener {
 
     @Inject
     AddProjectPresenter presenter;
+
+    @BindView(R.id.content_root)
+    ViewGroup contentRoot;
 
     @BindView(R.id.add_project_add_title)
     EditText addTitle;
@@ -71,11 +87,13 @@ public class AddProjectFragment extends BaseFragment
     @BindView(R.id.add_project_save_project_button)
     Button saveProject;
 
-//    @BindView(R.id.progress_bar)
-//    ProgressBar progressBar;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private List<TodoItemsItem> items = new ArrayList<>();
-    private AddProjectSpinnerAdapter addProjectSpinnerAdapter;
+    private List<Project> projects = new ArrayList<>();
+    private ArrayAdapter companyAdapter;
+    private ArrayAdapter categoryAdapter;
 
     @Nullable
     @Override
@@ -83,33 +101,50 @@ public class AddProjectFragment extends BaseFragment
         View view = inflater.inflate(getLayout(), container, false);
         bind(this, view);
 
+        setClickListeners();
+        handleSoftKeyBoardVisibility(getActivity(), categorySpinner, companySpinner, tagsSpinner);
+
         ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
 
+        receiveProjectData();
         return view;
     }
 
-    @Override
-    protected int getLayout() {
-        return R.layout.fragment_add_project;
+    private void setClickListeners() {
+        startDate.setOnClickListener(this);
+        endDate.setOnClickListener(this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
+        presenter.loadTags();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setProjectSpinners();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         requireNonNull(getActivity()).setTitle("Create project");
-
-        setSpinners();
     }
 
-    private void setSpinners() {
-        addProjectSpinnerAdapter = new AddProjectSpinnerAdapter(getActivity(), R.layout.project_spinner_item);
-        categorySpinner.setAdapter(addProjectSpinnerAdapter);
+    private void receiveProjectData() {
+        if (getArguments() != null) {
+            ProjectsResponse projectResponse = (ProjectsResponse) getArguments().getSerializable(EXTRA_PROJECTS_LIST);
+            projects.addAll(requireNonNull(projectResponse).getProjects());
+        }
+    }
+
+    private void setProjectSpinners() {
+        companyAdapter = new ArrayAdapter(requireNonNull(getActivity()), spinner_item_view, getCompanyNames(projects));
+        companyAdapter.setDropDownViewResource(spinner_item_view);
+        companySpinner.setAdapter(companyAdapter);
 
         categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -119,26 +154,42 @@ public class AddProjectFragment extends BaseFragment
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
+        categoryAdapter = new ArrayAdapter(requireNonNull(getActivity()),spinner_item_view, getCategories(projects));
+        categoryAdapter.setDropDownViewResource(spinner_item_view);
+        categorySpinner.setAdapter(categoryAdapter);
+
+        categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                categorySpinner.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
 
+    private void setTagsAdapter(List<TagsItem> tags) {
+        ArrayAdapter tagsAdapter = new ArrayAdapter(requireNonNull(getActivity()), spinner_item_view, getTagNames(tags));
 
-    private void fetchRemoteCategories() {
+        tagsAdapter.setDropDownViewResource(R.layout.spinner_item_view);
+        tagsSpinner.setAdapter(tagsAdapter);
 
+        tagsSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tagsSpinner.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
-
-    @Override
-    public void showProgress() {
-//        progressBar.setVisibility(VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-//        progressBar.setVisibility(GONE);
-    }
-
 
     @Override
     public void onTaskSelected(TodoItemsItem task) {
@@ -146,8 +197,64 @@ public class AddProjectFragment extends BaseFragment
             Bundle bundle = new Bundle();
             bundle.putSerializable("TASK", task);
 
-            ((ProjectsActivity) requireNonNull(getActivity())).showFragment(R.id.fragment_container, TaskDetailFragment.class, bundle, true);
+            ((ProjectsActivity) requireNonNull(getActivity())).showFragment(
+                    R.id.fragment_container, TaskDetailFragment.class, bundle, true);
         }
+    }
+
+    @Override
+    public void showTags(List<TagsItem> tags) {
+        setTagsAdapter(tags);
+    }
+
+    @Override
+    public void populateStartDate(String date) {
+        startDate.setText(date);
+    }
+
+    @Override
+    public void populateEndDate(String date) {
+        endDate.setText(date);
+    }
+
+
+    private void showStartDatePicker() {
+        Calendar c = getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireNonNull(getActivity()), (datePicker, startYear, startMonth, startDay)
+                        -> presenter.onStartDateSelected(startDay, startMonth + 1, startYear), year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    private void showEndDateDatePicker() {
+        Calendar c = getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireNonNull(getActivity()), (datePicker, endYear, endMonth, endDay)
+                -> presenter.onEndDateSelected(endDay, endMonth + 1, endYear), year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(GONE);
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_add_project;
     }
 
     @Override
@@ -157,17 +264,14 @@ public class AddProjectFragment extends BaseFragment
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.add_project_start_date:
+                showStartDatePicker();
+                break;
+            case R.id.add_project_end_date:
+                showEndDateDatePicker();
+                break;
+        }
     }
 }

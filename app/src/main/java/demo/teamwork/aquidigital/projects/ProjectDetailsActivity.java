@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -12,12 +13,22 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
+import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
 import demo.teamwork.aquidigital.projects.addproject.AddProjectFragment;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import demo.teamwork.aquidigital.util.ui.ViewUtil;
 import timber.log.Timber;
 
@@ -47,9 +58,13 @@ public class ProjectDetailsActivity extends BaseActivity implements OnClickListe
 
     public static final String EXTRA_NAME = "project_name";
     public static final String EXTRA_LOGO = "project_logo";
+    public static final String EXTRA_PROJECTS_LIST = "project_list";
 
     private String projectName;
     private  String projectLogo;
+
+    private ProjectsResponse projectsResponse = new ProjectsResponse();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +76,8 @@ public class ProjectDetailsActivity extends BaseActivity implements OnClickListe
 
         setProjectDetails();
 
+        ((TeamworkApplication) getApplication()).getAppComponent().inject(this);
+
         addNewProject.setOnClickListener(this);
     }
 
@@ -69,13 +86,15 @@ public class ProjectDetailsActivity extends BaseActivity implements OnClickListe
         projectName = intent.getStringExtra(EXTRA_NAME);
         projectLogo = intent.getStringExtra(EXTRA_LOGO);
 
+        projectsResponse = (ProjectsResponse) intent.getSerializableExtra(EXTRA_PROJECTS_LIST);
+
         collapsingToolbar.setTitle(projectName);
         backdrop.setImageURI(Uri.parse(projectLogo));
     }
 
     private void setToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -111,6 +130,10 @@ public class ProjectDetailsActivity extends BaseActivity implements OnClickListe
         setVisibility(projectDetailListContainer, false);
         appBarLayout.setExpanded(false);
         collapsingToolbar.setTitle("Create new project");
-        showFragment(R.id.project_detail_container, AddProjectFragment.class, null, false);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(EXTRA_PROJECTS_LIST, projectsResponse);
+
+        showFragment(R.id.project_detail_container, AddProjectFragment.class, bundle, false);
     }
 }

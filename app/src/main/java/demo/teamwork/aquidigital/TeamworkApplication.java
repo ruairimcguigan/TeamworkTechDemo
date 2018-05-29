@@ -17,11 +17,8 @@ import demo.teamwork.aquidigital.repository.api.ApiModule;
 import timber.log.Timber;
 
 public class TeamworkApplication extends Application {
-    private AppComponent appComponent;
 
-//    public static TeamworkApplication get(Context context) {
-//        return (TeamworkApplication) context.getApplicationContext();
-//    }
+    private AppComponent appComponent;
 
     @Override
     public void onCreate() {
@@ -35,13 +32,17 @@ public class TeamworkApplication extends Application {
             Sherlock.init(this);
             Traceur.enableLogging();
 
-            appComponent = DaggerAppComponent.builder()
-                    .appModule(new AppModule(this))
-                    .taskModule(new TaskModule())
-                    .projectsModule(new ProjectsModule())
-                    .apiModule(new ApiModule(this, BuildConfig.BASE_URL))
-                    .build();
+            initDagger();
         }
+    }
+
+    private void initDagger() {
+        appComponent = DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .taskModule(new TaskModule())
+                .projectsModule(new ProjectsModule())
+                .apiModule(new ApiModule(this, BuildConfig.BASE_URL))
+                .build();
     }
 
     public AppComponent getAppComponent() {

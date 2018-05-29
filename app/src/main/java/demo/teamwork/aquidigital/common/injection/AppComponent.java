@@ -6,6 +6,7 @@ import dagger.Component;
 import demo.teamwork.aquidigital.messages.MessagesFragment;
 import demo.teamwork.aquidigital.people.PeopleFragment;
 import demo.teamwork.aquidigital.people.PeopleModule;
+import demo.teamwork.aquidigital.projects.ProjectDetailsActivity;
 import demo.teamwork.aquidigital.projects.addproject.AddProjectFragment;
 import demo.teamwork.aquidigital.projects.addproject.AddProjectModule;
 import demo.teamwork.aquidigital.tasks.TasksFragment;
@@ -30,6 +31,8 @@ import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailModule;
 public interface AppComponent {
 
     void inject(ProjectsActivity activity);
+
+    void inject(ProjectDetailsActivity activity);
 
     void inject(ProjectsListFragment fragment);
 

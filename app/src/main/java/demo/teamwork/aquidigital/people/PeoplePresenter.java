@@ -11,6 +11,7 @@ import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
 
+import static io.reactivex.android.schedulers.AndroidSchedulers.*;
 import static timber.log.Timber.d;
 
 public class PeoplePresenter extends BasePresenter implements PeopleContract.Presenter {
@@ -22,7 +23,7 @@ public class PeoplePresenter extends BasePresenter implements PeopleContract.Pre
     private PeopleContract.Model model;
 
     @Inject
-    public PeoplePresenter(PeopleContract.Model model) {
+    PeoplePresenter(PeopleContract.Model model) {
         this.model = model;
     }
 
@@ -37,7 +38,7 @@ public class PeoplePresenter extends BasePresenter implements PeopleContract.Pre
     public void loadPeople() {
         addDisposable(projectService
                 .getPeople()
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(mainThread())
                 .doOnSubscribe(__ -> view.showProgress())
                 .doOnError(this::onError)
                 .doOnTerminate(() -> view.hideProgress())

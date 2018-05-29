@@ -6,7 +6,7 @@ import demo.teamwork.aquidigital.repository.Item;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 
 
-public class ProjectsContract {
+class ProjectsContract {
 
     interface View {
 
@@ -30,6 +30,6 @@ public class ProjectsContract {
 
     interface Model {
 
-        void persistToDataBase();
+        void cacheForOfflineViewing();
     }
 }

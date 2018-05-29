@@ -21,11 +21,11 @@ public class TaskPresenter extends BasePresenter implements Presenter {
     @Inject
     TeamworkAPI projectService;
 
-    private View view;
     private Model model;
+    private View view;
 
     @Inject
-    public TaskPresenter(Model model) {
+    TaskPresenter(Model model) {
         this.model = model;
     }
 

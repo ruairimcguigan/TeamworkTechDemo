@@ -23,7 +23,6 @@ import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 
-import static android.support.v7.widget.RecyclerView.HORIZONTAL;
 import static java.util.Objects.requireNonNull;
 
 public class ProjectsListFragment extends BaseFragment implements ProjectsContract.View{
@@ -46,7 +45,7 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
         ButterKnife.bind(this, view);
         setAdapter();
 
-        ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
 
         return view;
     }

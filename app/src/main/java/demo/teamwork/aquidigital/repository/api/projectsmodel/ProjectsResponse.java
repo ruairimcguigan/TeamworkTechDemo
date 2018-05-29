@@ -1,22 +1,23 @@
 package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class ProjectsResponse {
+public class ProjectsResponse implements Serializable{
 
 	@SerializedName("STATUS")
-	private String sTATUS;
+	private String status;
 
 	@SerializedName("projects")
 	private List<Project> projects;
 
-	public void setSTATUS(String sTATUS){
-		this.sTATUS = sTATUS;
+	public void setStatus(String status){
+		this.status = status;
 	}
 
 	public String getSTATUS(){
-		return sTATUS;
+		return status;
 	}
 
 	public void setProjects(List<Project> projects){
@@ -31,7 +32,7 @@ public class ProjectsResponse {
  	public String toString(){
 		return 
 			"Response{" + 
-			"sTATUS = '" + sTATUS + '\'' + 
+			"status = '" + status + '\'' +
 			",projects = '" + projects + '\'' + 
 			"}";
 		}

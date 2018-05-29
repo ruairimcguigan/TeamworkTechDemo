@@ -11,19 +11,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.base.BaseAdapter;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 
 public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectViewHolder> {
 
-    private final int TYPE_PROJECT = 0;
-    private final int TYPE_PROJECT_LOADING = 1;
-    private final int TYPE_ERROR = 2;
-
     private Context context;
+    private List<Project> projectList = new ArrayList<>();
+    private ProjectsResponse projectsResponse = new ProjectsResponse();
 
     ProjectAdapter(Context context) {
         this.context = context;
@@ -31,13 +34,12 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
 
     @NonNull
     @Override
-    public ProjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProjectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.project_item, parent, false);
 
         final ProjectViewHolder viewHolder = new ProjectViewHolder(view);
         viewHolder.itemView.setOnClickListener(v -> onItemClicked(viewHolder.getAdapterPosition()));
-
 
         return viewHolder;
     }
@@ -45,6 +47,10 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
     @Override
     public void onBindViewHolder(@NonNull ProjectViewHolder holder, int position) {
         Project project = (Project) getItem(position);
+        projectList.add(project);
+
+        projectsResponse.setProjects(projectList);
+
         holder.populate(project);
     }
 
@@ -81,6 +87,7 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
                 Context context = v.getContext();
 
                 Intent intent = new Intent(context, ProjectDetailsActivity.class);
+                intent.putExtra(ProjectDetailsActivity.EXTRA_PROJECTS_LIST, projectsResponse);
                 intent.putExtra(ProjectDetailsActivity.EXTRA_NAME,project.getName());
                 intent.putExtra(ProjectDetailsActivity.EXTRA_LOGO, project.getLogo());
 

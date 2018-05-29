@@ -28,7 +28,7 @@ public class AppModule {
     }
 
     @Provides
-    TasksFragment provideHomeActivity(){
+    TasksFragment provideTasksFragment(){
         return new TasksFragment();
     }
 

@@ -1,5 +1,6 @@
 package demo.teamwork.aquidigital.repository.api;
 
+import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagResponse;
 import demo.teamwork.aquidigital.repository.api.messagesmodel.MessagesResponse;
 import demo.teamwork.aquidigital.repository.api.peoplemodel.PeopleResponse;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
@@ -21,6 +22,7 @@ public interface TeamworkAPI {
     @GET("/people.json")
     Observable<PeopleResponse> getPeople();
 
-
+    @GET("/tags.json")
+    Observable<TagResponse> getTags();
 
 }

@@ -5,7 +5,7 @@ import demo.teamwork.aquidigital.projects.ProjectsContract.Model;
 public class ProjectsModel implements Model {
 
     @Override
-    public void persistToDataBase() {
-
+    public void cacheForOfflineViewing() {
+        // TODO: 22/05/2018 to be implemented
     }
 }
