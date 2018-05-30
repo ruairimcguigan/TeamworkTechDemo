@@ -10,7 +10,6 @@ import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import demo.teamwork.aquidigital.tasks.TaskContract.Model;
 import demo.teamwork.aquidigital.tasks.TaskContract.Presenter;
 import demo.teamwork.aquidigital.tasks.TaskContract.View;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
 
 import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;

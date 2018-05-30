@@ -3,7 +3,6 @@ package demo.teamwork.aquidigital.projects;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -21,7 +19,7 @@ import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 
 import static java.util.Objects.requireNonNull;
 
@@ -51,20 +49,6 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     }
 
     @Override
-    public void setAdapter() {
-        adapter = new ProjectAdapter(getActivity());
-        projectList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        projectList.setHasFixedSize(true);
-        projectList.setAdapter(adapter);
-    }
-
-    @Override
-    protected int getLayout() {
-        return R.layout.fragment_project_list;
-    }
-
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         requireNonNull(getActivity()).setTitle("List all projects");
@@ -78,8 +62,8 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     }
 
     @Override
-    public void showProjects(List<Project> projectList) {
-        adapter.setData(projectList);
+    public void showProjects(List<ProjectItem> projectItemList) {
+        adapter.setData(projectItemList);
     }
 
     @Override
@@ -90,6 +74,19 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     @Override
     public void hideProgress() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setAdapter() {
+        adapter = new ProjectAdapter(getActivity());
+        projectList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        projectList.setHasFixedSize(true);
+        projectList.setAdapter(adapter);
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.fragment_project_list;
     }
 
     @Override

@@ -12,40 +12,38 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.lang.reflect.Field;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
 import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagsItem;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
 import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailFragment;
+import demo.teamwork.aquidigital.util.ui.ViewUtil;
 
-import static android.R.layout.simple_spinner_item;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static butterknife.ButterKnife.bind;
 import static demo.teamwork.aquidigital.R.layout.spinner_item_view;
 import static demo.teamwork.aquidigital.projects.ProjectDetailsActivity.EXTRA_PROJECTS_LIST;
 import static demo.teamwork.aquidigital.tasks.TasksAdapter.AdapterCallback;
+import static demo.teamwork.aquidigital.util.ui.ViewUtil.formatForRequest;
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.getCategories;
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.getCompanyNames;
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.getTagNames;
@@ -91,7 +89,7 @@ public class AddProjectFragment extends BaseFragment
     ProgressBar progressBar;
 
     private List<TodoItemsItem> items = new ArrayList<>();
-    private List<Project> projects = new ArrayList<>();
+    private List<ProjectItem> projects = new ArrayList<>();
     private ArrayAdapter companyAdapter;
     private ArrayAdapter categoryAdapter;
 
@@ -217,15 +215,21 @@ public class AddProjectFragment extends BaseFragment
         endDate.setText(date);
     }
 
+    @Override
+    public void showCreateProjectSuccess() {
+        Toast.makeText(getActivity(), "Project created successfully", Toast.LENGTH_SHORT).show();
+    }
+
 
     private void showStartDatePicker() {
+
         Calendar c = getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(requireNonNull(getActivity()), (datePicker, startYear, startMonth, startDay)
-                        -> presenter.onStartDateSelected(startDay, startMonth + 1, startYear), year, month, day);
+                        -> presenter.onStartDateSelected(startYear, startMonth + 1, startDay), year, month, day);
 
         datePickerDialog.show();
     }
@@ -237,7 +241,7 @@ public class AddProjectFragment extends BaseFragment
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(requireNonNull(getActivity()), (datePicker, endYear, endMonth, endDay)
-                -> presenter.onEndDateSelected(endDay, endMonth + 1, endYear), year, month, day);
+                -> presenter.onEndDateSelected(endYear, endMonth + 1, endDay), year, month, day);
 
         datePickerDialog.show();
     }
@@ -261,6 +265,19 @@ public class AddProjectFragment extends BaseFragment
     public void onStop() {
         super.onStop();
         presenter.detach();
+    }
+
+    @OnClick(R.id.add_project_save_project_button)
+    public void createProject(){
+
+        presenter.onProjectFormComplete(
+                addTitle.getText().toString(),
+                addDescription.getText().toString(),
+                companySpinner.getSelectedItem().toString(),
+                tagsSpinner.getSelectedItem().toString(),
+                Integer.parseInt(categorySpinner.getSelectedItem().toString()),
+                formatForRequest(startDate.getText().toString()),
+                formatForRequest(endDate.getText().toString()));
     }
 
     @Override

@@ -10,9 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,8 +20,6 @@ import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
 import demo.teamwork.aquidigital.messages.MessagesFragment;
 import demo.teamwork.aquidigital.people.PeopleFragment;
-import demo.teamwork.aquidigital.projects.ProjectsContract.View;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 import demo.teamwork.aquidigital.tasks.TasksFragment;
 
 public class ProjectsActivity extends BaseActivity implements OnNavigationItemSelectedListener {

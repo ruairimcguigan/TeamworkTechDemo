@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import demo.teamwork.aquidigital.repository.Item;
 
-public class Project implements Item, Serializable {
+public class ProjectItem implements Item, Serializable {
 
 	@SerializedName("replyByEmailEnabled")
 	private boolean replyByEmailEnabled;

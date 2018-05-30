@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import demo.teamwork.aquidigital.common.base.BasePresenter;
 import demo.teamwork.aquidigital.people.PeopleContract.View;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import timber.log.Timber;
 
 import static io.reactivex.android.schedulers.AndroidSchedulers.*;

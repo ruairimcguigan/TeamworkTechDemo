@@ -10,22 +10,22 @@ public class ProjectsResponse implements Serializable{
 	private String status;
 
 	@SerializedName("projects")
-	private List<Project> projects;
+	private List<ProjectItem> projectItems;
 
 	public void setStatus(String status){
 		this.status = status;
 	}
 
-	public String getSTATUS(){
+	public String getStatus(){
 		return status;
 	}
 
-	public void setProjects(List<Project> projects){
-		this.projects = projects;
+	public void setProjectItems(List<ProjectItem> projectItems){
+		this.projectItems = projectItems;
 	}
 
-	public List<Project> getProjects(){
-		return projects;
+	public List<ProjectItem> getProjects(){
+		return projectItems;
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class ProjectsResponse implements Serializable{
 		return 
 			"Response{" + 
 			"status = '" + status + '\'' +
-			",projects = '" + projects + '\'' + 
+			",projects = '" + projectItems + '\'' +
 			"}";
 		}
 }

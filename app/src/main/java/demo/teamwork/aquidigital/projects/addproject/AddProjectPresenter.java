@@ -1,8 +1,6 @@
 package demo.teamwork.aquidigital.projects.addproject;
 
-import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,8 +10,9 @@ import demo.teamwork.aquidigital.projects.addproject.AddProjectContract.Model;
 import demo.teamwork.aquidigital.projects.addproject.AddProjectContract.Presenter;
 import demo.teamwork.aquidigital.projects.addproject.AddProjectContract.View;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
-import demo.teamwork.aquidigital.util.ui.ViewUtil;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+import demo.teamwork.aquidigital.repository.api.addprojectmodel.ProjectRequest;
+import demo.teamwork.aquidigital.repository.api.addprojectmodel.Project;
+import demo.teamwork.aquidigital.repository.api.addprojectmodel.Project.Builder;
 import timber.log.Timber;
 
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.*;
@@ -28,6 +27,7 @@ public class AddProjectPresenter extends BasePresenter implements Presenter {
 
     private View view;
     private Model model;
+    private Project project;
 
     @Inject
     AddProjectPresenter(Model model) {
@@ -49,7 +49,8 @@ public class AddProjectPresenter extends BasePresenter implements Presenter {
                 .doOnSubscribe(__ -> view.showProgress())
                 .doOnError(this::onError)
                 .doOnTerminate(() -> view.hideProgress())
-                .subscribe(tagResponse -> onSuccess(tagResponse.getTags())));
+                .subscribe(tagResponse -> onSuccess(tagResponse.getTags()))
+        );
     }
 
     @Override
@@ -66,17 +67,38 @@ public class AddProjectPresenter extends BasePresenter implements Presenter {
     }
 
     @Override
-    public void onStartDateSelected(int day, int month, int year) {
-        view.populateStartDate(formatDateForDisplay(day, month, year));
+    public void onStartDateSelected(int year, int month, int day) {
+        view.populateStartDate(formatDateForDisplay(year, month, day));
     }
 
-    private LocalDate convertToLocalDate(int day, int month, int year){
-        return of(year, month, day);
+
+
+    @Override
+    public void onEndDateSelected(int year, int month, int day) {
+        view.populateEndDate(formatDateForDisplay(year, month, day));
     }
 
     @Override
-    public void onEndDateSelected(int day, int month, int year) {
-        view.populateEndDate(formatDateForDisplay(day, month, year));
+    public void onProjectFormComplete(String title, String description, String company,
+                                      String tags, int category, String startDate, String endDate) {
+
+
+        ProjectRequest requestWrapper = new ProjectRequest(
+                new Builder(title, description, company, tags, category, startDate, endDate).build());
+
+
+        addDisposable(projectService
+                .createProject(requestWrapper)
+                .observeOn(mainThread())
+                .doOnSubscribe(__ -> view.showProgress())
+                .doOnError(this::onError)
+                .doOnTerminate(() -> view.hideProgress())
+                .subscribe(create -> onCreateProjectSuccess())
+        );
+    }
+
+    private void onCreateProjectSuccess() {
+        view.showCreateProjectSuccess();
     }
 
 

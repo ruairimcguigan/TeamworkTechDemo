@@ -46,11 +46,15 @@
     <style name="add_project_label">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">@dimen/add_project_segment_weight_one</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textSize">@dimen/label_font</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-
+    <style name="add_project_spinner">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/add_project_segment_height</item>
+        <item name="android:layout_weight">.75</item>
+    </style>
 
 </resources>

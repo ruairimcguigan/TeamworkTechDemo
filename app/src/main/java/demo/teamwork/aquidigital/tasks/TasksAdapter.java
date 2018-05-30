@@ -1,26 +1,18 @@
 package demo.teamwork.aquidigital.tasks;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.base.BaseAdapter;
-import demo.teamwork.aquidigital.projects.ProjectDetailsActivity;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
-import timber.log.Timber;
 
 public class TasksAdapter extends BaseAdapter<TodoItemsItem, TasksAdapter.TaskViewHolder> {
 

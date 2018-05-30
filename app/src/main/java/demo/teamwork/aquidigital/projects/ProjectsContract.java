@@ -2,8 +2,7 @@ package demo.teamwork.aquidigital.projects;
 
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.Item;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 
 
 class ProjectsContract {
@@ -12,7 +11,7 @@ class ProjectsContract {
 
         void setAdapter();
 
-        void showProjects(List<Project> projectList);
+        void showProjects(List<ProjectItem> projectItemList);
 
         void showProgress();
 

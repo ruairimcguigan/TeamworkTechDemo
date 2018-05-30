@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +18,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.base.BaseAdapter;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 
-public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectViewHolder> {
+public class ProjectAdapter extends BaseAdapter<ProjectItem, ProjectAdapter.ProjectViewHolder> {
 
     private Context context;
-    private List<Project> projectList = new ArrayList<>();
+    private List<ProjectItem> projectItemList = new ArrayList<>();
     private ProjectsResponse projectsResponse = new ProjectsResponse();
 
     ProjectAdapter(Context context) {
@@ -46,12 +45,12 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
 
     @Override
     public void onBindViewHolder(@NonNull ProjectViewHolder holder, int position) {
-        Project project = (Project) getItem(position);
-        projectList.add(project);
+        ProjectItem projectItem = (ProjectItem) getItem(position);
+        projectItemList.add(projectItem);
 
-        projectsResponse.setProjects(projectList);
+        projectsResponse.setProjectItems(projectItemList);
 
-        holder.populate(project);
+        holder.populate(projectItem);
     }
 
     class ProjectViewHolder extends RecyclerView.ViewHolder {
@@ -73,30 +72,30 @@ public class ProjectAdapter extends BaseAdapter<Project, ProjectAdapter.ProjectV
             ButterKnife.bind(this, itemView);
         }
 
-        void populate(Project project) {
-            projectLogo.setImageURI(Uri.parse(project.getLogo()));
-            projectName.setText(project.getName());
-            projectDescription.setText(project.getDescription());
-            setProjectStarred(project);
+        void populate(ProjectItem projectItem) {
+            projectLogo.setImageURI(Uri.parse(projectItem.getLogo()));
+            projectName.setText(projectItem.getName());
+            projectDescription.setText(projectItem.getDescription());
+            setProjectStarred(projectItem);
 
-            startProjectDetailsActivityOnViewSelect(project);
+            startProjectDetailsActivityOnViewSelect(projectItem);
         }
 
-        private void startProjectDetailsActivityOnViewSelect(Project project) {
+        private void startProjectDetailsActivityOnViewSelect(ProjectItem projectItem) {
             itemView.setOnClickListener(v -> {
                 Context context = v.getContext();
 
                 Intent intent = new Intent(context, ProjectDetailsActivity.class);
                 intent.putExtra(ProjectDetailsActivity.EXTRA_PROJECTS_LIST, projectsResponse);
-                intent.putExtra(ProjectDetailsActivity.EXTRA_NAME,project.getName());
-                intent.putExtra(ProjectDetailsActivity.EXTRA_LOGO, project.getLogo());
+                intent.putExtra(ProjectDetailsActivity.EXTRA_NAME, projectItem.getName());
+                intent.putExtra(ProjectDetailsActivity.EXTRA_LOGO, projectItem.getLogo());
 
                 context.startActivity(intent);
             });
         }
 
-        private void setProjectStarred(Project project) {
-            if (project.isStarred()){
+        private void setProjectStarred(ProjectItem projectItem) {
+            if (projectItem.isStarred()){
                 projectIsStarred.setImageResource(android.R.drawable.btn_star);
             }
         }

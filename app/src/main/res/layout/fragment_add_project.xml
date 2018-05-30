@@ -23,7 +23,7 @@
             android:gravity="end"
             android:hint="@string/add_project_title_hint"
             android:inputType="text"
-            android:padding="@dimen/margin_normal" />
+            android:padding="@dimen/margin_medium" />
 
         <EditText
             android:id="@+id/add_project_add_description"
@@ -34,8 +34,8 @@
             android:gravity="end"
             android:hint="@string/add_project_tdescription_hint"
             android:inputType="textMultiLine"
-            android:paddingEnd="@dimen/margin_normal"
-            android:paddingStart="@dimen/margin_normal" />
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingStart="@dimen/margin_medium" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,12 +44,14 @@
             android:clickable="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:padding="@dimen/margin_normal">
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/add_project_segment_height"
                 android:gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal"
                 android:padding="@dimen/margin_xsmall">
 
@@ -59,10 +61,8 @@
 
                 <Spinner
                     android:id="@+id/add_project_company_spinner"
-                    android:layout_width="0dp"
-                    android:gravity="end"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/add_project_segment_weight_one" />
+                    style="@style/add_project_spinner" />
+
             </LinearLayout>
 
             <include layout="@layout/divider" />
@@ -80,9 +80,7 @@
 
                 <Spinner
                     android:id="@+id/add_project_tags_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/add_project_segment_weight_one" />
+                    style="@style/add_project_spinner" />
 
             </LinearLayout>
 
@@ -101,9 +99,7 @@
 
                 <Spinner
                     android:id="@+id/add_project_category_spinner"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/add_project_segment_weight_one" />
+                    style="@style/add_project_spinner" />
 
             </LinearLayout>
 
@@ -122,9 +118,9 @@
 
                 <TextView
                     android:id="@+id/add_project_start_date"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/add_project_segment_weight_half"
+                    android:layout_weight="1"
                     android:clickable="true"
                     android:gravity="end"
                     android:hint="@string/start_date_label" />
@@ -147,9 +143,9 @@
 
                 <TextView
                     android:id="@+id/add_project_end_date"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="@dimen/add_project_segment_weight_half"
+                    android:layout_weight="1"
                     android:clickable="true"
                     android:gravity="end"
                     android:hint="@string/end_date" />
@@ -166,13 +162,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_marginTop="@dimen/margin_large"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_marginStart="@dimen/margin_small"
                 android:text="@string/save_project" />
 
         </LinearLayout>
     </LinearLayout>
-
 
     <include
         android:id="@+id/progress_bar"

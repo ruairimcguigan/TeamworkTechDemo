@@ -8,17 +8,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagsItem;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Project;
+import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import timber.log.Timber;
 
+import static java.lang.Integer.valueOf;
 import static java.lang.String.valueOf;
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.MONTH;
 import static java.util.Objects.requireNonNull;
 
 public class ViewUtil {
@@ -29,9 +26,9 @@ public class ViewUtil {
         this.context = context;
     }
 
-    public static List<String> getCompanyNames(List<Project> projects) {
+    public static List<String> getCompanyNames(List<ProjectItem> projectItems) {
         List<String> companyNames = new ArrayList<>();
-        for (Project p : projects) {
+        for (ProjectItem p : projectItems) {
             companyNames.add(p.getCompany().getName());
         }
         return companyNames;
@@ -47,10 +44,10 @@ public class ViewUtil {
         return tagNames;
     }
 
-    public static List<String> getCategories(List<Project> projects) {
-        List<String> categories = new ArrayList<>();
-        for (Project p : projects) {
-            categories.add(p.getCategory().getName());
+    public static List<Integer> getCategories(List<ProjectItem> projectItems) {
+        List<Integer> categories = new ArrayList<>();
+        for (ProjectItem p : projectItems) {
+            categories.add(valueOf(p.getCategory().getId()));
         }
         return categories;
     }
@@ -73,8 +70,6 @@ public class ViewUtil {
                 v.setOnTouchListener((v1, event) -> {
                     v1.performClick();
                     contentView.requestFocus();
-    //                    View current = activity.getCurrentFocus();
-    //                    if (current != null) current.clearFocus();
                     hideKeyboard(requireNonNull(activity));
                     return false;
                 });
@@ -83,7 +78,12 @@ public class ViewUtil {
     }
 
     public static String formatDateForDisplay(int day, int month, int year){
-        return valueOf(day) + "/" + valueOf(month) + "/" + valueOf(year);
+        return String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
+    }
+
+    public static String formatForRequest(String date){
+        String form = date.replaceAll("////", "");
+        return form;
     }
 
 }

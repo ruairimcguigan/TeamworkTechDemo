@@ -2,7 +2,6 @@ package demo.teamwork.aquidigital.projects.addproject;
 
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.AddProject;
 import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagsItem;
 
 public interface AddProjectContract {
@@ -18,6 +17,8 @@ public interface AddProjectContract {
         void populateStartDate(String date);
 
         void populateEndDate(String date);
+
+        void showCreateProjectSuccess();
     }
 
     interface Presenter{
@@ -29,6 +30,8 @@ public interface AddProjectContract {
         void onStartDateSelected(int day, int month, int year);
 
         void onEndDateSelected(int day, int month, int year);
+
+        void onProjectFormComplete(String title, String description, String company, String tags, int category, String startDate, String endDate);
 
     }
 
