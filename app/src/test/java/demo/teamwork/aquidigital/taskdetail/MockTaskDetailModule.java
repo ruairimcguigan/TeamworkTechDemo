@@ -3,5 +3,5 @@ package demo.teamwork.aquidigital.taskdetail;
 import dagger.Module;
 
 @Module
-public class MockTaskDetail {
+public class MockTaskDetailModule {
 }

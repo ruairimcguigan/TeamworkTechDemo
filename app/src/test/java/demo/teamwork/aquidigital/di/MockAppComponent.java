@@ -9,10 +9,11 @@ import demo.teamwork.aquidigital.common.injection.AppComponent;
 import demo.teamwork.aquidigital.messages.MessagesComponent;
 import demo.teamwork.aquidigital.people.MockPeopleModule;
 import demo.teamwork.aquidigital.people.PeopleComponent;
-import demo.teamwork.aquidigital.taskdetail.MockTaskDetail;
+import demo.teamwork.aquidigital.taskdetail.MockTaskDetailModule;
 import demo.teamwork.aquidigital.taskdetail.TaskDetailComponent;
 import demo.teamwork.aquidigital.tasks.MockTaskModule;
 import demo.teamwork.aquidigital.tasks.TaskComponent;
+import demo.teamwork.aquidigital.viewprojects.MockViewProjectDetailsModule;
 import demo.teamwork.aquidigital.viewprojects.MockViewProjectsModule;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectDetailsComponent;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsComponent;
@@ -21,11 +22,12 @@ import demo.teamwork.aquidigital.viewprojects.ViewProjectsComponent;
 @Component(modules = {
         MockAppModule.class,
         MockTaskModule.class,
-        MockTaskDetail.class,
+        MockTaskDetailModule.class,
         MockViewProjectsModule.class,
+        MockViewProjectDetailsModule.class,
+        MockAddProjectModule.class,
         MockPeopleModule.class,
         MockApiModule.class,
-        MockAddProjectModule.class
 })
 public interface MockAppComponent extends
         AppComponent,

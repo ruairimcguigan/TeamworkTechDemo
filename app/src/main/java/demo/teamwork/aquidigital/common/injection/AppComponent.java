@@ -15,6 +15,7 @@ import demo.teamwork.aquidigital.taskdetail.TaskDetailModule;
 import demo.teamwork.aquidigital.tasks.TaskComponent;
 import demo.teamwork.aquidigital.tasks.TaskModule;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectDetailsComponent;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectDetailsModule;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsActivity;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsComponent;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsModule;
@@ -25,6 +26,7 @@ import demo.teamwork.aquidigital.viewprojects.ViewProjectsModule;
         TaskModule.class,
         TaskDetailModule.class,
         ViewProjectsModule.class,
+        ViewProjectDetailsModule.class,
         PeopleModule.class,
         ApiModule.class,
         AddProjectModule.class

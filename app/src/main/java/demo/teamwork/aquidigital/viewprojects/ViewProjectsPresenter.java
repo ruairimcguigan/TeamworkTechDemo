@@ -20,11 +20,11 @@ public class ViewProjectsPresenter extends BasePresenter implements Presenter {
     TeamworkAPI projectService;
 
     private View view;
-    private final Model projectModel;
+    private final Model model;
 
     @Inject
-    ViewProjectsPresenter(Model projectModel) {
-        this.projectModel = projectModel;
+    ViewProjectsPresenter(Model model) {
+        this.model = model;
     }
 
     public enum NavigationSelection{
