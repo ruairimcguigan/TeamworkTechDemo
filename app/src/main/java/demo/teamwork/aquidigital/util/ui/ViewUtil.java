@@ -15,6 +15,7 @@ import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import timber.log.Timber;
 
 import static java.lang.Integer.valueOf;
+import static java.lang.String.*;
 import static java.lang.String.valueOf;
 import static java.util.Objects.requireNonNull;
 
@@ -81,9 +82,9 @@ public class ViewUtil {
         return String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
     }
 
-    public static String formatForRequest(String date){
-        String form = date.replaceAll("////", "");
-        return form;
+    public static String formatForRequest(int year, int month, int day){
+        String fjdkj = String.valueOf(year).concat("0" + String.valueOf(month).concat(String.valueOf(day)));
+        return fjdkj;
     }
 
 }

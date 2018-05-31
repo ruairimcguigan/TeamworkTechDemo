@@ -59,7 +59,6 @@ public class ProjectsPresenter extends BasePresenter implements Presenter {
 
     @Override
     protected void onError(Throwable throwable) {
-        // TODO: 22/05/2018 to be implemented
         Timber.d("Error retrieving projects", Arrays.toString(throwable.getStackTrace()));
     }
 

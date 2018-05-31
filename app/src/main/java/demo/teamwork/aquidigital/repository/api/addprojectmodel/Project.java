@@ -79,7 +79,6 @@ public class Project{
         private String harvestTimersEnabled = "";
 
 
-
         public Builder(String name, String description, String company,
                        String tags, int category, String startDate, String endDate) {
             this.name = name;

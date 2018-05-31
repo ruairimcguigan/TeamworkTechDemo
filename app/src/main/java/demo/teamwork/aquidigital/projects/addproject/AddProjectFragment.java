@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -93,6 +94,14 @@ public class AddProjectFragment extends BaseFragment
     private ArrayAdapter companyAdapter;
     private ArrayAdapter categoryAdapter;
 
+    private Calendar c = getInstance();
+    private int startYear = c.get(Calendar.YEAR);
+    private int startMonth = c.get(Calendar.MONTH);
+    private int startDay = c.get(Calendar.DAY_OF_MONTH);
+    private int endYear = c.get(Calendar.YEAR);
+    private int endMonth = c.get(Calendar.MONTH);
+    private int endDay = c.get(Calendar.DAY_OF_MONTH);
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -155,7 +164,7 @@ public class AddProjectFragment extends BaseFragment
             }
         });
 
-        categoryAdapter = new ArrayAdapter(requireNonNull(getActivity()),spinner_item_view, getCategories(projects));
+        categoryAdapter = new ArrayAdapter(requireNonNull(getActivity()), spinner_item_view, getCategories(projects));
         categoryAdapter.setDropDownViewResource(spinner_item_view);
         categorySpinner.setAdapter(categoryAdapter);
 
@@ -220,28 +229,22 @@ public class AddProjectFragment extends BaseFragment
         Toast.makeText(getActivity(), "Project created successfully", Toast.LENGTH_SHORT).show();
     }
 
-
     private void showStartDatePicker() {
 
-        Calendar c = getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireNonNull(getActivity()), (datePicker, startYear, startMonth, startDay)
-                        -> presenter.onStartDateSelected(startYear, startMonth + 1, startDay), year, month, day);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireNonNull(getActivity()),
+                (datePicker, startYear, startMonth, startDay)
+                        -> presenter.onStartDateSelected(startYear, startMonth + 1, startDay)
+                , startYear, startMonth + 1, startDay);
 
         datePickerDialog.show();
     }
 
     private void showEndDateDatePicker() {
-        Calendar c = getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(requireNonNull(getActivity()), (datePicker, endYear, endMonth, endDay)
-                -> presenter.onEndDateSelected(endYear, endMonth + 1, endDay), year, month, day);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireNonNull(getActivity()),
+                (datePicker, endYear, endMonth, endDay)
+                        -> presenter.onEndDateSelected(endYear, endMonth + 1, endDay),
+                endYear, endMonth + 1, endDay);
 
         datePickerDialog.show();
     }
@@ -268,7 +271,7 @@ public class AddProjectFragment extends BaseFragment
     }
 
     @OnClick(R.id.add_project_save_project_button)
-    public void createProject(){
+    public void createProject() {
 
         presenter.onProjectFormComplete(
                 addTitle.getText().toString(),
@@ -276,8 +279,8 @@ public class AddProjectFragment extends BaseFragment
                 companySpinner.getSelectedItem().toString(),
                 tagsSpinner.getSelectedItem().toString(),
                 Integer.parseInt(categorySpinner.getSelectedItem().toString()),
-                formatForRequest(startDate.getText().toString()),
-                formatForRequest(endDate.getText().toString()));
+                formatForRequest(startYear, startMonth, startDay),
+                formatForRequest(endYear, endMonth, endDay));
     }
 
     @Override
