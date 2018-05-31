@@ -13,7 +13,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
-import demo.teamwork.aquidigital.common.injection.FragmentComponent;
 import timber.log.Timber;
 
 /**

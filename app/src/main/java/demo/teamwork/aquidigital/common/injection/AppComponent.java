@@ -3,20 +3,20 @@ package demo.teamwork.aquidigital.common.injection;
 import javax.inject.Singleton;
 
 import dagger.Component;
-
-import demo.teamwork.aquidigital.addproject.AddProjectFragment;
+import demo.teamwork.aquidigital.TeamworkApplication;
+import demo.teamwork.aquidigital.addproject.AddProjectComponent;
 import demo.teamwork.aquidigital.addproject.AddProjectModule;
-import demo.teamwork.aquidigital.messages.MessagesFragment;
-import demo.teamwork.aquidigital.people.PeopleFragment;
+import demo.teamwork.aquidigital.messages.MessagesComponent;
+import demo.teamwork.aquidigital.people.PeopleComponent;
 import demo.teamwork.aquidigital.people.PeopleModule;
 import demo.teamwork.aquidigital.repository.api.ApiModule;
-import demo.teamwork.aquidigital.taskdetail.TaskDetailFragment;
+import demo.teamwork.aquidigital.taskdetail.TaskDetailComponent;
 import demo.teamwork.aquidigital.taskdetail.TaskDetailModule;
+import demo.teamwork.aquidigital.tasks.TaskComponent;
 import demo.teamwork.aquidigital.tasks.TaskModule;
-import demo.teamwork.aquidigital.tasks.TasksFragment;
-import demo.teamwork.aquidigital.viewprojects.ViewProjectDetailsActivity;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectDetailsComponent;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsActivity;
-import demo.teamwork.aquidigital.viewprojects.ViewProjectsListFragment;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsComponent;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsModule;
 
 @Singleton
@@ -29,22 +29,16 @@ import demo.teamwork.aquidigital.viewprojects.ViewProjectsModule;
         ApiModule.class,
         AddProjectModule.class
 })
-public interface AppComponent {
+public interface AppComponent extends
+        ViewProjectsComponent,
+        ViewProjectDetailsComponent,
+        AddProjectComponent,
+        TaskComponent,
+        TaskDetailComponent,
+        MessagesComponent,
+        PeopleComponent {
+
+    void inject(TeamworkApplication application);
 
     void inject(ViewProjectsActivity activity);
-
-    void inject(ViewProjectDetailsActivity activity);
-
-    void inject(ViewProjectsListFragment fragment);
-
-    void inject(MessagesFragment fragment);
-
-    void inject(PeopleFragment fragment);
-
-    void inject(TasksFragment fragment);
-
-    void inject(TaskDetailFragment fragment);
-
-    void inject(AddProjectFragment fragment);
-
 }
