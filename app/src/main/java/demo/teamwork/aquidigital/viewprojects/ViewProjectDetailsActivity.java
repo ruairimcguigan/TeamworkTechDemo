@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.projects;
+package demo.teamwork.aquidigital.viewprojects;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,15 +17,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
+import demo.teamwork.aquidigital.addproject.AddProjectFragment;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
-import demo.teamwork.aquidigital.projects.addproject.AddProjectFragment;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import timber.log.Timber;
 
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.setVisibility;
 import static java.util.Objects.requireNonNull;
 
-public class ProjectDetailsActivity extends BaseActivity implements OnClickListener{
+public class ViewProjectDetailsActivity extends BaseActivity implements OnClickListener{
 
     @BindView(R.id.project_backdrop)
     ImageView backdrop;

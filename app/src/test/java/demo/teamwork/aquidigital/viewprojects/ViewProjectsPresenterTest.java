@@ -1,26 +1,24 @@
-package demo.teamwork.aquidigital.projects;
+package demo.teamwork.aquidigital.viewprojects;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import javax.inject.Inject;
-
-import demo.teamwork.aquidigital.projects.ProjectsContract.Model;
-import demo.teamwork.aquidigital.projects.ProjectsContract.View;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Model;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.View;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import demo.teamwork.aquidigital.util.RxSchedulersOverrideRule;
 import demo.teamwork.aquidigital.util.TestData;
 
-import static demo.teamwork.aquidigital.projects.ProjectsContract.*;
+import static demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.*;
 import static io.reactivex.Observable.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ProjectsPresenterTest {
+public class ViewProjectsPresenterTest {
 
     @Mock
     TeamworkAPI teamworkAPI;
@@ -40,7 +38,7 @@ public class ProjectsPresenterTest {
         project = TestData.buildProjectItem();
         response = TestData.getProjectResponse();
 
-        presenter = new ProjectsPresenter(model);
+        presenter = new ViewProjectsPresenter(model);
         presenter.attachView(view);
 
     }

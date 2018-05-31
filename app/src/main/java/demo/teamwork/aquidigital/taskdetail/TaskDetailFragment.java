@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.tasks.taskdetail;
+package demo.teamwork.aquidigital.taskdetail;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -66,7 +66,7 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     @BindView(R.id.following_status)
     TextView followingStatus;
 
-    private OnGlobalLayoutListener mGlobalLayoutListener;
+    private OnGlobalLayoutListener globalLayoutListener;
     private TodoItemsItem task;
 
     @Override
@@ -106,7 +106,8 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
         startDate.setText(task.getStartDate());
         taskList.setText(task.getPriority());
         projectName.setText(task.getProjectName());
-        createdBy.setText(task.getCreatorFirstname() + "" + task.getCreatorLastname());
+        createdBy.setText(getString(R.string.task_detail_name_concat,
+                task.getCreatorFirstname(), task.getCreatorLastname()));
         createdOn.setText(task.getCreatedOn());
         lastModified.setText(task.getLastChangedOn());
         accessStatus.setText(task.getStatus());
@@ -149,11 +150,11 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     }
 
     private void setExpandableLayoutListener() {
-        mGlobalLayoutListener = () -> {
+        globalLayoutListener = () -> {
             projectDetailsExpandContainer.move(projectDetailsHeader.getHeight(), 0, null);
 
-            projectDetailsHeader.getViewTreeObserver().removeOnGlobalLayoutListener(mGlobalLayoutListener);
+            projectDetailsHeader.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
         };
-        projectDetailsHeader.getViewTreeObserver().addOnGlobalLayoutListener(mGlobalLayoutListener);
+        projectDetailsHeader.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
     }
 }

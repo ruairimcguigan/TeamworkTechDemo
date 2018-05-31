@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.projects;
+package demo.teamwork.aquidigital.viewprojects;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,10 +23,10 @@ import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 
 import static java.util.Objects.requireNonNull;
 
-public class ProjectsListFragment extends BaseFragment implements ProjectsContract.View{
+public class ViewProjectsListFragment extends BaseFragment implements ViewProjectsContract.View{
 
     @Inject
-    ProjectsPresenter presenter;
+    ViewProjectsPresenter presenter;
 
     @BindView(R.id.projectList)
     RecyclerView projectList;
@@ -34,7 +34,7 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    private ProjectAdapter adapter;
+    private ViewProjectAdapter adapter;
 
     @Nullable
     @Override
@@ -78,7 +78,7 @@ public class ProjectsListFragment extends BaseFragment implements ProjectsContra
 
     @Override
     public void setAdapter() {
-        adapter = new ProjectAdapter(getActivity());
+        adapter = new ViewProjectAdapter(getActivity());
         projectList.setLayoutManager(new LinearLayoutManager(getActivity()));
         projectList.setHasFixedSize(true);
         projectList.setAdapter(adapter);

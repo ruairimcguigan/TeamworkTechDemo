@@ -10,15 +10,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
-import demo.teamwork.aquidigital.projects.ProjectsActivity;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsActivity;
 import timber.log.Timber;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Abstract activity that every other Activity in this application must implement. It provides the
@@ -110,9 +111,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
 
     protected void shouldShowActionBarUpButton() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
         } else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -161,17 +162,17 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
 
     private void startParentActivity() {
         finish();
-        startActivity(new Intent(this, ProjectsActivity.class));
+        startActivity(new Intent(this, ViewProjectsActivity.class));
     }
 
     protected void handleBackButton() {
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
             int stack = getSupportFragmentManager().getBackStackEntryCount();
             if (stack > 0) {
-                getSupportActionBar().setHomeButtonEnabled(true);
+                requireNonNull(getSupportActionBar()).setHomeButtonEnabled(true);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             } else {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
                 getSupportActionBar().setHomeButtonEnabled(false);
             }
         });

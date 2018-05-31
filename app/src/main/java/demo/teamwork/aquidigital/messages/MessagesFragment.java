@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.projects.ProjectsActivity;
 
 import static java.util.Objects.requireNonNull;
 
@@ -27,7 +26,7 @@ public class MessagesFragment extends BaseFragment implements MessagesContract.V
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayout(), container, false);
 
-        ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
         Toast.makeText(getActivity(), "MessagesFragment", Toast.LENGTH_SHORT).show();
         return view;
     }

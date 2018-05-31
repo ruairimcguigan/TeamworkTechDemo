@@ -1,23 +1,22 @@
-package demo.teamwork.aquidigital.projects.addproject;
+package demo.teamwork.aquidigital.addproject;
 
 import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import demo.teamwork.aquidigital.addproject.AddProjectContract.Model;
+import demo.teamwork.aquidigital.addproject.AddProjectContract.Presenter;
+import demo.teamwork.aquidigital.addproject.AddProjectContract.View;
 import demo.teamwork.aquidigital.common.base.BasePresenter;
-import demo.teamwork.aquidigital.projects.addproject.AddProjectContract.Model;
-import demo.teamwork.aquidigital.projects.addproject.AddProjectContract.Presenter;
-import demo.teamwork.aquidigital.projects.addproject.AddProjectContract.View;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.ProjectRequest;
 import demo.teamwork.aquidigital.repository.api.addprojectmodel.Project;
 import demo.teamwork.aquidigital.repository.api.addprojectmodel.Project.Builder;
+import demo.teamwork.aquidigital.repository.api.addprojectmodel.ProjectRequest;
 import timber.log.Timber;
 
-import static demo.teamwork.aquidigital.util.ui.ViewUtil.*;
+import static demo.teamwork.aquidigital.util.ui.ViewUtil.formatDateForDisplay;
 import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
-import static java.time.LocalDate.of;
 import static timber.log.Timber.d;
 
 public class AddProjectPresenter extends BasePresenter implements Presenter {

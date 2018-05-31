@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.projects.addproject;
+package demo.teamwork.aquidigital.addproject;
 
 import java.util.List;
 

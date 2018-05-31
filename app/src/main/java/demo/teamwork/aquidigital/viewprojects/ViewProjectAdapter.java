@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.projects;
+package demo.teamwork.aquidigital.viewprojects;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,13 +21,13 @@ import demo.teamwork.aquidigital.common.base.BaseAdapter;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 
-public class ProjectAdapter extends BaseAdapter<ProjectItem, ProjectAdapter.ProjectViewHolder> {
+public class ViewProjectAdapter extends BaseAdapter<ProjectItem, ViewProjectAdapter.ProjectViewHolder> {
 
     private Context context;
     private List<ProjectItem> projectItemList = new ArrayList<>();
     private ProjectsResponse projectsResponse = new ProjectsResponse();
 
-    ProjectAdapter(Context context) {
+    ViewProjectAdapter(Context context) {
         this.context = context;
     }
 
@@ -85,10 +85,10 @@ public class ProjectAdapter extends BaseAdapter<ProjectItem, ProjectAdapter.Proj
             itemView.setOnClickListener(v -> {
                 Context context = v.getContext();
 
-                Intent intent = new Intent(context, ProjectDetailsActivity.class);
-                intent.putExtra(ProjectDetailsActivity.EXTRA_PROJECTS_LIST, projectsResponse);
-                intent.putExtra(ProjectDetailsActivity.EXTRA_NAME, projectItem.getName());
-                intent.putExtra(ProjectDetailsActivity.EXTRA_LOGO, projectItem.getLogo());
+                Intent intent = new Intent(context, ViewProjectDetailsActivity.class);
+                intent.putExtra(ViewProjectDetailsActivity.EXTRA_PROJECTS_LIST, projectsResponse);
+                intent.putExtra(ViewProjectDetailsActivity.EXTRA_NAME, projectItem.getName());
+                intent.putExtra(ViewProjectDetailsActivity.EXTRA_LOGO, projectItem.getLogo());
 
                 context.startActivity(intent);
             });

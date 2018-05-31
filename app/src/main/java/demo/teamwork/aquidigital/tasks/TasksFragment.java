@@ -9,9 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +19,9 @@ import butterknife.BindView;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
-import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailFragment;
+import demo.teamwork.aquidigital.taskdetail.TaskDetailFragment;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsActivity;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -53,7 +51,7 @@ public class TasksFragment extends BaseFragment implements AdapterCallback, Task
         bind(this, view);
         setAdapter();
 
-        ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);
+        ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
 
         return view;
     }
@@ -108,7 +106,7 @@ public class TasksFragment extends BaseFragment implements AdapterCallback, Task
             Bundle bundle = new Bundle();
             bundle.putSerializable("TASK", task);
 
-            ((ProjectsActivity) getActivity()).showFragment(R.id.fragment_container, TaskDetailFragment.class, bundle, true);
+            ((ViewProjectsActivity) requireNonNull(getActivity())).showFragment(R.id.fragment_container, TaskDetailFragment.class, bundle, true);
         }
     }
 

@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.projects.addproject;
+package demo.teamwork.aquidigital.addproject;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -30,26 +29,24 @@ import butterknife.OnClick;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagsItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
-import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailFragment;
-import demo.teamwork.aquidigital.util.ui.ViewUtil;
+import demo.teamwork.aquidigital.taskdetail.TaskDetailFragment;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsActivity;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static butterknife.ButterKnife.bind;
 import static demo.teamwork.aquidigital.R.layout.spinner_item_view;
-import static demo.teamwork.aquidigital.projects.ProjectDetailsActivity.EXTRA_PROJECTS_LIST;
 import static demo.teamwork.aquidigital.tasks.TasksAdapter.AdapterCallback;
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.formatForRequest;
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.getCategories;
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.getCompanyNames;
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.getTagNames;
 import static demo.teamwork.aquidigital.util.ui.ViewUtil.handleSoftKeyBoardVisibility;
-import static java.time.LocalDate.of;
+import static demo.teamwork.aquidigital.viewprojects.ViewProjectDetailsActivity.EXTRA_PROJECTS_LIST;
 import static java.util.Calendar.getInstance;
 import static java.util.Objects.requireNonNull;
 
@@ -204,7 +201,7 @@ public class AddProjectFragment extends BaseFragment
             Bundle bundle = new Bundle();
             bundle.putSerializable("TASK", task);
 
-            ((ProjectsActivity) requireNonNull(getActivity())).showFragment(
+            ((ViewProjectsActivity) requireNonNull(getActivity())).showFragment(
                     R.id.fragment_container, TaskDetailFragment.class, bundle, true);
         }
     }

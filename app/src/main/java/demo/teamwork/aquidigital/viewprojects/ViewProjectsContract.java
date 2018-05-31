@@ -1,11 +1,11 @@
-package demo.teamwork.aquidigital.projects;
+package demo.teamwork.aquidigital.viewprojects;
 
 import java.util.List;
 
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 
 
-class ProjectsContract {
+class ViewProjectsContract {
 
     interface View {
 

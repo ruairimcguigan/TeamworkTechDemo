@@ -7,8 +7,6 @@ import android.content.SharedPreferences;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.tasks.TasksFragment;
-import demo.teamwork.aquidigital.projects.ProjectsActivity;
 import demo.teamwork.aquidigital.repository.TeamworkDataStore;
 import demo.teamwork.aquidigital.repository.TeamworkRemoteDataStore;
 
@@ -25,16 +23,6 @@ public class AppModule {
     @Provides
     Application provideApplication() {
         return application;
-    }
-
-    @Provides
-    TasksFragment provideTasksFragment(){
-        return new TasksFragment();
-    }
-
-    @Provides
-    ProjectsActivity provideProjectsActivity(){
-        return new ProjectsActivity();
     }
 
     @Provides

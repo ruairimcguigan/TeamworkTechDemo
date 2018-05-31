@@ -1,4 +1,4 @@
-package demo.teamwork.aquidigital.projects;
+package demo.teamwork.aquidigital.viewprojects;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,15 +6,15 @@ import java.util.List;
 import javax.inject.Inject;
 
 import demo.teamwork.aquidigital.common.base.BasePresenter;
-import demo.teamwork.aquidigital.projects.ProjectsContract.Model;
-import demo.teamwork.aquidigital.projects.ProjectsContract.Presenter;
-import demo.teamwork.aquidigital.projects.ProjectsContract.View;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Model;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Presenter;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.View;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import timber.log.Timber;
 
 import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 
-public class ProjectsPresenter extends BasePresenter implements Presenter {
+public class ViewProjectsPresenter extends BasePresenter implements Presenter {
 
     @Inject
     TeamworkAPI projectService;
@@ -23,7 +23,7 @@ public class ProjectsPresenter extends BasePresenter implements Presenter {
     private final Model projectModel;
 
     @Inject
-    ProjectsPresenter(Model projectModel) {
+    ViewProjectsPresenter(Model projectModel) {
         this.projectModel = projectModel;
     }
 

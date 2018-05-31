@@ -1,6 +1,5 @@
-package demo.teamwork.aquidigital.tasks.taskdetail;
+package demo.teamwork.aquidigital.taskdetail;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,12 +7,7 @@ import javax.inject.Inject;
 import demo.teamwork.aquidigital.common.base.BasePresenter;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 
-import demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailContract.View;
-import timber.log.Timber;
-
-import static demo.teamwork.aquidigital.tasks.taskdetail.TaskDetailContract.*;
-import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
-import static timber.log.Timber.d;
+import static demo.teamwork.aquidigital.taskdetail.TaskDetailContract.*;
 
 public class TaskDetailPresenter extends BasePresenter implements Presenter {
 
@@ -27,7 +21,6 @@ public class TaskDetailPresenter extends BasePresenter implements Presenter {
     public TaskDetailPresenter(Model model) {
         this.model = model;
     }
-
 
     @Override
     public void attachView(View view) {
