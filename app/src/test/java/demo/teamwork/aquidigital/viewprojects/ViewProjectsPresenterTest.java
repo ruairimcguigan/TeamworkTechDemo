@@ -3,21 +3,24 @@ package demo.teamwork.aquidigital.viewprojects;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Model;
-import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.View;
 import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
 import demo.teamwork.aquidigital.util.RxSchedulersOverrideRule;
 import demo.teamwork.aquidigital.util.TestData;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Model;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.View;
 
-import static demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.*;
-import static io.reactivex.Observable.*;
+import static io.reactivex.Observable.just;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ViewProjectsPresenterTest {
 
     @Mock
@@ -29,7 +32,10 @@ public class ViewProjectsPresenterTest {
     @Mock private View view;
     @Mock private Model model;
 
-    private Presenter presenter;
+    @InjectMocks
+    private ViewProjectsPresenter presenter;
+
+//    private Presenter presenter;
     private ProjectItem project;
     private ProjectsResponse response;
 
@@ -38,7 +44,7 @@ public class ViewProjectsPresenterTest {
         project = TestData.buildProjectItem();
         response = TestData.getProjectResponse();
 
-        presenter = new ViewProjectsPresenter(model);
+//        presenter = new ViewProjectsPresenter(model);
         presenter.attachView(view);
 
     }

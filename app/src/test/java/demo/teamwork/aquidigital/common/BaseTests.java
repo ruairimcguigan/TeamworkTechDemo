@@ -65,7 +65,7 @@ public abstract class BaseTests {
 
         mockApiMocks = new MockApiModule();
         MockitoAnnotations.initMocks(mockApiMocks);
-//
+
 //        injector = DaggerMockAppComponent.builder()
 //                .MockAppModule(appMocks)
 //                .MockTaskModule(taskMocks)

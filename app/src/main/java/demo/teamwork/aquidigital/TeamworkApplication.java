@@ -18,6 +18,9 @@ import timber.log.Timber;
 
 public class TeamworkApplication extends Application {
 
+    private String API_KEY="twp_k9ejP88LcuojHjmFkUFuYIUNYalg";
+    private String BASE_URL="https://yat.teamwork.com";
+
     private AppComponent appComponent;
 
     @Override
@@ -41,7 +44,7 @@ public class TeamworkApplication extends Application {
                 .appModule(new AppModule(this))
                 .taskModule(new TaskModule())
                 .viewProjectsModule(new ViewProjectsModule())
-                .apiModule(new ApiModule(this, BuildConfig.BASE_URL))
+                .apiModule(new ApiModule(this, "https://yat.teamwork.com"))
                 .build();
     }
 

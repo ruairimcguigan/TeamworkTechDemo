@@ -14,12 +14,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.BuildConfig;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.repository.TeamworkLocalDataStore;
 import demo.teamwork.aquidigital.repository.TeamworkRemoteDataStore;
-import demo.teamwork.aquidigital.repository.api.AuthenticationInterceptor;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -27,7 +24,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static demo.teamwork.aquidigital.BuildConfig.BASE_URL;
 import static okhttp3.Credentials.basic;
 
 @Module
@@ -84,7 +80,7 @@ public class ApiModule {
     OkHttpClient provideClient(Cache cache) {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.addInterceptor(provideLoggingInterceptor());
-        client.addInterceptor(provideAuthenticationInterceptor(basic(BuildConfig.API_KEY, "X")));
+        client.addInterceptor(provideAuthenticationInterceptor(basic("twp_k9ejP88LcuojHjmFkUFuYIUNYalg", "X")));
         client.cache(cache);
         return client.build();
     }
@@ -103,7 +99,7 @@ public class ApiModule {
     @Provides
     @Singleton
     public TeamworkAPI provideProjectApiService(Cache cache) {
-        return provideRetrofit(BASE_URL, provideClient(cache)).create(TeamworkAPI.class);
+        return provideRetrofit("https://yat.teamwork.com", provideClient(cache)).create(TeamworkAPI.class);
     }
 
     @Provides
