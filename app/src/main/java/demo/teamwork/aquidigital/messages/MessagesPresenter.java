@@ -2,9 +2,9 @@ package demo.teamwork.aquidigital.messages;
 
 import javax.inject.Inject;
 
-import demo.teamwork.aquidigital.tasks.TaskContract;
-import demo.teamwork.aquidigital.tasks.TaskContract.Model;
-import demo.teamwork.aquidigital.tasks.TaskContract.Presenter;
+import demo.teamwork.aquidigital.tasks.ViewTasksContract;
+import demo.teamwork.aquidigital.tasks.ViewTasksContract.Model;
+import demo.teamwork.aquidigital.tasks.ViewTasksContract.Presenter;
 
 public class MessagesPresenter implements Presenter{
 
@@ -16,7 +16,7 @@ public class MessagesPresenter implements Presenter{
     }
 
     @Override
-    public void attachView(TaskContract.View view) {
+    public void attachView(ViewTasksContract.View view) {
 
     }
 

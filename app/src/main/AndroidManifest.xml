@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".viewprojects.ViewProjectDetailsActivity"/>
+        <activity android:name=".viewprojectdetails.ViewProjectDetailsActivity"/>
     </application>
 
 </manifest>

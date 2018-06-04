@@ -5,24 +5,24 @@
         <item
             android:id="@+id/nav_projects"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="Projects" />
-    </group>
-    <group android:id="@+id/grp2" android:checkableBehavior="single" >
-        <item
-            android:id="@+id/nav_messages"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="Messages" />
+            android:title="@string/projects" />
     </group>
     <group android:id="@+id/grp3" android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_tasks"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="Tasks" />
+            android:title="@string/tasks" />
     </group>
     <group android:id="@+id/grp4" android:checkableBehavior="single" >
         <item
             android:id="@+id/nav_people"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="People" />
+            android:title="@string/people" />
+    </group>
+    <group android:id="@+id/grp2" android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_messages"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="@string/messages" />
     </group>
 </menu>

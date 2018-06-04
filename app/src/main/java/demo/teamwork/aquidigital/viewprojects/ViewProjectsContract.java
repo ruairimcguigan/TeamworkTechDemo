@@ -5,9 +5,9 @@ import java.util.List;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 
 
-class ViewProjectsContract {
+public class ViewProjectsContract {
 
-    interface View {
+    public interface View {
 
         void setAdapter();
 
@@ -17,6 +17,7 @@ class ViewProjectsContract {
 
         void hideProgress();
 
+        void onError(Throwable throwable);
     }
 
     interface Presenter{
@@ -27,7 +28,7 @@ class ViewProjectsContract {
 
     }
 
-    interface Model {
+    public interface Model {
 
         void cacheForOfflineViewing();
     }

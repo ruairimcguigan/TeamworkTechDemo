@@ -1,23 +1,23 @@
 package demo.teamwork.aquidigital.viewprojects;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import demo.teamwork.aquidigital.common.base.BasePresenter;
+import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
+import demo.teamwork.aquidigital.util.network.NetworkUtil;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Model;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Presenter;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.View;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
 import timber.log.Timber;
 
 import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ViewProjectsPresenter extends BasePresenter implements Presenter {
 
-    @Inject
-    TeamworkAPI projectService;
+    @Inject TeamworkAPI projectService;
+    @Inject NetworkUtil networkUtil;
 
     private View view;
     private final Model model;
@@ -40,13 +40,14 @@ public class ViewProjectsPresenter extends BasePresenter implements Presenter {
 
     @Override
     public void loadProjects() {
-        addDisposable(projectService
-                .getProjects()
-                .observeOn(mainThread())
-                .doOnSubscribe(__ -> view.showProgress())
-                .doOnError(this::onError)
-                .doOnTerminate(() -> view.hideProgress())
-                .subscribe(result -> onSuccess(result.getProjects())));
+        if (networkUtil.isNetworkConnected()) {
+            addDisposable(projectService
+                    .getProjects()
+                    .observeOn(mainThread())
+                    .doOnSubscribe(__ -> view.showProgress())
+                    .doOnTerminate(() -> view.hideProgress())
+                    .subscribe(result -> onSuccess(result.getProjects()), this::onError));
+        }
     }
 
     @Override
@@ -59,7 +60,7 @@ public class ViewProjectsPresenter extends BasePresenter implements Presenter {
 
     @Override
     protected void onError(Throwable throwable) {
-        Timber.d("Error retrieving projects", Arrays.toString(throwable.getStackTrace()));
+        view.onError(throwable);
     }
 
 }

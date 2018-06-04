@@ -1,5 +1,6 @@
 package demo.teamwork.aquidigital.repository.api;
 
+import demo.teamwork.aquidigital.repository.api.addprojectmodel.CreateProjectResult;
 import demo.teamwork.aquidigital.repository.api.addprojectmodel.ProjectRequest;
 import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagResponse;
 import demo.teamwork.aquidigital.repository.api.messagesmodel.MessagesResponse;
@@ -31,7 +32,7 @@ public interface TeamworkAPI {
 
     @Headers("Content-Type: application/json")
     @POST("/projects.json")
-    Observable<ProjectRequest> createProject(@Body ProjectRequest project);
+    Observable<CreateProjectResult> createProject(@Body ProjectRequest project);
 
 
 }

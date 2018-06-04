@@ -8,13 +8,9 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "demo.teamwork.aquidigital.runner.TeamworkTestRunner"
     }
     buildTypes {
-//        debug {
-//            buildConfigField 'String', "API_KEY", API_KEY
-//            buildConfigField 'String', "BASE_URL", BASE_URL
-//        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

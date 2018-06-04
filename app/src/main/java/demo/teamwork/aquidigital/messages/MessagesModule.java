@@ -4,8 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.tasks.TaskContract.Model;
-import demo.teamwork.aquidigital.tasks.TaskContract.Presenter;
+import demo.teamwork.aquidigital.tasks.ViewTasksContract.Model;
+import demo.teamwork.aquidigital.tasks.ViewTasksContract.Presenter;
 
 @Module
 public class MessagesModule {

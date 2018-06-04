@@ -9,12 +9,10 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.repository.TeamworkLocalDataStore;
 import demo.teamwork.aquidigital.repository.TeamworkRemoteDataStore;
 import okhttp3.Cache;
@@ -28,9 +26,6 @@ import static okhttp3.Credentials.basic;
 
 @Module
 public class ApiModule {
-
-    @Inject
-    TeamworkApplication application;
 
     private final Context context;
     private final String baseUrl;
@@ -48,9 +43,9 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    Cache provideCache(Application application) {
+    Cache provideCache() {
         int cacheSize = 10 * 1024 * 1024;
-        return new Cache(application.getCacheDir(), cacheSize);
+        return new Cache(context.getCacheDir(), cacheSize);
     }
 
     @Provides

@@ -3,19 +3,18 @@ package demo.teamwork.aquidigital.common.injection;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import demo.teamwork.aquidigital.TeamworkApplication;
-import demo.teamwork.aquidigital.addproject.AddProjectComponent;
-import demo.teamwork.aquidigital.addproject.AddProjectModule;
+import demo.teamwork.aquidigital.createproject.CreateProjectComponent;
+import demo.teamwork.aquidigital.createproject.CreateProjectModule;
 import demo.teamwork.aquidigital.messages.MessagesComponent;
-import demo.teamwork.aquidigital.people.PeopleComponent;
-import demo.teamwork.aquidigital.people.PeopleModule;
+import demo.teamwork.aquidigital.people.ViewPeopleComponent;
+import demo.teamwork.aquidigital.people.ViewPeopleModule;
 import demo.teamwork.aquidigital.repository.api.ApiModule;
 import demo.teamwork.aquidigital.taskdetail.TaskDetailComponent;
 import demo.teamwork.aquidigital.taskdetail.TaskDetailModule;
-import demo.teamwork.aquidigital.tasks.TaskComponent;
-import demo.teamwork.aquidigital.tasks.TaskModule;
-import demo.teamwork.aquidigital.viewprojects.ViewProjectDetailsComponent;
-import demo.teamwork.aquidigital.viewprojects.ViewProjectDetailsModule;
+import demo.teamwork.aquidigital.tasks.ViewTasksComponent;
+import demo.teamwork.aquidigital.tasks.ViewTasksModule;
+import demo.teamwork.aquidigital.viewprojectdetails.ViewProjectDetailsComponent;
+import demo.teamwork.aquidigital.viewprojectdetails.ViewProjectDetailsModule;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsActivity;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsComponent;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsModule;
@@ -23,24 +22,23 @@ import demo.teamwork.aquidigital.viewprojects.ViewProjectsModule;
 @Singleton
 @Component(modules = {
         AppModule.class,
-        TaskModule.class,
+        ViewTasksModule.class,
         TaskDetailModule.class,
         ViewProjectsModule.class,
         ViewProjectDetailsModule.class,
-        PeopleModule.class,
+        ViewPeopleModule.class,
         ApiModule.class,
-        AddProjectModule.class
+        CreateProjectModule.class
 })
 public interface AppComponent extends
         ViewProjectsComponent,
         ViewProjectDetailsComponent,
-        AddProjectComponent,
-        TaskComponent,
+        CreateProjectComponent,
+        ViewTasksComponent,
         TaskDetailComponent,
         MessagesComponent,
-        PeopleComponent {
-
-    void inject(TeamworkApplication application);
+        ViewPeopleComponent {
 
     void inject(ViewProjectsActivity activity);
+
 }

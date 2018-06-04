@@ -19,8 +19,8 @@ import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
 import demo.teamwork.aquidigital.messages.MessagesFragment;
-import demo.teamwork.aquidigital.people.PeopleFragment;
-import demo.teamwork.aquidigital.tasks.TasksFragment;
+import demo.teamwork.aquidigital.people.ViewPeopleFragment;
+import demo.teamwork.aquidigital.tasks.ViewTasksFragment;
 
 public class ViewProjectsActivity extends BaseActivity implements OnNavigationItemSelectedListener {
 
@@ -88,11 +88,11 @@ public class ViewProjectsActivity extends BaseActivity implements OnNavigationIt
                 break;
 
             case R.id.nav_tasks:
-                showFragment(TasksFragment.class);
+                showFragment(ViewTasksFragment.class);
                 break;
 
             case R.id.nav_people:
-                showFragment(PeopleFragment.class);
+                showFragment(ViewPeopleFragment.class);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

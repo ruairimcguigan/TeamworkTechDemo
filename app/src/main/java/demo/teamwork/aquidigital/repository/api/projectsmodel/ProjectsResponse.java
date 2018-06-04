@@ -1,10 +1,13 @@
 package demo.teamwork.aquidigital.repository.api.projectsmodel;
 
-import java.io.Serializable;
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class ProjectsResponse implements Serializable{
+import java.io.Serializable;
+import java.util.List;
+
+import demo.teamwork.aquidigital.common.base.Result;
+
+public class ProjectsResponse implements Serializable, Result{
 
 	@SerializedName("STATUS")
 	private String status;

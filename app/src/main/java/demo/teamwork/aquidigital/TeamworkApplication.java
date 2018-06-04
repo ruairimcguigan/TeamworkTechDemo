@@ -9,11 +9,11 @@ import com.squareup.leakcanary.LeakCanary;
 import com.tspoon.traceur.Traceur;
 
 import demo.teamwork.aquidigital.common.injection.AppComponent;
-import demo.teamwork.aquidigital.common.injection.DaggerAppComponent;
-import demo.teamwork.aquidigital.tasks.TaskModule;
-import demo.teamwork.aquidigital.viewprojects.ViewProjectsModule;
 import demo.teamwork.aquidigital.common.injection.AppModule;
+import demo.teamwork.aquidigital.common.injection.DaggerAppComponent;
 import demo.teamwork.aquidigital.repository.api.ApiModule;
+import demo.teamwork.aquidigital.tasks.ViewTasksModule;
+import demo.teamwork.aquidigital.viewprojects.ViewProjectsModule;
 import timber.log.Timber;
 
 public class TeamworkApplication extends Application {
@@ -42,7 +42,7 @@ public class TeamworkApplication extends Application {
     private void initDagger() {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
-                .taskModule(new TaskModule())
+                .viewTasksModule(new ViewTasksModule())
                 .viewProjectsModule(new ViewProjectsModule())
                 .apiModule(new ApiModule(this, "https://yat.teamwork.com"))
                 .build();

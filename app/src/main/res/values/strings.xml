@@ -32,6 +32,10 @@
     <string name="end_date">End date:</string>
     <string name="save_project">Save project</string>
     <string name="task_detail_name_concat">%s %s</string>
+    <string name="project_load_failed">Failed to load projects</string>
+    <string name="retry">Retry</string>
+    <string name="projects">Projects</string>
+    <string name="tasks">Tasks</string>
 
     <string-array name="default_spinner_value">
         <item>No project selected</item>

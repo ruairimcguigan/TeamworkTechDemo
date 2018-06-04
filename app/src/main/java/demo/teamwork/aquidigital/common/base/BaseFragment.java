@@ -15,6 +15,9 @@ import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
 import timber.log.Timber;
 
+import static android.support.design.widget.Snackbar.LENGTH_INDEFINITE;
+import static android.support.design.widget.Snackbar.make;
+
 /**
  * Abstract Fragment that every other Fragment in this application must implement. It handles
  * creation of Dagger components and makes sure that instances of ConfigPersistentComponent are kept
@@ -67,6 +70,12 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract int getLayout();
+
+    protected void showRetrySnackbar(final int message, final int requestId,
+                                   View.OnClickListener listener) {
+        make(getActivity().findViewById(android.R.id.content), getString(message), LENGTH_INDEFINITE)
+                .setAction(getString(requestId), listener).show();
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

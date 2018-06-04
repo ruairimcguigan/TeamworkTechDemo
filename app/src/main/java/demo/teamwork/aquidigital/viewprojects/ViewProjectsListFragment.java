@@ -77,6 +77,15 @@ public class ViewProjectsListFragment extends BaseFragment implements ViewProjec
     }
 
     @Override
+    public void onError(Throwable throwable) {
+        showFailedToRetrieveProjectsAlert();
+    }
+
+    private void showFailedToRetrieveProjectsAlert() {
+        showRetrySnackbar(R.string.project_load_failed, R.string.retry, view -> presenter.loadProjects());
+    }
+
+    @Override
     public void setAdapter() {
         adapter = new ViewProjectAdapter(getActivity());
         projectList.setLayoutManager(new LinearLayoutManager(getActivity()));

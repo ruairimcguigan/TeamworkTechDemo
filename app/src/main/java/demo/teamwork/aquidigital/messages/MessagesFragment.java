@@ -27,7 +27,7 @@ public class MessagesFragment extends BaseFragment implements MessagesContract.V
         View view = inflater.inflate(getLayout(), container, false);
 
         ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
-        Toast.makeText(getActivity(), "MessagesFragment", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Functionality to be implemented", Toast.LENGTH_SHORT).show();
         return view;
     }
 

@@ -1,7 +1,7 @@
 package demo.teamwork.aquidigital.util.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -10,24 +10,23 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagsItem;
+import javax.inject.Inject;
+
+import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import timber.log.Timber;
 
 import static java.lang.Integer.valueOf;
-import static java.lang.String.*;
-import static java.lang.String.valueOf;
+import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 
 public class ViewUtil {
 
-    private Context context;
 
-    public ViewUtil(Context context) {
-        this.context = context;
-    }
+    @Inject
+    public ViewUtil() { }
 
-    public static List<String> getCompanyNames(List<ProjectItem> projectItems) {
+    public List<String> getCompanyNames(List<ProjectItem> projectItems) {
         List<String> companyNames = new ArrayList<>();
         for (ProjectItem p : projectItems) {
             companyNames.add(p.getCompany().getName());
@@ -35,17 +34,17 @@ public class ViewUtil {
         return companyNames;
     }
 
-    public static List<String> getTagNames(List<TagsItem> tagsItems) {
+    public List<String> getTagNames(List<TagItem> tagItems) {
         List<String> tagNames = new ArrayList<>();
 
-        for (TagsItem t : tagsItems) {
+        for (TagItem t : tagItems) {
             tagNames.add(t.getName());
         }
         Timber.i("getTagsNames:", tagNames.toString());
         return tagNames;
     }
 
-    public static List<Integer> getCategories(List<ProjectItem> projectItems) {
+    public List<Integer> getCategories(List<ProjectItem> projectItems) {
         List<Integer> categories = new ArrayList<>();
         for (ProjectItem p : projectItems) {
             categories.add(valueOf(p.getCategory().getId()));
@@ -53,11 +52,11 @@ public class ViewUtil {
         return categories;
     }
 
-    public static void setVisibility(View view, boolean visible) {
+    public void setVisibility(View view, boolean visible) {
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
-    private static void hideKeyboard(Activity activity) {
+    private void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
 
         if (imm != null && imm.isAcceptingText()) {
@@ -65,8 +64,8 @@ public class ViewUtil {
         }
     }
 
-    public static void handleSoftKeyBoardVisibility(Activity activity, ViewGroup contentView, View... views) {
-        for (View v: views) {
+    public void handleSoftKeyBoardVisibility(Activity activity, ViewGroup contentView, View... views) {
+        for (View v : views) {
             if (!(v instanceof EditText)) {
                 v.setOnTouchListener((v1, event) -> {
                     v1.performClick();
@@ -78,13 +77,28 @@ public class ViewUtil {
         }
     }
 
-    public static String formatDateForDisplay(int day, int month, int year){
+    public String formatDateForDisplay(int day, int month, int year){
         return String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
     }
 
-    public static String formatForRequest(int year, int month, int day){
-        String fjdkj = String.valueOf(year).concat("0" + String.valueOf(month).concat(String.valueOf(day)));
-        return fjdkj;
+    public String formatForRequest(int year, int month, int day){
+
+        String formatted = "";
+
+        if (day < 10 && month < 10){
+            formatted = String.valueOf(year).concat(prefixWithZeroFormat(month).concat(prefixWithZeroFormat(day)));
+        }
+        else if (month < 10) {
+            formatted = String.valueOf(year).concat(prefixWithZeroFormat(month).concat(String.valueOf(day)));
+        }
+        else if (day < 10){
+            formatted = String.valueOf(year).concat(String.valueOf(month).concat(prefixWithZeroFormat(day)));
+        }
+        return formatted;
     }
 
+    @SuppressLint("DefaultLocale")
+    String prefixWithZeroFormat(int value) {
+        return format("%02d", value);
+    }
 }

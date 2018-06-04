@@ -1,18 +1,19 @@
 package demo.teamwork.aquidigital.repository.api.addprojectmodel;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class TagResponse {
 
 	@SerializedName("tags")
-	private List<TagsItem> tags;
+	private List<TagItem> tags;
 
-	public void setTags(List<TagsItem> tags){
+	public void setTags(List<TagItem> tags){
 		this.tags = tags;
 	}
 
-	public List<TagsItem> getTags(){
+	public List<TagItem> getTags(){
 		return tags;
 	}
 

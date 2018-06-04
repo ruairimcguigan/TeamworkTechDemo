@@ -2,7 +2,7 @@ package demo.teamwork.aquidigital.repository.api.addprojectmodel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Project{
+public class Project {
 
     // Required
     @SerializedName("name")

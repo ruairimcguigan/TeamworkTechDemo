@@ -20,6 +20,7 @@ import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.base.BaseAdapter;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
 import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
+import demo.teamwork.aquidigital.viewprojectdetails.ViewProjectDetailsActivity;
 
 public class ViewProjectAdapter extends BaseAdapter<ProjectItem, ViewProjectAdapter.ProjectViewHolder> {
 
