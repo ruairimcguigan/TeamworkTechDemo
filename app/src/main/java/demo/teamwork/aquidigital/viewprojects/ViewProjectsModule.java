@@ -5,7 +5,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-import static demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.*;
+import static demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Model;
+import static demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Presenter;
 
 @Module
 public class ViewProjectsModule {

@@ -6,6 +6,8 @@ public interface ViewProjectsComponent {
 
     void inject(ViewProjectsPresenter presenter);
 
+    void inject(ViewProjectsModel model);
+
     void inject(ViewProjectsListFragment fragment);
 
     void inject(ViewProjectAdapter adapter);

@@ -1,213 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@color/grey_light"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_medium">
 
-    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-        android:id="@+id/project_details_expand_container"
+    <TextView
+        android:id="@+id/project_details_header"
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ael_duration="500"
-        app:ael_expanded="false"
-        app:ael_interpolator="fastOutSlowIn"
-        app:ael_orientation="vertical">
+        android:textSize="@dimen/title_text_size"
+        android:padding="@dimen/margin_medium" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/grey_light"
-            android:orientation="vertical"
-            android:padding="@dimen/margin_medium">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/expanded_content_margin_top"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/task_id" />
-
-                <TextView
-                    android:id="@+id/task_id"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/progress" />
-
-                <TextView
-                    android:id="@+id/progress_percentage"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/responsible" />
-
-                <TextView
-                    android:id="@+id/responsible"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/start_date" />
-
-                <TextView
-                    android:id="@+id/start_date"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/task_list" />
-
-                <TextView
-                    android:id="@+id/task_list"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/project_name" />
-
-                <TextView
-                    android:id="@+id/task_project_name"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/created_by" />
-
-                <TextView
-                    android:id="@+id/created_by"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/created_on" />
-
-                <TextView
-                    android:id="@+id/created_on"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/last_modified" />
-
-                <TextView
-                    android:id="@+id/last_modified"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/access" />
-
-                <TextView
-                    android:id="@+id/access_status"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    style="@style/task_detail_label_bold"
-                    android:text="@string/following" />
-
-                <TextView
-                    android:id="@+id/following_status"
-                    style="@style/task_detail_label_light" />
-            </TableRow>
-
-        </LinearLayout>
-    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/project_detail_expandable_header"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/project_details_header"
-            style="@style/Text.ReadMore.Overlay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="@dimen/margin_medium" />
+            style="@style/task_detail_label_bold"
+            android:text="@string/task_id" />
 
-        <ImageView
-            android:id="@+id/exit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_arrow_drop_down" />
+        <TextView
+            android:id="@+id/task_id"
+            style="@style/task_detail_label_light" />
+    </TableRow>
 
-    </RelativeLayout>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
 
-    <!--<View-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="2dp"-->
-    <!--android:background="@color/white"-->
-    <!--android:layout_alignBottom="@+id/project_detail_expandable_header" />-->
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/progress" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/progress_percentage"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/responsible" />
+
+        <TextView
+            android:id="@+id/responsible"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/start_date" />
+
+        <TextView
+            android:id="@+id/start_date"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/task_list" />
+
+        <TextView
+            android:id="@+id/task_list"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/project_name" />
+
+        <TextView
+            android:id="@+id/task_project_name"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/created_by" />
+
+        <TextView
+            android:id="@+id/created_by"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/created_on" />
+
+        <TextView
+            android:id="@+id/created_on"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/last_modified" />
+
+        <TextView
+            android:id="@+id/last_modified"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/access" />
+
+        <TextView
+            android:id="@+id/access_status"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            style="@style/task_detail_label_bold"
+            android:text="@string/following" />
+
+        <TextView
+            android:id="@+id/following_status"
+            style="@style/task_detail_label_light" />
+    </TableRow>
+
+</LinearLayout>

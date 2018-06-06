@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.base.BaseAdapter;
-import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
+import demo.teamwork.aquidigital.tasks.models.TodoItemsItem;
 
 public class ViewTasksAdapter extends BaseAdapter<TodoItemsItem, ViewTasksAdapter.TaskViewHolder> {
 

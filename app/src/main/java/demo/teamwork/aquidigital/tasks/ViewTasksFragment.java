@@ -20,7 +20,7 @@ import butterknife.BindView;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
+import demo.teamwork.aquidigital.tasks.models.TodoItemsItem;
 import demo.teamwork.aquidigital.taskdetail.TaskDetailFragment;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsActivity;
 

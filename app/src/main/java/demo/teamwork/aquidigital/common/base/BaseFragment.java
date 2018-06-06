@@ -1,13 +1,16 @@
 package demo.teamwork.aquidigital.common.base;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.LongSparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -16,13 +19,8 @@ import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
 import timber.log.Timber;
 
 import static android.support.design.widget.Snackbar.LENGTH_INDEFINITE;
-import static android.support.design.widget.Snackbar.make;
+import static java.util.Objects.requireNonNull;
 
-/**
- * Abstract Fragment that every other Fragment in this application must implement. It handles
- * creation of Dagger components and makes sure that instances of ConfigPersistentComponent are kept
- * across configuration changes.
- */
 public abstract class BaseFragment extends Fragment {
 
     private static final String KEY_FRAGMENT_ID = "KEY_FRAGMENT_ID";
@@ -53,19 +51,25 @@ public abstract class BaseFragment extends Fragment {
 
     protected void showRetrySnackbar(final int message, final int requestId,
                                    View.OnClickListener listener) {
-        make(getActivity().findViewById(android.R.id.content), getString(message), LENGTH_INDEFINITE)
-                .setAction(getString(requestId), listener).show();
+
+        Snackbar snack =
+                Snackbar.make(requireNonNull(getActivity()).findViewById(android.R.id.content), getString(message), LENGTH_INDEFINITE);
+
+        View view = snack.getView();
+        TextView tv = view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTextColor(Color.WHITE);
+        snack.setAction(getString(requestId), listener).show();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(KEY_FRAGMENT_ID, fragmentId);
     }
 
     @Override
     public void onDestroy() {
-        if (!getActivity().isChangingConfigurations()) {
+        if (!requireNonNull(getActivity()).isChangingConfigurations()) {
             Timber.i("Clearing ConfigPersistentComponent id=%d", fragmentId);
             componentsArray.remove(fragmentId);
         }

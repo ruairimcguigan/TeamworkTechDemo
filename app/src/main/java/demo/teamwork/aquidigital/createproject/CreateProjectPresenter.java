@@ -9,9 +9,9 @@ import demo.teamwork.aquidigital.common.base.BasePresenter;
 import demo.teamwork.aquidigital.createproject.CreateProjectContract.Model;
 import demo.teamwork.aquidigital.createproject.CreateProjectContract.Presenter;
 import demo.teamwork.aquidigital.createproject.CreateProjectContract.View;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.Project;
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.ProjectRequest;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
+import demo.teamwork.aquidigital.createproject.models.Project;
+import demo.teamwork.aquidigital.createproject.models.ProjectRequest;
 import demo.teamwork.aquidigital.util.network.NetworkUtil;
 import demo.teamwork.aquidigital.util.ui.ViewUtil;
 import timber.log.Timber;
@@ -21,7 +21,7 @@ import static timber.log.Timber.d;
 
 public class CreateProjectPresenter extends BasePresenter implements Presenter {
 
-    @Inject TeamworkAPI projectService;
+    @Inject TeamworkApi projectService;
     @Inject NetworkUtil networkUtil;
     @Inject ViewUtil viewUtil;
 
@@ -88,8 +88,7 @@ public class CreateProjectPresenter extends BasePresenter implements Presenter {
     @Override
     public void loadTags() {
         if (networkUtil.isNetworkConnected()) {
-            addDisposable(projectService
-                    .getTags()
+            addDisposable(model.provideTags(projectService)
                     .observeOn(mainThread())
                     .doOnSubscribe(__ -> view.showProgress())
                     .doOnTerminate(() -> view.hideProgress())
@@ -135,9 +134,9 @@ public class CreateProjectPresenter extends BasePresenter implements Presenter {
                         startDate(),
                         endDate())
                         .build());
+
         if (networkUtil.isNetworkConnected()) {
-            addDisposable(projectService
-                    .createProject(requestWrapper)
+            addDisposable(model.createProject(requestWrapper, projectService)
                     .observeOn(mainThread())
                     .doOnSubscribe(__ -> view.showProgress())
                     .doOnTerminate(() -> view.hideProgress())

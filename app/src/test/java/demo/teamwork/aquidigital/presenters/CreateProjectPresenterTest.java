@@ -13,22 +13,23 @@ import demo.teamwork.aquidigital.createproject.CreateProjectContract.Model;
 import demo.teamwork.aquidigital.createproject.CreateProjectContract.View;
 import demo.teamwork.aquidigital.createproject.CreateProjectDateObj;
 import demo.teamwork.aquidigital.createproject.CreateProjectPresenter;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.CreateProjectResult;
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagResponse;
+import demo.teamwork.aquidigital.createproject.models.CreateProjectResult;
+import demo.teamwork.aquidigital.createproject.models.TagResponse;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
 import demo.teamwork.aquidigital.util.TestData;
 import demo.teamwork.aquidigital.util.network.NetworkUtil;
 import demo.teamwork.aquidigital.util.ui.ViewUtil;
 import io.reactivex.Observable;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CreateProjectPresenterTest extends BaseTests{
 
-    @Mock private TeamworkAPI createProjectService;
+    @Mock private TeamworkApi api;
 
     @Mock private NetworkUtil networkUtil;
 
@@ -52,8 +53,8 @@ public class CreateProjectPresenterTest extends BaseTests{
     public void loadTagsForTagSpinner() {
 
         // given
-        when(createProjectService.getTags()).thenReturn(Observable.just(tagResponse));
         when(networkUtil.isNetworkConnected()).thenReturn(true);
+        when(model.provideTags(api)).thenReturn(Observable.just(tagResponse));
 
         // when
         presenter.loadTags();
@@ -84,7 +85,7 @@ public class CreateProjectPresenterTest extends BaseTests{
         Observable<CreateProjectResult> resultObservable = Observable.just(result);
 
         when(networkUtil.isNetworkConnected()).thenReturn(true);
-        when(createProjectService.createProject(any())).thenReturn(resultObservable);
+        when(model.createProject((any()), eq(api))).thenReturn(resultObservable);
 
         // when
         presenter.onStartDateSelected(2018, 7, 1);
@@ -108,17 +109,11 @@ public class CreateProjectPresenterTest extends BaseTests{
         presenter.onTagChanged("tag");
         Exception exception = new Exception();
 
-        CreateProjectDateObj startDateObj = new CreateProjectDateObj(2018, 7, 1);
-        CreateProjectDateObj endDateObj = new CreateProjectDateObj(2018, 9, 1);
-
-
         CreateProjectResult result = new CreateProjectResult();
         result.setStatus("ok");
 
-        Observable<CreateProjectResult> resultObservable = Observable.just(result);
-
         when(networkUtil.isNetworkConnected()).thenReturn(true);
-        when(createProjectService.createProject(any())).thenReturn(Observable.error(exception));
+        when(model.createProject((any()), eq(api))).thenReturn(Observable.error(exception));
 
         // when
         presenter.onStartDateSelected(2018, 7, 1);

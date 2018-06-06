@@ -2,6 +2,7 @@ package demo.teamwork.aquidigital.viewprojects;
 
 import dagger.Module;
 import dagger.Provides;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
 
 @Module
 public class TestViewProjectsModule {
@@ -12,7 +13,7 @@ public class TestViewProjectsModule {
     }
 
     @Provides
-    ViewProjectsContract.Model provideProjectModel(){
-        return new ViewProjectsModel();
+    ViewProjectsContract.Model provideProjectModel(TeamworkApi api){
+        return new ViewProjectsModel(api);
     }
 }

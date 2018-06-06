@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import demo.teamwork.aquidigital.common.base.BasePresenter;
 import demo.teamwork.aquidigital.people.ViewPeopleContract.Model;
 import demo.teamwork.aquidigital.people.ViewPeopleContract.View;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
 import demo.teamwork.aquidigital.util.network.NetworkUtil;
 import timber.log.Timber;
 
@@ -17,7 +17,8 @@ import static timber.log.Timber.d;
 
 public class ViewPeoplePresenter extends BasePresenter implements ViewPeopleContract.Presenter {
 
-    @Inject TeamworkAPI projectService;
+    @Inject
+    TeamworkApi api;
     @Inject NetworkUtil networkUtil;
 
     private View view;
@@ -38,8 +39,7 @@ public class ViewPeoplePresenter extends BasePresenter implements ViewPeopleCont
     @Override
     public void loadPeople() {
         if (networkUtil.isNetworkConnected()) {
-            addDisposable(projectService
-                    .getPeople()
+            addDisposable(model.providePeople(api)
                     .observeOn(mainThread())
                     .doOnSubscribe(__ -> view.showProgress())
                     .doOnTerminate(() -> view.hideProgress())

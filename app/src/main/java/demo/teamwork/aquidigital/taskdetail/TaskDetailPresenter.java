@@ -5,14 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import demo.teamwork.aquidigital.common.base.BasePresenter;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
 
 import static demo.teamwork.aquidigital.taskdetail.TaskDetailContract.*;
 
 public class TaskDetailPresenter extends BasePresenter implements Presenter {
 
     @Inject
-    TeamworkAPI projectService;
+    TeamworkApi projectService;
 
     private View view;
     private Model model;

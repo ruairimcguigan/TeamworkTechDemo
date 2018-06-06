@@ -9,26 +9,22 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.TextView;
 
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
+import demo.teamwork.aquidigital.tasks.models.TodoItemsItem;
 
 import static butterknife.ButterKnife.bind;
 import static java.util.Objects.requireNonNull;
 
-public class TaskDetailFragment extends BaseFragment implements TaskDetailContract.View, View.OnClickListener {
+public class TaskDetailFragment extends BaseFragment
+        implements TaskDetailContract.View {
 
     @Inject
     TaskDetailPresenter presenter;
-
-    @BindView(R.id.project_details_expand_container)
-    ExpandableRelativeLayout projectDetailsExpandContainer;
 
     @BindView(R.id.project_details_header)
     TextView projectDetailsHeader;
@@ -79,14 +75,17 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayout(), container, false);
         bind(this, view);
 
-        ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
-
-        projectDetailsHeader.setOnClickListener(this);
-        setExpandableLayoutListener();
+        ((TeamworkApplication) requireNonNull(
+                getActivity()).
+                getApplication()).
+                getAppComponent().
+                inject(this);
 
         return view;
     }
@@ -114,7 +113,6 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
         followingStatus.setText(task.getTimeIsLogged());
     }
 
-
     @Override
     protected int getLayout() {
         return R.layout.fragment_task_detail_list;
@@ -130,31 +128,5 @@ public class TaskDetailFragment extends BaseFragment implements TaskDetailContra
     public void onStop() {
         super.onStop();
         presenter.detach();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.project_details_header:
-                toggleProjectDetailsContainer();
-                break;
-        }
-    }
-
-    private void toggleProjectDetailsContainer() {
-        if (!projectDetailsExpandContainer.isExpanded()) {
-            projectDetailsExpandContainer.expand();
-        }else {
-            projectDetailsExpandContainer.collapse();
-        }
-    }
-
-    private void setExpandableLayoutListener() {
-        globalLayoutListener = () -> {
-            projectDetailsExpandContainer.move(projectDetailsHeader.getHeight(), 0, null);
-
-            projectDetailsHeader.getViewTreeObserver().removeOnGlobalLayoutListener(globalLayoutListener);
-        };
-        projectDetailsHeader.getViewTreeObserver().addOnGlobalLayoutListener(globalLayoutListener);
     }
 }

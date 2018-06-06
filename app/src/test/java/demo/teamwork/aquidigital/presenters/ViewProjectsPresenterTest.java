@@ -8,23 +8,22 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import demo.teamwork.aquidigital.common.BaseTests;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
 import demo.teamwork.aquidigital.util.TestData;
 import demo.teamwork.aquidigital.util.network.NetworkUtil;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Model;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.View;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsPresenter;
+import demo.teamwork.aquidigital.viewprojects.model.ProjectsResponse;
 import io.reactivex.Observable;
 
-import static io.reactivex.Observable.just;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ViewProjectsPresenterTest extends BaseTests{
 
-    @Mock private TeamworkAPI teamworkAPI;
+    @Mock private TeamworkApi api;
     @Mock private NetworkUtil networkUtil;
 
     @Mock private View view;
@@ -46,7 +45,7 @@ public class ViewProjectsPresenterTest extends BaseTests{
     public void onStart_UserShouldBeAbleToViewAllActiveProjects() {
 
         // given
-        when(teamworkAPI.getProjects()).thenReturn(just(response));
+        when(model.provideProjects(api)).thenReturn(Observable.just(response));
         when(networkUtil.isNetworkConnected()).thenReturn(true);
 
         // when
@@ -64,7 +63,8 @@ public class ViewProjectsPresenterTest extends BaseTests{
         // given
         Exception exception = new Exception();
         when(networkUtil.isNetworkConnected()).thenReturn(true);
-        when(teamworkAPI.getProjects()).thenReturn(Observable.error(exception));
+
+        when(model.provideProjects(api)).thenReturn(Observable.error(exception));
 
         // when
         presenter.loadProjects();

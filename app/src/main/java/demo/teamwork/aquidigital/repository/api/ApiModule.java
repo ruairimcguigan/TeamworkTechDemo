@@ -13,8 +13,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import demo.teamwork.aquidigital.repository.TeamworkLocalDataStore;
-import demo.teamwork.aquidigital.repository.TeamworkRemoteDataStore;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -93,19 +91,7 @@ public class ApiModule {
 
     @Provides
     @Singleton
-    public TeamworkAPI provideProjectApiService(Cache cache) {
-        return provideRetrofit("https://yat.teamwork.com", provideClient(cache)).create(TeamworkAPI.class);
-    }
-
-    @Provides
-    @Singleton
-    TeamworkLocalDataStore providesAppLocalDataStore(Application context) {
-        return new TeamworkLocalDataStore();
-    }
-
-    @Provides
-    @Singleton
-    TeamworkRemoteDataStore providesRepository() {
-        return new TeamworkRemoteDataStore();
+    public TeamworkApi provideProjectApiService(Cache cache) {
+        return provideRetrofit(baseUrl, provideClient(cache)).create(TeamworkApi.class);
     }
 }

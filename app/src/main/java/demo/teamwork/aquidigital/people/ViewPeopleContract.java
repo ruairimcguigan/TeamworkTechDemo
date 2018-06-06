@@ -3,7 +3,10 @@ package demo.teamwork.aquidigital.people;
 
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.api.peoplemodel.PeopleItem;
+import demo.teamwork.aquidigital.people.models.PeopleItem;
+import demo.teamwork.aquidigital.people.models.PeopleResponse;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
+import io.reactivex.Observable;
 
 public interface ViewPeopleContract {
 
@@ -29,5 +32,6 @@ public interface ViewPeopleContract {
 
     interface Model {
 
+        Observable<PeopleResponse> providePeople(TeamworkApi api);
     }
 }

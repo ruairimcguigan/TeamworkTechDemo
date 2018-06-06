@@ -21,7 +21,7 @@ import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
 import demo.teamwork.aquidigital.createproject.CreateProjectFragment;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
+import demo.teamwork.aquidigital.viewprojects.model.ProjectsResponse;
 import demo.teamwork.aquidigital.util.ui.ViewUtil;
 import timber.log.Timber;
 
@@ -65,7 +65,11 @@ public class ViewProjectDetailsActivity extends BaseActivity implements OnClickL
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         ButterKnife.bind(this);
-        ((TeamworkApplication) getApplication()).getAppComponent().inject(this);
+
+        ((TeamworkApplication)
+                getApplication()).
+                getAppComponent().
+                inject(this);
 
         setToolbar();
         setProjectDetails();

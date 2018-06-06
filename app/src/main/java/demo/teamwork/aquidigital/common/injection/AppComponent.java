@@ -5,7 +5,6 @@ import javax.inject.Singleton;
 import dagger.Component;
 import demo.teamwork.aquidigital.createproject.CreateProjectComponent;
 import demo.teamwork.aquidigital.createproject.CreateProjectModule;
-import demo.teamwork.aquidigital.messages.MessagesComponent;
 import demo.teamwork.aquidigital.people.ViewPeopleComponent;
 import demo.teamwork.aquidigital.people.ViewPeopleModule;
 import demo.teamwork.aquidigital.repository.api.ApiModule;
@@ -36,7 +35,6 @@ public interface AppComponent extends
         CreateProjectComponent,
         ViewTasksComponent,
         TaskDetailComponent,
-        MessagesComponent,
         ViewPeopleComponent {
 
     void inject(ViewProjectsActivity activity);

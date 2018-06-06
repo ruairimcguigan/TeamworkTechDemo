@@ -11,8 +11,8 @@ import demo.teamwork.aquidigital.common.BaseTests;
 import demo.teamwork.aquidigital.people.ViewPeopleContract.Model;
 import demo.teamwork.aquidigital.people.ViewPeopleContract.View;
 import demo.teamwork.aquidigital.people.ViewPeoplePresenter;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
-import demo.teamwork.aquidigital.repository.api.peoplemodel.PeopleResponse;
+import demo.teamwork.aquidigital.people.models.PeopleResponse;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
 import demo.teamwork.aquidigital.util.TestData;
 import demo.teamwork.aquidigital.util.network.NetworkUtil;
 import io.reactivex.Observable;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class ViewPeoplePresenterTest extends BaseTests {
 
-    @Mock private TeamworkAPI peopleService;
+    @Mock private TeamworkApi api;
     @Mock private NetworkUtil networkUtil;
 
     @Mock private View view;
@@ -44,7 +44,7 @@ public class ViewPeoplePresenterTest extends BaseTests {
     public void onStart_UserShouldBeAbleToViewAllActiveProjects() {
 
         // given
-        when(peopleService.getPeople()).thenReturn(Observable.just(peopleResponse));
+        when(model.providePeople(api)).thenReturn(Observable.just(peopleResponse));
         when(networkUtil.isNetworkConnected()).thenReturn(true);
 
         // when
@@ -62,7 +62,8 @@ public class ViewPeoplePresenterTest extends BaseTests {
         // given
         Exception exception = new Exception();
         when(networkUtil.isNetworkConnected()).thenReturn(true);
-        when(peopleService.getPeople()).thenReturn(Observable.error(exception));
+        when(model.providePeople(api)).thenReturn(Observable.error(exception));
+
 
         // when
         presenter.loadPeople();

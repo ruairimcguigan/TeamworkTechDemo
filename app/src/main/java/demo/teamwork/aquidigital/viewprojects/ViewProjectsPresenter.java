@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import demo.teamwork.aquidigital.common.base.BasePresenter;
-import demo.teamwork.aquidigital.repository.api.TeamworkAPI;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
 import demo.teamwork.aquidigital.util.network.NetworkUtil;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Model;
 import demo.teamwork.aquidigital.viewprojects.ViewProjectsContract.Presenter;
@@ -16,7 +16,9 @@ import static io.reactivex.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ViewProjectsPresenter extends BasePresenter implements Presenter {
 
-    @Inject TeamworkAPI projectService;
+    @Inject
+    TeamworkApi projectService;
+
     @Inject NetworkUtil networkUtil;
 
     private View view;
@@ -25,10 +27,6 @@ public class ViewProjectsPresenter extends BasePresenter implements Presenter {
     @Inject
     ViewProjectsPresenter(Model model) {
         this.model = model;
-    }
-
-    public enum NavigationSelection{
-        PROJECTS, MESSAGES, TASKS, PEOPLE
     }
 
     @Override
@@ -41,8 +39,7 @@ public class ViewProjectsPresenter extends BasePresenter implements Presenter {
     @Override
     public void loadProjects() {
         if (networkUtil.isNetworkConnected()) {
-            addDisposable(projectService
-                    .getProjects()
+            addDisposable(model.provideProjects(projectService)
                     .observeOn(mainThread())
                     .doOnSubscribe(__ -> view.showProgress())
                     .doOnTerminate(() -> view.hideProgress())

@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.common.base.BaseAdapter;
-import demo.teamwork.aquidigital.repository.api.peoplemodel.PeopleItem;
+import demo.teamwork.aquidigital.people.models.PeopleItem;
 
 public class ViewPeopleAdapter extends BaseAdapter<PeopleItem, ViewPeopleAdapter.TaskViewHolder> {
 

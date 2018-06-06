@@ -44,7 +44,7 @@ public class TeamworkApplication extends Application {
                 .appModule(new AppModule(this))
                 .viewTasksModule(new ViewTasksModule())
                 .viewProjectsModule(new ViewProjectsModule())
-                .apiModule(new ApiModule(this, "https://yat.teamwork.com"))
+                .apiModule(new ApiModule(this, BASE_URL))
                 .build();
     }
 

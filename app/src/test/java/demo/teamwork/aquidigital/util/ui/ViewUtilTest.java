@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.util.List;
 
 import demo.teamwork.aquidigital.common.BaseTests;
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagItem;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
+import demo.teamwork.aquidigital.createproject.models.TagItem;
+import demo.teamwork.aquidigital.viewprojects.model.ProjectItem;
 import demo.teamwork.aquidigital.util.TestData;
 
 import static junit.framework.Assert.assertEquals;

@@ -19,6 +19,6 @@ public class ViewPeopleModule {
     @Provides
     @Singleton
     Model provideMessagesModel(){
-        return new ViewPeopleModel();
+        return new ViewPeopleModel( );
     }
 }

@@ -2,7 +2,13 @@ package demo.teamwork.aquidigital.createproject;
 
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagItem;
+import demo.teamwork.aquidigital.createproject.models.CreateProjectResult;
+import demo.teamwork.aquidigital.createproject.models.ProjectRequest;
+import demo.teamwork.aquidigital.createproject.models.TagItem;
+import demo.teamwork.aquidigital.createproject.models.TagResponse;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
+import io.reactivex.Observable;
+import retrofit2.http.Body;
 
 public interface CreateProjectContract {
 
@@ -49,5 +55,8 @@ public interface CreateProjectContract {
 
     interface Model {
 
+        Observable<CreateProjectResult> createProject(@Body ProjectRequest project, TeamworkApi api);
+
+        Observable<TagResponse> provideTags(TeamworkApi api);
     }
 }

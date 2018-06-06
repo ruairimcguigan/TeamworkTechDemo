@@ -3,17 +3,17 @@ package demo.teamwork.aquidigital.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagResponse;
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagItem;
-import demo.teamwork.aquidigital.repository.api.peoplemodel.PeopleItem;
-import demo.teamwork.aquidigital.repository.api.peoplemodel.PeopleResponse;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.BoardData;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Category;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.Company;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
-import demo.teamwork.aquidigital.repository.api.tasksmodel.TasksResponse;
-import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
+import demo.teamwork.aquidigital.createproject.models.TagResponse;
+import demo.teamwork.aquidigital.createproject.models.TagItem;
+import demo.teamwork.aquidigital.people.models.PeopleItem;
+import demo.teamwork.aquidigital.people.models.PeopleResponse;
+import demo.teamwork.aquidigital.viewprojects.model.BoardData;
+import demo.teamwork.aquidigital.viewprojects.model.Category;
+import demo.teamwork.aquidigital.viewprojects.model.Company;
+import demo.teamwork.aquidigital.viewprojects.model.ProjectItem;
+import demo.teamwork.aquidigital.viewprojects.model.ProjectsResponse;
+import demo.teamwork.aquidigital.tasks.models.TasksResponse;
+import demo.teamwork.aquidigital.tasks.models.TodoItemsItem;
 
 public class TestData {
 

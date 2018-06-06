@@ -18,7 +18,7 @@ import butterknife.BindView;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.repository.api.peoplemodel.PeopleItem;
+import demo.teamwork.aquidigital.people.models.PeopleItem;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;

@@ -19,10 +19,5 @@
             android:icon="@drawable/ic_launcher_foreground"
             android:title="@string/people" />
     </group>
-    <group android:id="@+id/grp2" android:checkableBehavior="single" >
-        <item
-            android:id="@+id/nav_messages"
-            android:icon="@drawable/ic_launcher_foreground"
-            android:title="@string/messages" />
-    </group>
+    
 </menu>

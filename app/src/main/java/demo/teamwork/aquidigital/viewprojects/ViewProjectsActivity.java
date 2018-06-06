@@ -17,7 +17,6 @@ import butterknife.BindView;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
-import demo.teamwork.aquidigital.messages.MessagesFragment;
 import demo.teamwork.aquidigital.people.ViewPeopleFragment;
 import demo.teamwork.aquidigital.tasks.ViewTasksFragment;
 
@@ -69,12 +68,9 @@ public class ViewProjectsActivity extends BaseActivity implements OnNavigationIt
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+
             case R.id.nav_projects:
                 showFragment(ViewProjectsListFragment.class);
-                break;
-
-            case R.id.nav_messages:
-                showFragment(MessagesFragment.class);
                 break;
 
             case R.id.nav_tasks:

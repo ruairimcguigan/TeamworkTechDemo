@@ -2,7 +2,10 @@ package demo.teamwork.aquidigital.tasks;
 
 import java.util.List;
 
-import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
+import demo.teamwork.aquidigital.repository.api.TeamworkApi;
+import demo.teamwork.aquidigital.tasks.models.TasksResponse;
+import demo.teamwork.aquidigital.tasks.models.TodoItemsItem;
+import io.reactivex.Observable;
 
 public interface ViewTasksContract {
 
@@ -28,5 +31,6 @@ public interface ViewTasksContract {
 
     interface Model {
 
+        Observable<TasksResponse> provideTasks(TeamworkApi projectService);
     }
 }

@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
+import demo.teamwork.aquidigital.viewprojects.model.ProjectItem;
 
 import static java.util.Objects.requireNonNull;
 

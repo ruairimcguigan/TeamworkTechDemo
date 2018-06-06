@@ -31,10 +31,10 @@ import butterknife.OnClick;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseFragment;
-import demo.teamwork.aquidigital.repository.api.addprojectmodel.TagItem;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectItem;
-import demo.teamwork.aquidigital.repository.api.projectsmodel.ProjectsResponse;
-import demo.teamwork.aquidigital.repository.api.tasksmodel.TodoItemsItem;
+import demo.teamwork.aquidigital.createproject.models.TagItem;
+import demo.teamwork.aquidigital.viewprojects.model.ProjectItem;
+import demo.teamwork.aquidigital.viewprojects.model.ProjectsResponse;
+import demo.teamwork.aquidigital.tasks.models.TodoItemsItem;
 import demo.teamwork.aquidigital.taskdetail.TaskDetailFragment;
 import demo.teamwork.aquidigital.util.ui.AfterTextWatcher;
 import demo.teamwork.aquidigital.util.ui.ViewUtil;
@@ -116,12 +116,10 @@ public class CreateProjectFragment extends BaseFragment
                 .inject(this);
 
         setClickListeners();
-
         setKeyboardVisibillityListenersOnViews();
-
         receiveProjectData();
-
         populateViewsOnConfigChange(savedInstanceState);
+
         return view;
     }
 
@@ -144,11 +142,12 @@ public class CreateProjectFragment extends BaseFragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        requireNonNull(getActivity()).setTitle("Create project");
+        requireNonNull(getActivity()).setTitle(
+                getActivity().getString(R.string.create_project_title));
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(CAT_SPINNER, categorySpinner.getSelectedItemPosition());
         outState.putInt(COM_SPINNER, companySpinner.getSelectedItemPosition());
@@ -197,7 +196,6 @@ public class CreateProjectFragment extends BaseFragment
         startDateView.setOnClickListener(this);
         endDateView.setOnClickListener(this);
     }
-
 
     private void receiveProjectData() {
         if (getArguments() != null) {
