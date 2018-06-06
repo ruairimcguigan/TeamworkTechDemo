@@ -1,6 +1,6 @@
 # TeamworkTechDemo
 
-<img src="https://github.com/ruairimcguigan/TeamworkTechDemo/blob/master/demo.gif" width="320" height="580">
+<img src="https://github.com/ruairimcguigan/TeamworkTechDemo/blob/master/demo_vid.gif" width="320" height="580">
 
 ## Running the tests
 
