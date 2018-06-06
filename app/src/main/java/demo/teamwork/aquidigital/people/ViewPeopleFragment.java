@@ -27,8 +27,7 @@ import static java.util.Objects.requireNonNull;
 
 public class ViewPeopleFragment extends BaseFragment implements ViewPeopleContract.View {
 
-    @Inject
-    ViewPeoplePresenter presenter;
+    @Inject ViewPeoplePresenter presenter;
 
     @BindView(R.id.people_list)
     RecyclerView peopleList;
@@ -42,7 +41,7 @@ public class ViewPeopleFragment extends BaseFragment implements ViewPeopleContra
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayout(), container, false);
-            bind(this,view);
+        bind(this, view);
         setAdapter();
 
         ((TeamworkApplication) getActivity().getApplication()).getAppComponent().inject(this);

@@ -38,12 +38,17 @@ public class ViewProjectsListFragment extends BaseFragment implements ViewProjec
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayout(), container, false);
         ButterKnife.bind(this, view);
         setAdapter();
 
-        ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
+        ((TeamworkApplication) requireNonNull(getActivity())
+                .getApplication())
+                .getAppComponent()
+                .inject(this);
 
         return view;
     }

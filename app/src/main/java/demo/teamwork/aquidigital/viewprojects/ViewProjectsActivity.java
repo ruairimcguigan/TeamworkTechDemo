@@ -14,13 +14,14 @@ import android.view.MenuItem;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
 import demo.teamwork.aquidigital.TeamworkApplication;
 import demo.teamwork.aquidigital.common.base.BaseActivity;
 import demo.teamwork.aquidigital.messages.MessagesFragment;
 import demo.teamwork.aquidigital.people.ViewPeopleFragment;
 import demo.teamwork.aquidigital.tasks.ViewTasksFragment;
+
+import static butterknife.ButterKnife.bind;
 
 public class ViewProjectsActivity extends BaseActivity implements OnNavigationItemSelectedListener {
 
@@ -39,18 +40,12 @@ public class ViewProjectsActivity extends BaseActivity implements OnNavigationIt
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
-        ButterKnife.bind(this);
+        bind(this);
+        init();
 
-        setNavigationView();
-        showFragment(ViewProjectsListFragment.class);
-
-        setSupportActionBar(toolbar);
-
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
-
-        ((TeamworkApplication) getApplication()).getAppComponent().inject(this);
+        ((TeamworkApplication) getApplication())
+                .getAppComponent()
+                .inject(this);
     }
 
     @Override
@@ -62,11 +57,6 @@ public class ViewProjectsActivity extends BaseActivity implements OnNavigationIt
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    protected int getLayout() {
-        return R.layout.activity_projects;
     }
 
     private void setNavigationView() {
@@ -97,6 +87,24 @@ public class ViewProjectsActivity extends BaseActivity implements OnNavigationIt
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void init() {
+        setNavigationView();
+        setToolbar();
+        showFragment(ViewProjectsListFragment.class);
+    }
+
+    private void setToolbar() {
+        setSupportActionBar(toolbar);
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        ab.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_projects;
     }
 
 }

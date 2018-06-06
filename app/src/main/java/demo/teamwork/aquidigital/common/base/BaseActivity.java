@@ -1,40 +1,20 @@
 package demo.teamwork.aquidigital.common.base;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AppCompatActivity;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 import butterknife.ButterKnife;
 import demo.teamwork.aquidigital.R;
-import demo.teamwork.aquidigital.common.injection.ConfigPersistentComponent;
-import demo.teamwork.aquidigital.viewprojects.ViewProjectsActivity;
-import timber.log.Timber;
 
 import static java.util.Objects.requireNonNull;
 
-/**
- * Abstract activity that every other Activity in this application must implement. It provides the
- * following functionality: - Handles creation of Dagger components and makes sure that instances of
- * ConfigPersistentComponent are kept across configuration changes. - Handles signing out
- * when an authentication error event is received.
- */
 public abstract class BaseActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
-
-    private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
-    private static final AtomicLong NEXT_ID = new AtomicLong(0);
-    private static final LongSparseArray<ConfigPersistentComponent> componentsArray =
-            new LongSparseArray<>();
-
-    private long activityId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,35 +23,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
         ButterKnife.bind(this);
 
         handleBackButton();
-
-        // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
-        // being called after a configuration change.
-        activityId =
-                savedInstanceState != null
-                        ? savedInstanceState.getLong(KEY_ACTIVITY_ID)
-                        : NEXT_ID.getAndIncrement();
-
-        ConfigPersistentComponent configPersistentComponent;
-
-//        if (componentsArray.get(activityId) == null) {
-//
-//            Timber.i("Creating new ConfigPersistentComponent id=%d", activityId);
-//            configPersistentComponent = DaggerConfigPersistentComponent.builder()
-//                    .appComponent(TeamworkApplication.get(this).getComponent())
-//                    .build();
-//
-//            componentsArray.put(activityId, configPersistentComponent);
-//        } else {
-//
-//            Timber.i("Reusing ConfigPersistentComponent id=%d", activityId);
-//            configPersistentComponent = componentsArray.get(activityId);
-//        }
-//        ActivityComponent activityComponent =
-//                configPersistentComponent.activityComponent(new ActivityModule(this));
-//
-//        inject(activityComponent);
-
-//        attachView();
     }
 
     protected final <T extends Fragment> void showFragment( Class<T> fragmentClass) {
@@ -134,36 +85,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
         return mySnackbar;
     }
 
-    protected void showActionbarTitle() {
-        if (getActionBar() != null) {
-            getActionBar().setDisplayShowTitleEnabled(true);
-        }
-    }
-
-    protected void hideActionbarTitle() {
-        if (getActionBar() != null) {
-            getActionBar().setDisplayShowTitleEnabled(false);
-        }
-    }
-
     protected abstract int getLayout();
 
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-////                startParentActivity();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-
-    private void startParentActivity() {
-        finish();
-        startActivity(new Intent(this, ViewProjectsActivity.class));
-    }
 
     protected void handleBackButton() {
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
@@ -176,21 +99,5 @@ public abstract class BaseActivity extends AppCompatActivity implements Fragment
                 getSupportActionBar().setHomeButtonEnabled(false);
             }
         });
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putLong(KEY_ACTIVITY_ID, activityId);
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (!isChangingConfigurations()) {
-            Timber.i("Clearing ConfigPersistentComponent id=%d", activityId);
-            componentsArray.remove(activityId);
-        }
-//        detachPresenter();
-        super.onDestroy();
     }
 }

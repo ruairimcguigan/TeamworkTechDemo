@@ -54,9 +54,11 @@ import static java.util.Objects.requireNonNull;
 public class CreateProjectFragment extends BaseFragment
         implements AdapterCallback, CreateProjectContract.View, OnClickListener {
 
-    @Inject CreateProjectPresenter presenter;
+    @Inject
+    CreateProjectPresenter presenter;
 
-    @Inject ViewUtil viewUtil;
+    @Inject
+    ViewUtil viewUtil;
 
     @BindView(R.id.content_root)
     ViewGroup contentRoot;
@@ -77,10 +79,10 @@ public class CreateProjectFragment extends BaseFragment
     Spinner tagsSpinner;
 
     @BindView(R.id.add_project_start_date)
-    TextView startDate;
+    TextView startDateView;
 
     @BindView(R.id.add_project_end_date)
-    TextView endDate;
+    TextView endDateView;
 
     @BindView(R.id.add_project_save_project_button)
     Button saveProject;
@@ -93,22 +95,34 @@ public class CreateProjectFragment extends BaseFragment
     private ArrayAdapter companyAdapter;
     private ArrayAdapter categoryAdapter;
 
+    public static final String START_DATE = "startDate";
+    public static final String END_DATE = "endDate";
+    public static final String CAT_SPINNER = "categorySpinner";
+    public static final String COM_SPINNER = "companySpinner";
+    public static final String TAG_SPINNER = "tagSpinner";
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(getLayout(), container, false);
         bind(this, view);
-        ((TeamworkApplication) requireNonNull(getActivity()).getApplication()).getAppComponent().inject(this);
+
+        ((TeamworkApplication) requireNonNull(getActivity())
+                .getApplication())
+                .getAppComponent()
+                .inject(this);
 
         setClickListeners();
-        viewUtil.handleSoftKeyBoardVisibility(getActivity(), categorySpinner, companySpinner, tagsSpinner);
-        receiveProjectData();
-        return view;
-    }
 
-    private void setClickListeners() {
-        startDate.setOnClickListener(this);
-        endDate.setOnClickListener(this);
+        setKeyboardVisibillityListenersOnViews();
+
+        receiveProjectData();
+
+        populateViewsOnConfigChange(savedInstanceState);
+        return view;
     }
 
     @Override
@@ -125,6 +139,32 @@ public class CreateProjectFragment extends BaseFragment
 
         setTitle();
         setDescription();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        requireNonNull(getActivity()).setTitle("Create project");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(CAT_SPINNER, categorySpinner.getSelectedItemPosition());
+        outState.putInt(COM_SPINNER, companySpinner.getSelectedItemPosition());
+        outState.putInt(TAG_SPINNER, tagsSpinner.getSelectedItemPosition());
+        outState.putString(START_DATE, startDateView.getText().toString());
+        outState.putString(END_DATE, endDateView.getText().toString());
+    }
+
+    private void populateViewsOnConfigChange(@Nullable Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            categorySpinner.setSelection(savedInstanceState.getInt(CAT_SPINNER, 0));
+            companySpinner.setSelection(savedInstanceState.getInt(COM_SPINNER, 0));
+            tagsSpinner.setSelection(savedInstanceState.getInt(TAG_SPINNER, 0));
+            startDateView.setText(savedInstanceState.getString(START_DATE));
+            endDateView.setText(savedInstanceState.getString(END_DATE));
+        }
     }
 
     private void setTitle() {
@@ -145,21 +185,34 @@ public class CreateProjectFragment extends BaseFragment
         });
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        requireNonNull(getActivity()).setTitle("Create project");
+    private void setKeyboardVisibillityListenersOnViews() {
+        viewUtil.handleSoftKeyBoardVisibility(
+                getActivity(),
+                categorySpinner,
+                companySpinner,
+                tagsSpinner);
     }
+
+    private void setClickListeners() {
+        startDateView.setOnClickListener(this);
+        endDateView.setOnClickListener(this);
+    }
+
 
     private void receiveProjectData() {
         if (getArguments() != null) {
-            ProjectsResponse projectResponse = (ProjectsResponse) getArguments().getSerializable(EXTRA_PROJECTS_LIST);
+            ProjectsResponse projectResponse = (
+                    ProjectsResponse) getArguments().getSerializable(EXTRA_PROJECTS_LIST);
             projects.addAll(requireNonNull(projectResponse).getProjects());
         }
     }
 
     private void setProjectSpinners() {
-        companyAdapter = new ArrayAdapter(requireNonNull(getActivity()), spinner_item_view, viewUtil.getCompanyNames(projects));
+        companyAdapter = new ArrayAdapter(
+                requireNonNull(getActivity()),
+                spinner_item_view,
+                viewUtil.getCompanyNames(projects));
+
         companyAdapter.setDropDownViewResource(spinner_item_view);
         companySpinner.setAdapter(companyAdapter);
 
@@ -175,7 +228,10 @@ public class CreateProjectFragment extends BaseFragment
             }
         });
 
-        categoryAdapter = new ArrayAdapter(requireNonNull(getActivity()), spinner_item_view, viewUtil.getCategories(projects));
+        categoryAdapter = new ArrayAdapter(requireNonNull(getActivity()),
+                spinner_item_view,
+                viewUtil.getCategories(projects));
+
         categoryAdapter.setDropDownViewResource(spinner_item_view);
         categorySpinner.setAdapter(categoryAdapter);
 
@@ -193,7 +249,9 @@ public class CreateProjectFragment extends BaseFragment
     }
 
     private void setTagsAdapter(List<TagItem> tags) {
-        ArrayAdapter tagsAdapter = new ArrayAdapter(requireNonNull(getActivity()), spinner_item_view, viewUtil.getTagNames(tags));
+        ArrayAdapter tagsAdapter = new ArrayAdapter(requireNonNull(getActivity()),
+                spinner_item_view,
+                viewUtil.getTagNames(tags));
 
         tagsAdapter.setDropDownViewResource(R.layout.spinner_item_view);
         tagsSpinner.setAdapter(tagsAdapter);
@@ -236,12 +294,12 @@ public class CreateProjectFragment extends BaseFragment
 
     @Override
     public void populateStartDate(String date) {
-        startDate.setText(date);
+        startDateView.setText(date);
     }
 
     @Override
     public void populateEndDate(String date) {
-        endDate.setText(date);
+        endDateView.setText(date);
     }
 
     @Override
@@ -250,7 +308,6 @@ public class CreateProjectFragment extends BaseFragment
     }
 
     private void showStartDatePicker() {
-
         Calendar start = getInstance();
         int startYear = start.get(Calendar.YEAR);
         int startMonth = start.get(Calendar.MONTH);
@@ -291,7 +348,7 @@ public class CreateProjectFragment extends BaseFragment
 
     @Override
     protected int getLayout() {
-        return R.layout.fragment_add_project;
+        return R.layout.fragment_create_project;
     }
 
     @Override

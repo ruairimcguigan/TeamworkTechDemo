@@ -3,6 +3,7 @@ package demo.teamwork.aquidigital.tasks;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -78,8 +79,10 @@ public class ViewTasksFragment extends BaseFragment implements AdapterCallback, 
     public void setAdapter(){
         adapter = new ViewTasksAdapter(getActivity());
         adapter.callback = this;
-
-        taskList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager lm = new LinearLayoutManager(getActivity());
+        taskList.setLayoutManager(lm);
+        DividerItemDecoration decoration = new DividerItemDecoration(taskList.getContext(), lm.getOrientation());
+        taskList.addItemDecoration(decoration);
         taskList.setHasFixedSize(true);
         taskList.setAdapter(adapter);
     }

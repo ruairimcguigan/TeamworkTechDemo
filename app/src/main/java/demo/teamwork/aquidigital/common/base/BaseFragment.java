@@ -35,27 +35,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Create the FragmentComponent and reuses cached ConfigPersistentComponent if this is
-        // being called after a configuration change.
-        fragmentId =
-                savedInstanceState != null
-                        ? savedInstanceState.getLong(KEY_FRAGMENT_ID)
-                        : NEXT_ID.getAndIncrement();
-        ConfigPersistentComponent configPersistentComponent;
-//        if (componentsArray.get(fragmentId) == null) {
-//            Timber.i("Creating new ConfigPersistentComponent id=%d", fragmentId);
-//            configPersistentComponent =
-//                    DaggerConfigPersistentComponent.builder()
-//                            .appComponent(TeamworkApplication.get(requireNonNull(getActivity())).getComponent())
-//                            .build();
-//            componentsArray.put(fragmentId, configPersistentComponent);
-//        } else {
-//            Timber.i("Reusing ConfigPersistentComponent id=%d", fragmentId);
-//            configPersistentComponent = componentsArray.get(fragmentId);
-//        }
-//        FragmentComponent fragmentComponent =
-//                configPersistentComponent.fragmentComponent(new FragmentModule(this));
-//        inject(fragmentComponent);
+        setRetainInstance(true);
     }
 
     @Nullable

@@ -1,8 +1,10 @@
 package demo.teamwork.aquidigital.repository.api.tasksmodel;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
-import com.google.gson.annotations.SerializedName;
+import java.util.Objects;
 
 import demo.teamwork.aquidigital.repository.Item;
 
@@ -677,6 +679,79 @@ public class TodoItemsItem implements Serializable, Item{
 
 	public String getCreatorAvatarUrl(){
 		return creatorAvatarUrl;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TodoItemsItem)) return false;
+		TodoItemsItem that = (TodoItemsItem) o;
+		return companyId == that.companyId &&
+				userFollowingChanges == that.userFollowingChanges &&
+				id == that.id &&
+				harvestEnabled == that.harvestEnabled &&
+				order == that.order &&
+				estimatedMinutes == that.estimatedMinutes &&
+				hasTickets == that.hasTickets &&
+				commentsCount == that.commentsCount &&
+				completed == that.completed &&
+				position == that.position &&
+				hasReminders == that.hasReminders &&
+				jsonMemberPrivate == that.jsonMemberPrivate &&
+				userFollowingComments == that.userFollowingComments &&
+				dLM == that.dLM &&
+				canEdit == that.canEdit &&
+				hasPredecessors == that.hasPredecessors &&
+				todoListId == that.todoListId &&
+				attachmentsCount == that.attachmentsCount &&
+				projectId == that.projectId &&
+				tasklistIsTemplate == that.tasklistIsTemplate &&
+				canComplete == that.canComplete &&
+				creatorId == that.creatorId &&
+				hasDependencies == that.hasDependencies &&
+				canLogTime == that.canLogTime &&
+				tasklistPrivate == that.tasklistPrivate &&
+				hasUnreadComments == that.hasUnreadComments &&
+				viewEstimatedTime == that.viewEstimatedTime &&
+				progress == that.progress &&
+				Objects.equals(projectName, that.projectName) &&
+				Objects.equals(responsiblePartyLastname, that.responsiblePartyLastname) &&
+				Objects.equals(predecessors, that.predecessors) &&
+				Objects.equals(creatorFirstname, that.creatorFirstname) &&
+				Objects.equals(timeIsLogged, that.timeIsLogged) &&
+				Objects.equals(parentTask, that.parentTask) &&
+				Objects.equals(responsiblePartyNames, that.responsiblePartyNames) &&
+				Objects.equals(responsiblePartySummary, that.responsiblePartySummary) &&
+				Objects.equals(dueDateBase, that.dueDateBase) &&
+				Objects.equals(creatorLastname, that.creatorLastname) &&
+				Objects.equals(commentFollowerIds, that.commentFollowerIds) &&
+				Objects.equals(todoListName, that.todoListName) &&
+				Objects.equals(companyName, that.companyName) &&
+				Objects.equals(changeFollowerSummary, that.changeFollowerSummary) &&
+				Objects.equals(lockdownId, that.lockdownId) &&
+				Objects.equals(priority, that.priority) &&
+				Objects.equals(responsiblePartyFirstname, that.responsiblePartyFirstname) &&
+				Objects.equals(lastChangedOn, that.lastChangedOn) &&
+				Objects.equals(responsiblePartyId, that.responsiblePartyId) &&
+				Objects.equals(status, that.status) &&
+				Objects.equals(createdOn, that.createdOn) &&
+				Objects.equals(parentTaskId, that.parentTaskId) &&
+				Objects.equals(description, that.description) &&
+				Objects.equals(startDate, that.startDate) &&
+				Objects.equals(responsiblePartyType, that.responsiblePartyType) &&
+				Objects.equals(content, that.content) &&
+				Objects.equals(responsiblePartyIds, that.responsiblePartyIds) &&
+				Objects.equals(dueDate, that.dueDate) &&
+				Objects.equals(commentFollowerSummary, that.commentFollowerSummary) &&
+				Objects.equals(changeFollowerIds, that.changeFollowerIds) &&
+				Objects.equals(tasklistLockdownId, that.tasklistLockdownId) &&
+				Objects.equals(boardColumn, that.boardColumn) &&
+				Objects.equals(creatorAvatarUrl, that.creatorAvatarUrl);
+	}
+
+	@Override
+	public int hashCode() {	
+		return Objects.hash(projectName, responsiblePartyLastname, predecessors, creatorFirstname, timeIsLogged, parentTask, responsiblePartyNames, responsiblePartySummary, companyId, dueDateBase, creatorLastname, userFollowingChanges, commentFollowerIds, id, harvestEnabled, order, todoListName, companyName, estimatedMinutes, hasTickets, changeFollowerSummary, lockdownId, commentsCount, completed, priority, responsiblePartyFirstname, lastChangedOn, responsiblePartyId, position, hasReminders, status, jsonMemberPrivate, userFollowingComments, dLM, createdOn, parentTaskId, canEdit, description, startDate, hasPredecessors, responsiblePartyType, content, todoListId, responsiblePartyIds, dueDate, attachmentsCount, projectId, commentFollowerSummary, tasklistIsTemplate, canComplete, creatorId, hasDependencies, canLogTime, tasklistPrivate, changeFollowerIds, hasUnreadComments, tasklistLockdownId, viewEstimatedTime, boardColumn, progress, creatorAvatarUrl);
 	}
 
 	@Override
